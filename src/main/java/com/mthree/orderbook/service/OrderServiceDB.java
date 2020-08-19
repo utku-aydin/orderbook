@@ -7,6 +7,7 @@ package com.mthree.orderbook.service;
 
 import com.mthree.orderbook.entity.Order;
 import com.mthree.orderbook.repository.OrderRepository;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
@@ -45,13 +46,13 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public Order addOrder(Map<String, Integer> orderData) {
-        order = orderRepository.save(order);
+    public Order addOrder(Order order) {
+        orderRepository.save(order);
         return order;
     }
 
     @Override
-    public Order updateOrder(Map<String, Integer> orderData) {
+    public Order updateOrder(Order order) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

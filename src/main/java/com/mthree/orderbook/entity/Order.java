@@ -26,7 +26,6 @@ public class Order {
     @Id    
     private int id;
     
-    @JsonProperty("symbol")
     @Column(nullable = false)
     private String symbol;
     
@@ -38,19 +37,15 @@ public class Order {
     @Column(nullable = false)
     private int size;
 
-    @JsonProperty("numbermatched")
     @Column(nullable = false)
     private int numbermatched;
     
-    @JsonProperty("side")
     @Column(nullable = false)
     private String side;
     
-    @JsonProperty("placedat")
     @Column(nullable = false)
     private LocalDateTime placedat = LocalDateTime.now();
     
-    @JsonProperty("fulfilled")
     @Column(nullable = false)
     private boolean fulfilled;
 

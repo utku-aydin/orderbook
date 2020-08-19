@@ -57,8 +57,8 @@ public class OrderController {
     
     @PostMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Order> addOrder(Order order) {
-        Order added = service.addOrder(order);
+    public ResponseEntity<Order> addOrder(@RequestBody Map<String, String> orderData) {
+        Order added = service.addOrder(orderData);
         
         return ResponseEntity.ok(added);
     }

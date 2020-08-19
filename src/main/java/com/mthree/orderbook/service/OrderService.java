@@ -19,8 +19,8 @@ public interface OrderService {
     public List<Order> getBuyOrders();
     public List<Order> getSellOrders();
     public Order getOrderByID(int id);
-    public Order addOrder(Order order);
-    public Order updateOrder(Order order);
+    public Order addOrder(Map<String, String> orderData);
+    public Order updateOrder(Map<String, String> orderData);
     public Order cancelOrderByID(int id);
     
 }

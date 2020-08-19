@@ -7,6 +7,7 @@ package com.mthree.orderbook.service;
 
 import com.mthree.orderbook.entity.OB_Order;
 import com.mthree.orderbook.entity.SideEnum;
+import com.mthree.orderbook.entity.StatusEnum;
 import com.mthree.orderbook.repository.OrderRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -66,6 +67,9 @@ public class OrderServiceDB implements OrderService {
         order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
         order.setPlacedAt(LocalDateTime.parse(orderData.get("placedat")));
         order.setFulfilled(Boolean.parseBoolean(orderData.get("fulfilled")));
+        order.setStatus(StatusEnum.valueOf(orderData.get("status")));
+        order.setUserSymbol(orderData.get("userSymbol"));
+        order.setVersion(0);
         
         order = orderRepository.save(order);
         

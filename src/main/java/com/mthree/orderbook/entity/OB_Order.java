@@ -5,6 +5,7 @@
  */
 package com.mthree.orderbook.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -19,11 +20,22 @@ import javax.persistence.Id;
  * @author utkua
  */
 @Entity
-public class OB_Order {
+public class OB_Order implements Serializable {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id    
     private int id;
+    
+    @Id
+    private int version;    
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
     
     @Column(nullable = false)
     private String symbol;
@@ -42,6 +54,28 @@ public class OB_Order {
     
     @Column(nullable = false)
     private LocalDateTime placedAt;
+    
+    @Column(nullable = false)
+    private String userSymbol;
+    
+    @Column(nullable = false)
+    private StatusEnum status;
+
+    public String getUserSymbol() {
+        return userSymbol;
+    }
+
+    public void setUserSymbol(String userSymbol) {
+        this.userSymbol = userSymbol;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
     
     @Column(nullable = false)
     private boolean fulfilled;
@@ -112,15 +146,17 @@ public class OB_Order {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.symbol);
-        hash = 73 * hash + Objects.hashCode(this.price);
-        hash = 73 * hash + this.ordersize;
-        hash = 73 * hash + this.numbermatched;
-        hash = 73 * hash + Objects.hashCode(this.side);
-        hash = 73 * hash + Objects.hashCode(this.placedAt);
-        hash = 73 * hash + (this.fulfilled ? 1 : 0);
+        int hash = 7;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.symbol);
+        hash = 71 * hash + Objects.hashCode(this.price);
+        hash = 71 * hash + this.ordersize;
+        hash = 71 * hash + this.numbermatched;
+        hash = 71 * hash + Objects.hashCode(this.side);
+        hash = 71 * hash + Objects.hashCode(this.placedAt);
+        hash = 71 * hash + Objects.hashCode(this.userSymbol);
+        hash = 71 * hash + Objects.hashCode(this.status);
+        hash = 71 * hash + (this.fulfilled ? 1 : 0);
         return hash;
     }
 
@@ -151,13 +187,19 @@ public class OB_Order {
         if (!Objects.equals(this.symbol, other.symbol)) {
             return false;
         }
-        if (!Objects.equals(this.side, other.side)) {
+        if (!Objects.equals(this.userSymbol, other.userSymbol)) {
             return false;
         }
         if (!Objects.equals(this.price, other.price)) {
             return false;
         }
+        if (this.side != other.side) {
+            return false;
+        }
         if (!Objects.equals(this.placedAt, other.placedAt)) {
+            return false;
+        }
+        if (this.status != other.status) {
             return false;
         }
         return true;

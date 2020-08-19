@@ -29,11 +29,9 @@ public class Order {
     @Column(nullable = false)
     private String symbol;
     
-    @JsonProperty("price")
     @Column(nullable = false)
     private BigDecimal price;
     
-    @JsonProperty("size")
     @Column(nullable = false)
     private int size;
 
@@ -44,7 +42,7 @@ public class Order {
     private String side;
     
     @Column(nullable = false)
-    private LocalDateTime placedat = LocalDateTime.now();
+    private LocalDateTime placedat;
     
     @Column(nullable = false)
     private boolean fulfilled;

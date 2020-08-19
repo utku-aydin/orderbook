@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -55,6 +57,7 @@ public class OB_Order {
     @Column(nullable = false)
     private int numbermatched;
     
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SideEnum side;
     
@@ -64,6 +67,7 @@ public class OB_Order {
     @Column(nullable = false)
     private String usersymbol;
     
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusEnum status;
 

@@ -91,6 +91,8 @@ public class OrderServiceDB implements OrderService {
         
         if (order.getSide() == SideEnum.BUY) {
             compared = orderRepository.findSellOrders();
+        } else {
+            
         }
     }
     

@@ -13,9 +13,13 @@ import java.io.Serializable;
  */
 public class OB_OrderId implements Serializable {
     
-    private final int id;
+    private int id;
     
-    private final int version;
+    private int version;
+    
+    public OB_OrderId() {
+        
+    }
     
     public OB_OrderId(int id, int version) {
         this.id = id;

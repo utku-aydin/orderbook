@@ -22,7 +22,7 @@ import javax.persistence.IdClass;
  */
 @Entity
 @IdClass(OB_OrderId.class)
-public class OB_Order implements Serializable {
+public class OB_Order {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id    

@@ -14,12 +14,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 /**
  *
  * @author utkua
  */
 @Entity
+@IdClass(OB_OrderId.class)
 public class OB_Order implements Serializable {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)

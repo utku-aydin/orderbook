@@ -38,10 +38,10 @@ public class OB_Order {
     private int numbermatched;
     
     @Column(nullable = false)
-    private String side;
+    private SideEnum side;
     
     @Column(nullable = false)
-    private LocalDateTime placedat;
+    private LocalDateTime placedAt;
     
     @Column(nullable = false)
     private boolean fulfilled;
@@ -86,20 +86,20 @@ public class OB_Order {
         this.numbermatched = numbermatched;
     }
 
-    public String getSide() {
+    public SideEnum getSide() {
         return side;
     }
 
-    public void setSide(String side) {
+    public void setSide(SideEnum side) {
         this.side = side;
     }
 
-    public LocalDateTime getPlacedat() {
-        return placedat;
+    public LocalDateTime getPlacedAt() {
+        return placedAt;
     }
 
-    public void setPlacedat(LocalDateTime placedat) {
-        this.placedat = placedat;
+    public void setPlacedAt(LocalDateTime placedAt) {
+        this.placedAt = placedAt;
     }
 
     public boolean isFulfilled() {
@@ -119,7 +119,7 @@ public class OB_Order {
         hash = 73 * hash + this.ordersize;
         hash = 73 * hash + this.numbermatched;
         hash = 73 * hash + Objects.hashCode(this.side);
-        hash = 73 * hash + Objects.hashCode(this.placedat);
+        hash = 73 * hash + Objects.hashCode(this.placedAt);
         hash = 73 * hash + (this.fulfilled ? 1 : 0);
         return hash;
     }
@@ -157,7 +157,7 @@ public class OB_Order {
         if (!Objects.equals(this.price, other.price)) {
             return false;
         }
-        if (!Objects.equals(this.placedat, other.placedat)) {
+        if (!Objects.equals(this.placedAt, other.placedAt)) {
             return false;
         }
         return true;

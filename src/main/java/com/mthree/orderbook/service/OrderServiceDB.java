@@ -6,6 +6,7 @@
 package com.mthree.orderbook.service;
 
 import com.mthree.orderbook.entity.OB_Order;
+import com.mthree.orderbook.entity.SideEnum;
 import com.mthree.orderbook.repository.OrderRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -61,12 +62,14 @@ public class OrderServiceDB implements OrderService {
         order.setSymbol(orderData.get("symbol"));
         order.setPrice(new BigDecimal(orderData.get("price")));
         order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
-        order.setSide(orderData.get("side"));
+        order.setSide(orderData.get("side").equals("buy") ? SideEnum.BUY : SideEnum.SELL);
         order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
-        order.setPlacedat(LocalDateTime.parse(orderData.get("placedat")));
+        order.setPlacedAt(LocalDateTime.parse(orderData.get("placedat")));
         order.setFulfilled(Boolean.parseBoolean(orderData.get("fulfilled")));
         
-        orderRepository.save(order);
+        order = orderRepository.save(order);
+        
+        
         return order;
     }
 
@@ -78,6 +81,14 @@ public class OrderServiceDB implements OrderService {
     @Override
     public OB_Order cancelOrderByID(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private void matchOrder(OB_Order order) {
+        List<OB_Order> compared;
+        
+        if (order.getSide() == SideEnum.BUY) {
+            compared = orderRepository.findSellOrders();
+        }
     }
     
 }

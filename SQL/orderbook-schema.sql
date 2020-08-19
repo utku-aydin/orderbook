@@ -9,10 +9,10 @@ CREATE TABLE ob_order (
     symbol VARCHAR(8) NOT NULL,
 	price DECIMAL(10,2) NOT NULL,
 	orderSize INT NOT NULL,
-	side VARCHAR(3) NOT NULL,
+	side ('BUY', 'SELL') NOT NULL,
     numberMatched INT NOT NULL,
     placedAt DATETIME NOT NULL,
-	fulfilled boolean NOT NULL
+	status ENUM('ACTIVE', 'CANCELLED', 'FULFILLED') NOT NULL
 );
 
 DROP DATABASE IF EXISTS orderbookdbtest;

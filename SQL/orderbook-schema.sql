@@ -6,7 +6,7 @@ USE orderbookdb;
 
 CREATE TABLE ob_order (
 	id 				INT 										AUTO_INCREMENT,
-	version_id 		INT 										DEFAULT 0,
+	version 		INT 										DEFAULT 0,
     symbol 			VARCHAR(8) 									NOT NULL,
 	price 			DECIMAL(10,2) 								NOT NULL,
 	orderSize 		INT 										NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE ob_order (
 	userSymbol 		VARCHAR(8) 									NOT NULL,
 	status 			ENUM('ACTIVE', 'CANCELLED', 'FULFILLED') 	NOT NULL,
     CONSTRAINT PK_OB_ORDER 
-    	PRIMARY KEY (id, version_id)
+    	PRIMARY KEY (id, version)
 );
 
 CREATE TABLE trade (

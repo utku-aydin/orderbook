@@ -78,9 +78,6 @@ public class OB_Order {
     public void setStatus(StatusEnum status) {
         this.status = status;
     }
-    
-    @Column(nullable = false)
-    private boolean fulfilled;
 
     public int getId() {
         return id;
@@ -138,14 +135,6 @@ public class OB_Order {
         this.placedAt = placedAt;
     }
 
-    public boolean isFulfilled() {
-        return fulfilled;
-    }
-
-    public void setFulfilled(boolean fulfilled) {
-        this.fulfilled = fulfilled;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -158,7 +147,6 @@ public class OB_Order {
         hash = 71 * hash + Objects.hashCode(this.placedAt);
         hash = 71 * hash + Objects.hashCode(this.userSymbol);
         hash = 71 * hash + Objects.hashCode(this.status);
-        hash = 71 * hash + (this.fulfilled ? 1 : 0);
         return hash;
     }
 
@@ -181,9 +169,6 @@ public class OB_Order {
             return false;
         }
         if (this.numbermatched != other.numbermatched) {
-            return false;
-        }
-        if (this.fulfilled != other.fulfilled) {
             return false;
         }
         if (!Objects.equals(this.symbol, other.symbol)) {

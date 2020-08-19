@@ -66,7 +66,6 @@ public class OrderServiceDB implements OrderService {
         order.setSide(orderData.get("side").equals("buy") ? SideEnum.BUY : SideEnum.SELL);
         order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
         order.setPlacedAt(LocalDateTime.parse(orderData.get("placedat")));
-        order.setFulfilled(Boolean.parseBoolean(orderData.get("fulfilled")));
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         order.setUserSymbol(orderData.get("userSymbol"));
         order.setVersion(0);

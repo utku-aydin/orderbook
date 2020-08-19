@@ -5,7 +5,7 @@
  */
 package com.mthree.orderbook.repository;
 
-import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.OB_Order;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,12 +16,12 @@ import org.springframework.stereotype.Repository;
  * @author utkua
  */
 @Repository
-public interface OrderRepository extends JpaRepository<Order, Integer> {
+public interface OrderRepository extends JpaRepository<OB_Order, Integer> {
     
     @Query(value = "SELECT * FROM `order` WHERE side = \"buy\"", nativeQuery = true)
-    List<Order> findBuyOrders();
+    List<OB_Order> findBuyOrders();
     
     @Query(value = "SELECT * FROM `order` WHERE side = \"sell\"", nativeQuery = true)
-    List<Order> findSellOrders();
+    List<OB_Order> findSellOrders();
   
 }

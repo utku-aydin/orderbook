@@ -5,7 +5,6 @@
  */
 package com.mthree.orderbook.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -20,7 +19,7 @@ import javax.persistence.Id;
  * @author utkua
  */
 @Entity
-public class Order {
+public class OB_Order {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id    
@@ -33,7 +32,7 @@ public class Order {
     private BigDecimal price;
     
     @Column(nullable = false)
-    private int size;
+    private int ordersize;
 
     @Column(nullable = false)
     private int numbermatched;
@@ -71,20 +70,20 @@ public class Order {
         this.price = price;
     }
 
-    public int getSize() {
-        return size;
+    public int getOrdersize() {
+        return ordersize;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setOrdersize(int ordersize) {
+        this.ordersize = ordersize;
     }
 
     public int getNumbermatched() {
         return numbermatched;
     }
 
-    public void setNumbermatched(int sold) {
-        this.numbermatched = sold;
+    public void setNumbermatched(int numbermatched) {
+        this.numbermatched = numbermatched;
     }
 
     public String getSide() {
@@ -99,8 +98,8 @@ public class Order {
         return placedat;
     }
 
-    public void setPlacedat(LocalDateTime placedAt) {
-        this.placedat = placedAt;
+    public void setPlacedat(LocalDateTime placedat) {
+        this.placedat = placedat;
     }
 
     public boolean isFulfilled() {
@@ -113,15 +112,15 @@ public class Order {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + this.id;
-        hash = 31 * hash + Objects.hashCode(this.symbol);
-        hash = 31 * hash + Objects.hashCode(this.price);
-        hash = 31 * hash + this.size;
-        hash = 31 * hash + this.numbermatched;
-        hash = 31 * hash + Objects.hashCode(this.side);
-        hash = 31 * hash + Objects.hashCode(this.placedat);
-        hash = 31 * hash + (this.fulfilled ? 1 : 0);
+        int hash = 3;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.symbol);
+        hash = 73 * hash + Objects.hashCode(this.price);
+        hash = 73 * hash + this.ordersize;
+        hash = 73 * hash + this.numbermatched;
+        hash = 73 * hash + Objects.hashCode(this.side);
+        hash = 73 * hash + Objects.hashCode(this.placedat);
+        hash = 73 * hash + (this.fulfilled ? 1 : 0);
         return hash;
     }
 
@@ -136,11 +135,11 @@ public class Order {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Order other = (Order) obj;
+        final OB_Order other = (OB_Order) obj;
         if (this.id != other.id) {
             return false;
         }
-        if (this.size != other.size) {
+        if (this.ordersize != other.ordersize) {
             return false;
         }
         if (this.numbermatched != other.numbermatched) {

@@ -5,12 +5,14 @@
  */
 package com.mthree.orderbook.service;
 
-import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.OB_Order;
 import com.mthree.orderbook.repository.OrderRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -27,32 +29,38 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public List<Order> getOrders() {
+    public List<OB_Order> getOrders() {
         return orderRepository.findAll();
     }
     
     @Override
-    public List<Order> getBuyOrders() {
+    public List<OB_Order> getBuyOrders() {
         return orderRepository.findBuyOrders();
     }
 
     @Override
-    public List<Order> getSellOrders() {
+    public List<OB_Order> getSellOrders() {
         return orderRepository.findSellOrders();
     }
 
     @Override
-    public Order getOrderByID(int id) {
+    public OB_Order getOrderByID(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Order addOrder(Map<String, String> orderData) {
-        Order order = new Order();
+    public OB_Order addOrder(Map<String, String> orderData) {
+        OB_Order order = new OB_Order();
+        
+        Set<String> keys = orderData.keySet();
+        Collection<String> values = orderData.values();
+        for (int i = 0; i < orderData.size(); i++) {
+            System.out.println();
+        }
         
         order.setSymbol(orderData.get("symbol"));
         order.setPrice(new BigDecimal(orderData.get("price")));
-        order.setSize(Integer.parseInt(orderData.get("size")));
+        order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
         order.setSide(orderData.get("side"));
         order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
         order.setPlacedat(LocalDateTime.parse(orderData.get("placedat")));
@@ -63,12 +71,12 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public Order updateOrder(Map<String, String> orderData) {
+    public OB_Order updateOrder(Map<String, String> orderData) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Order cancelOrderByID(int id) {
+    public OB_Order cancelOrderByID(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -5,7 +5,7 @@
  */
 package com.mthree.orderbook.service;
 
-import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.OB_Order;
 import java.util.List;
 import java.util.Map;
 
@@ -15,12 +15,12 @@ import java.util.Map;
  */
 public interface OrderService {
     
-    public List<Order> getOrders();
-    public List<Order> getBuyOrders();
-    public List<Order> getSellOrders();
-    public Order getOrderByID(int id);
-    public Order addOrder(Map<String, String> orderData);
-    public Order updateOrder(Map<String, String> orderData);
-    public Order cancelOrderByID(int id);
+    public List<OB_Order> getOrders();
+    public List<OB_Order> getBuyOrders();
+    public List<OB_Order> getSellOrders();
+    public OB_Order getOrderByID(int id);
+    public OB_Order addOrder(Map<String, String> orderData);
+    public OB_Order updateOrder(Map<String, String> orderData);
+    public OB_Order cancelOrderByID(int id);
     
 }

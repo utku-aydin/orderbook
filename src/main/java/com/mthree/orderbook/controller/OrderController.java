@@ -5,7 +5,7 @@
  */
 package com.mthree.orderbook.controller;
 
-import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.OB_Order;
 import com.mthree.orderbook.service.OrderService;
 import java.util.List;
 import java.util.Map;
@@ -36,8 +36,8 @@ public class OrderController {
     }
     
     @GetMapping("/buyOrders")
-    public ResponseEntity<List<Order>> getBuyOrders() {
-        List<Order> orders = service.getBuyOrders();
+    public ResponseEntity<List<OB_Order>> getBuyOrders() {
+        List<OB_Order> orders = service.getBuyOrders();
         if (orders.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
@@ -46,8 +46,8 @@ public class OrderController {
     }
     
     @GetMapping("/sellOrders")
-    public ResponseEntity<List<Order>> getSellOrders() {
-        List<Order> orders = service.getSellOrders();
+    public ResponseEntity<List<OB_Order>> getSellOrders() {
+        List<OB_Order> orders = service.getSellOrders();
         if (orders.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
@@ -57,8 +57,8 @@ public class OrderController {
     
     @PostMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Order> addOrder(@RequestBody Map<String, String> orderData) {
-        Order added = service.addOrder(orderData);
+    public ResponseEntity<OB_Order> addOrder(@RequestBody Map<String, String> orderData) {
+        OB_Order added = service.addOrder(orderData);
         
         return ResponseEntity.ok(added);
     }

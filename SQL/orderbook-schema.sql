@@ -4,18 +4,15 @@ CREATE DATABASE orderbookdb;
 
 USE orderbookdb;
 
-CREATE TABLE `order` (
-	id INT AUTO_INCREMENT,
+CREATE TABLE ob_order (
+	id INT primary key AUTO_INCREMENT,
     symbol VARCHAR(8) NOT NULL,
 	price DECIMAL(10,2) NOT NULL,
-	`size` INT NOT NULL,
+	orderSize INT NOT NULL,
 	side VARCHAR(3) NOT NULL,
     numberMatched INT NOT NULL,
     placedAt DATETIME NOT NULL,
-	fulfilled boolean NOT NULL,
-	
-	CONSTRAINT pk_order
-		PRIMARY KEY (id)
+	fulfilled boolean NOT NULL
 );
 
 DROP DATABASE IF EXISTS orderbookdbtest;

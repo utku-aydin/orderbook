@@ -5,6 +5,7 @@
  */
 package com.mthree.orderbook.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -25,26 +26,33 @@ public class Order {
     @Id    
     private int id;
     
+    @JsonProperty("symbol")
     @Column(nullable = false)
     private String symbol;
     
+    @JsonProperty("price")
     @Column(nullable = false)
     private BigDecimal price;
     
+    @JsonProperty("size")
     @Column(nullable = false)
     private int size;
 
+    @JsonProperty("numbermatched")
     @Column(nullable = false)
-    private int sold;
+    private int numbermatched;
     
+    @JsonProperty("side")
     @Column(nullable = false)
     private String side;
     
+    @JsonProperty("placedat")
     @Column(nullable = false)
-    private LocalDateTime placedAt;
+    private LocalDateTime placedat = LocalDateTime.now();
     
+    @JsonProperty("fulfilled")
     @Column(nullable = false)
-    private boolean fullFilled;
+    private boolean fulfilled;
 
     public int getId() {
         return id;
@@ -78,12 +86,12 @@ public class Order {
         this.size = size;
     }
 
-    public int getSold() {
-        return sold;
+    public int getNumbermatched() {
+        return numbermatched;
     }
 
-    public void setSold(int sold) {
-        this.sold = sold;
+    public void setNumbermatched(int sold) {
+        this.numbermatched = sold;
     }
 
     public String getSide() {
@@ -94,20 +102,20 @@ public class Order {
         this.side = side;
     }
 
-    public LocalDateTime getPlacedAt() {
-        return placedAt;
+    public LocalDateTime getPlacedat() {
+        return placedat;
     }
 
-    public void setPlacedAt(LocalDateTime placedAt) {
-        this.placedAt = placedAt;
+    public void setPlacedat(LocalDateTime placedAt) {
+        this.placedat = placedAt;
     }
 
-    public boolean isFullFilled() {
-        return fullFilled;
+    public boolean isFulfilled() {
+        return fulfilled;
     }
 
-    public void setFullFilled(boolean fullFilled) {
-        this.fullFilled = fullFilled;
+    public void setFulfilled(boolean fulfilled) {
+        this.fulfilled = fulfilled;
     }
 
     @Override
@@ -117,10 +125,10 @@ public class Order {
         hash = 31 * hash + Objects.hashCode(this.symbol);
         hash = 31 * hash + Objects.hashCode(this.price);
         hash = 31 * hash + this.size;
-        hash = 31 * hash + this.sold;
+        hash = 31 * hash + this.numbermatched;
         hash = 31 * hash + Objects.hashCode(this.side);
-        hash = 31 * hash + Objects.hashCode(this.placedAt);
-        hash = 31 * hash + (this.fullFilled ? 1 : 0);
+        hash = 31 * hash + Objects.hashCode(this.placedat);
+        hash = 31 * hash + (this.fulfilled ? 1 : 0);
         return hash;
     }
 
@@ -142,10 +150,10 @@ public class Order {
         if (this.size != other.size) {
             return false;
         }
-        if (this.sold != other.sold) {
+        if (this.numbermatched != other.numbermatched) {
             return false;
         }
-        if (this.fullFilled != other.fullFilled) {
+        if (this.fulfilled != other.fulfilled) {
             return false;
         }
         if (!Objects.equals(this.symbol, other.symbol)) {
@@ -157,7 +165,7 @@ public class Order {
         if (!Objects.equals(this.price, other.price)) {
             return false;
         }
-        if (!Objects.equals(this.placedAt, other.placedAt)) {
+        if (!Objects.equals(this.placedat, other.placedat)) {
             return false;
         }
         return true;

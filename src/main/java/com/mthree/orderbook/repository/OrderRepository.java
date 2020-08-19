@@ -18,10 +18,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     
-    @Query(value = "SELECT * FROM order WHERE side = buy", nativeQuery = true)
+    @Query(value = "SELECT * FROM `order` WHERE side = \"buy\"", nativeQuery = true)
     List<Order> findBuyOrders();
     
-    @Query(value = "SELECT * FROM order WHERE side = sell", nativeQuery = true)
+    @Query(value = "SELECT * FROM `order` WHERE side = \"sell\"", nativeQuery = true)
     List<Order> findSellOrders();
   
 }

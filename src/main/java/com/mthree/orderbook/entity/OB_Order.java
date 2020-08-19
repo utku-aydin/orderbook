@@ -15,19 +15,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.Table;
 
 /**
  *
  * @author utkua
  */
 @Entity
+@Table(name = "ob_order")
 @IdClass(OB_OrderId.class)
 public class OB_Order {
     
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name = "id")
     @Id    
     private int id;
     
+    @Column(name = "version")
     @Id
     private int version;    
 

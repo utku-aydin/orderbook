@@ -18,10 +18,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<OB_Order, Integer> {
     
-    @Query(value = "SELECT * FROM `order` WHERE side = \"buy\" ORDER BY \"price\"", nativeQuery = true)
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"buy\" ORDER BY \"price\"", nativeQuery = true)
     List<OB_Order> findBuyOrders();
     
-    @Query(value = "SELECT * FROM `order` WHERE side = \"sell\" ORDER BY \"price\" ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"sell\" ORDER BY \"price\" ASC", nativeQuery = true)
     List<OB_Order> findSellOrders();
   
 }

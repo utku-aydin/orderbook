@@ -55,20 +55,20 @@ public class OB_Order {
     private SideEnum side;
     
     @Column(nullable = false)
-    private LocalDateTime placedAt;
+    private LocalDateTime placedat;
     
     @Column(nullable = false)
-    private String userSymbol;
+    private String usersymbol;
     
     @Column(nullable = false)
     private StatusEnum status;
 
     public String getUserSymbol() {
-        return userSymbol;
+        return usersymbol;
     }
 
-    public void setUserSymbol(String userSymbol) {
-        this.userSymbol = userSymbol;
+    public void setUserSymbol(String usersymbol) {
+        this.usersymbol = usersymbol;
     }
 
     public StatusEnum getStatus() {
@@ -128,11 +128,11 @@ public class OB_Order {
     }
 
     public LocalDateTime getPlacedAt() {
-        return placedAt;
+        return placedat;
     }
 
-    public void setPlacedAt(LocalDateTime placedAt) {
-        this.placedAt = placedAt;
+    public void setPlacedAt(LocalDateTime placedat) {
+        this.placedat = placedat;
     }
 
     @Override
@@ -144,8 +144,8 @@ public class OB_Order {
         hash = 71 * hash + this.ordersize;
         hash = 71 * hash + this.numbermatched;
         hash = 71 * hash + Objects.hashCode(this.side);
-        hash = 71 * hash + Objects.hashCode(this.placedAt);
-        hash = 71 * hash + Objects.hashCode(this.userSymbol);
+        hash = 71 * hash + Objects.hashCode(this.placedat);
+        hash = 71 * hash + Objects.hashCode(this.usersymbol);
         hash = 71 * hash + Objects.hashCode(this.status);
         return hash;
     }
@@ -174,7 +174,7 @@ public class OB_Order {
         if (!Objects.equals(this.symbol, other.symbol)) {
             return false;
         }
-        if (!Objects.equals(this.userSymbol, other.userSymbol)) {
+        if (!Objects.equals(this.usersymbol, other.usersymbol)) {
             return false;
         }
         if (!Objects.equals(this.price, other.price)) {
@@ -183,7 +183,7 @@ public class OB_Order {
         if (this.side != other.side) {
             return false;
         }
-        if (!Objects.equals(this.placedAt, other.placedAt)) {
+        if (!Objects.equals(this.placedat, other.placedat)) {
             return false;
         }
         if (this.status != other.status) {

@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @IdClass(OB_OrderId.class)
 public class OB_Order {
     
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     @Id    
     private int id;

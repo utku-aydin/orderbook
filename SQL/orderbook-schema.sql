@@ -10,11 +10,11 @@ CREATE TABLE ob_order (
     symbol 			VARCHAR(8) 									NOT NULL,
 	price 			DECIMAL(10,2) 								NOT NULL,
 	orderSize 		INT 										NOT NULL,
-	side 			ENUM('BUY', 'SELL') 						NOT NULL,
+	side 			VARCHAR(8) 									NOT NULL,
     numberMatched 	INT 										NOT NULL,
     placedAt 		DATETIME 									NOT NULL,
 	userSymbol 		VARCHAR(8) 									NOT NULL,
-	status 			ENUM('ACTIVE', 'CANCELLED', 'FULFILLED') 	NOT NULL,
+	status 			VARCHAR(8) 	 								NOT NULL,
     CONSTRAINT PK_OB_ORDER 
     	PRIMARY KEY (id, version)
 );

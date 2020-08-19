@@ -6,22 +6,27 @@
 package com.mthree.orderbook.entity;
 
 import java.io.Serializable;
+import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
 /**
  *
  * @author utkua
  */
+@Embeddable
 public class OB_OrderId implements Serializable {
     
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     
-    private int version;
+    private Integer version;
     
     public OB_OrderId() {
         
     }
     
-    public OB_OrderId(int id, int version) {
+    public OB_OrderId(Integer id, Integer version) {
         this.id = id;
         this.version = version;
     }

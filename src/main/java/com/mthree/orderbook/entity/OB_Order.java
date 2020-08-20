@@ -20,7 +20,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 /**
  *
@@ -28,10 +30,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ob_order")
+@SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
 @IdClass(OB_OrderId.class)
 public class OB_Order implements Serializable {
     
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
     @Column(name = "id")
     @Id    
     private int id;

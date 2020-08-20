@@ -74,7 +74,8 @@ public class OrderServiceDB implements OrderService {
         order.setUsersymbol(orderData.get("userSymbol"));
         order.setVersion(0);
         
-        order = orderRepository.save(order);
+        order = orderRepository.saveAndFlush(order);
+        order.setId(orderRepository.findMostRecentOrder().getId());
         
         if (order.getSide() == SideEnum.BUY) {
             matchBuyOrder(order);
@@ -188,6 +189,12 @@ public class OrderServiceDB implements OrderService {
                 }
                 
                 trade.setTradetime(LocalDateTime.now());
+                
+                System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getVersion() + ""
+                + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getVersion());
+
+                System.out.println("Sell order id: " + order.getId() + " version: " + order.getVersion() + ""
+                + "Buy order id: " + current.getId() + " version: " + current.getVersion());
                 
                 tradeRepository.save(trade);
                 orderRepository.save(order);

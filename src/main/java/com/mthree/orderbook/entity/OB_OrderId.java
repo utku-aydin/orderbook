@@ -9,15 +9,18 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.TableGenerator;
 
 /**
  *
  * @author utkua
  */
 @Embeddable
+@SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
 public class OB_OrderId implements Serializable {
     
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
     private Integer id;
     
     private Integer version;

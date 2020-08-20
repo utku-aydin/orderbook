@@ -17,10 +17,9 @@ import javax.persistence.TableGenerator;
  * @author utkua
  */
 @Embeddable
-@SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
 public class OB_OrderId implements Serializable {
     
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     
     private Integer version;
@@ -31,6 +30,14 @@ public class OB_OrderId implements Serializable {
     
     public OB_OrderId(Integer id, Integer version) {
         this.id = id;
+        this.version = version;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
         this.version = version;
     }
 

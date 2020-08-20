@@ -69,13 +69,15 @@ public class OrderServiceDB implements OrderService {
         order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));
         order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
-        order.setPlacedat(LocalDateTime.parse(orderData.get("placedat")));
+        order.setPlacedat(LocalDateTime.now());
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         order.setUsersymbol(orderData.get("userSymbol"));
         order.setVersion(0);
         
         order = orderRepository.saveAndFlush(order);
-        order.setId(orderRepository.findMostRecentOrder().getId());
+        order.setId(orderRepository.findMostRecentOrder().get(0).getId());
+        //order.setId(10);
+        System.out.println("Order id set: " + order.getId());
         
         if (order.getSide() == SideEnum.BUY) {
             matchBuyOrder(order);

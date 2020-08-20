@@ -30,11 +30,10 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @Table(name = "ob_order")
-@SequenceGenerator(name="seq", initialValue=1, allocationSize=100)
 @IdClass(OB_OrderId.class)
 public class OB_Order implements Serializable {
     
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")
     @Id    
     private int id;

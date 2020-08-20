@@ -34,7 +34,6 @@ public class Trade implements Serializable {
     @Id    
     private int id;
     
-    // Don't capitalize id, as JPA will add an underscore (since MySql not case-sensitive)
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumns({
         @JoinColumn(name = "buyid", nullable = false),
@@ -42,7 +41,6 @@ public class Trade implements Serializable {
     })
     private OB_Order buyorder;
     
-    // Don't capitalize id, as JPA will add an underscore (since MySql not case-sensitive)
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumns({
         @JoinColumn(name = "sellid", nullable = false),

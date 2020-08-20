@@ -15,7 +15,7 @@ CREATE TABLE ob_order (
     placedAt 		DATETIME 									NOT NULL,
 	userSymbol 		VARCHAR(8) 									NOT NULL,
 	status 			ENUM('ACTIVE', 'CANCELLED', 'FULFILLED') 	NOT NULL,
-    CONSTRAINT PK_OB_ORDER 
+    CONSTRAINT PK_ob_order 
     	PRIMARY KEY (id, version)
 );
 

@@ -111,19 +111,19 @@ public class OB_Order {
         this.price = price;
     }
 
-    public int getOrdersize() {
+    public int getOrderSize() {
         return ordersize;
     }
 
-    public void setOrdersize(int ordersize) {
+    public void setOrderSize(int ordersize) {
         this.ordersize = ordersize;
     }
 
-    public int getNumbermatched() {
+    public int getNumberMatched() {
         return numbermatched;
     }
 
-    public void setNumbermatched(int numbermatched) {
+    public void setNumberMatched(int numbermatched) {
         this.numbermatched = numbermatched;
     }
 

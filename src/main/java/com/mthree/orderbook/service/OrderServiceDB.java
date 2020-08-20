@@ -62,9 +62,9 @@ public class OrderServiceDB implements OrderService {
         
         order.setSymbol(orderData.get("symbol"));
         order.setPrice(new BigDecimal(orderData.get("price")));
-        order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
+        order.setOrderSize(Integer.parseInt(orderData.get("ordersize")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));
-        order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
+        order.setNumberMatched(Integer.parseInt(orderData.get("numbermatched")));
         order.setPlacedAt(LocalDateTime.parse(orderData.get("placedat")));
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         order.setUserSymbol(orderData.get("userSymbol"));
@@ -86,13 +86,38 @@ public class OrderServiceDB implements OrderService {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void matchOrder(OB_Order order) {
-        List<OB_Order> compared;
+    private void matchBuyOrder(OB_Order order) {
+        List<OB_Order> compared = orderRepository.findSellOrders();;
+        int remaining = order.getNumberMatched() - order.getOrderSize();
+        int marker = 0;
+        OB_Order current = compared.get(marker);
         
-        if (order.getSide() == SideEnum.BUY) {
-            compared = orderRepository.findSellOrders();
-        } else {
-            
+        while (remaining > 0) {            
+            if (order.getPrice().compareTo(current.getPrice()) < 0) {
+                
+            }
+        }
+    }
+    
+    private void matchSellOrder(OB_Order order) {
+        List<OB_Order> compared = orderRepository.findBuyOrders();
+        int remaining = order.getNumberMatched() - order.getOrderSize();
+        int marker = 0;
+        OB_Order current = compared.get(marker);
+        
+        while (remaining > 0) {            
+            if ((order.getPrice().compareTo(current.getPrice()) < 0) || (order.getPrice().compareTo(current.getPrice()) == 0)) {
+                int currentRemaining = current.getOrderSize() - current.getNumberMatched();
+                if (currentRemaining > remaining) {
+                    currentRemaining -= remaining;
+                    remaining = 0;
+                } else {
+                    remaining -= currentRemaining;
+                    currentRemaining = 0;
+                    current.setNumberMatched(current.getOrderSize());
+                    current.setStatus(StatusEnum.FULFILLED);
+                }
+            }
         }
     }
     

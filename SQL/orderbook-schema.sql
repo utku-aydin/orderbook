@@ -22,16 +22,18 @@ CREATE TABLE ob_order (
 CREATE TABLE trade (
 	id 				INT 		primary key 	AUTO_INCREMENT,
     buyId 			INT 		NOT NULL,
+	buyVersion		INT			NOT NULL,
 	sellId 			INT 		NOT NULL,
+	sellVersion		INT 		NOT NULL,
 	tradeTime 		DATETIME 	NOT NULL,
 	tradePrice 		DECIMAL 	NOT NULL,
     tradeSize 		INT 		NOT NULL,
-    CONSTRAINT FK_trade_buyId
-    	FOREIGN KEY (buyId)
-    	REFERENCES ob_order(id),
-    CONSTRAINT FK_trade_sellId
-    	FOREIGN KEY (sellId)
-    	REFERENCES ob_order(id)
+    CONSTRAINT FK_trade_buy
+    	FOREIGN KEY (buyId, buyVersion)
+    	REFERENCES ob_order(id, version),
+    CONSTRAINT FK_trade_sell
+    	FOREIGN KEY (sellId, sellVersion)
+    	REFERENCES ob_order(id, version)
 );
 
 DROP DATABASE IF EXISTS orderbookdbtest;

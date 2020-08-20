@@ -11,11 +11,14 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -32,13 +35,19 @@ public class Trade implements Serializable {
     private int id;
     
     // Don't capitalize id, as JPA will add an underscore (since MySql not case-sensitive)
-    @ManyToOne
-    @JoinColumn(name = "buyid", nullable = false)
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "buyid", nullable = false),
+        @JoinColumn(name = "buyversion", nullable = false)
+    })
     private OB_Order buyorder;
     
     // Don't capitalize id, as JPA will add an underscore (since MySql not case-sensitive)
-    @ManyToOne
-    @JoinColumn(name = "sellid", nullable = false)
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumns({
+        @JoinColumn(name = "sellid", nullable = false),
+        @JoinColumn(name = "sellversion", nullable = false)
+    })
     private OB_Order sellorder;
     
     @Column(nullable = false)

@@ -8,7 +8,9 @@ package com.mthree.orderbook.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -36,14 +39,6 @@ public class OB_Order implements Serializable {
     @Column(name = "version")
     @Id
     private int version;    
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
     
     @Column(nullable = false)
     private String symbol;
@@ -70,22 +65,13 @@ public class OB_Order implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusEnum status;
-
-    public String getUserSymbol() {
-        return usersymbol;
-    }
-
-    public void setUserSymbol(String usersymbol) {
-        this.usersymbol = usersymbol;
-    }
-
-    public StatusEnum getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusEnum status) {
-        this.status = status;
-    }
+    
+    /*
+    @OneToMany(mappedBy = "buyorder")
+    private Set<Trade> buyTrade = new HashSet<>();
+    
+    @OneToMany(mappedBy = "sellorder")
+    private Set<Trade> sellTrade = new HashSet<>();*/
 
     public int getId() {
         return id;
@@ -93,6 +79,14 @@ public class OB_Order implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public String getSymbol() {
@@ -111,19 +105,19 @@ public class OB_Order implements Serializable {
         this.price = price;
     }
 
-    public int getOrderSize() {
+    public int getOrdersize() {
         return ordersize;
     }
 
-    public void setOrderSize(int ordersize) {
+    public void setOrdersize(int ordersize) {
         this.ordersize = ordersize;
     }
 
-    public int getNumberMatched() {
+    public int getNumbermatched() {
         return numbermatched;
     }
 
-    public void setNumberMatched(int numbermatched) {
+    public void setNumbermatched(int numbermatched) {
         this.numbermatched = numbermatched;
     }
 
@@ -135,13 +129,46 @@ public class OB_Order implements Serializable {
         this.side = side;
     }
 
-    public LocalDateTime getPlacedAt() {
+    public LocalDateTime getPlacedat() {
         return placedat;
     }
 
-    public void setPlacedAt(LocalDateTime placedat) {
+    public void setPlacedat(LocalDateTime placedat) {
         this.placedat = placedat;
     }
+
+    public String getUsersymbol() {
+        return usersymbol;
+    }
+
+    public void setUsersymbol(String usersymbol) {
+        this.usersymbol = usersymbol;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    /*
+    public Set<Trade> getBuyTrade() {
+        return buyTrade;
+    }
+
+    public void setBuyTrade(Set<Trade> buyTrade) {
+        this.buyTrade = buyTrade;
+    }
+
+    public Set<Trade> getSellTrade() {
+        return sellTrade;
+    }
+
+    public void setSellTrade(Set<Trade> sellTrade) {
+        this.sellTrade = sellTrade;
+    }*/
 
     @Override
     public int hashCode() {

@@ -26,7 +26,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ob_order")
 @IdClass(OB_OrderId.class)
-public class OB_Order {
+public class OB_Order implements Serializable {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id")

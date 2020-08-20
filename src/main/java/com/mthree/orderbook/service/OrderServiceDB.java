@@ -8,7 +8,9 @@ package com.mthree.orderbook.service;
 import com.mthree.orderbook.entity.OB_Order;
 import com.mthree.orderbook.entity.SideEnum;
 import com.mthree.orderbook.entity.StatusEnum;
+import com.mthree.orderbook.entity.Trade;
 import com.mthree.orderbook.repository.OrderRepository;
+import com.mthree.orderbook.repository.TradeRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -25,9 +27,11 @@ import org.springframework.stereotype.Repository;
 public class OrderServiceDB implements OrderService {
     
     private final OrderRepository orderRepository;
+    private final TradeRepository tradeRepository;
     
-    public OrderServiceDB (OrderRepository orderRepository) {
+    public OrderServiceDB (OrderRepository orderRepository, TradeRepository tradeRepository) {
         this.orderRepository = orderRepository;
+        this.tradeRepository = tradeRepository;
     }
 
     @Override
@@ -101,22 +105,36 @@ public class OrderServiceDB implements OrderService {
     
     private void matchSellOrder(OB_Order order) {
         List<OB_Order> compared = orderRepository.findBuyOrders();
-        int remaining = order.getNumberMatched() - order.getOrderSize();
+        int orderRemaining = order.getNumberMatched() - order.getOrderSize();
         int marker = 0;
         OB_Order current = compared.get(marker);
         
-        while (remaining > 0) {            
+        while (orderRemaining > 0) {            
             if ((order.getPrice().compareTo(current.getPrice()) < 0) || (order.getPrice().compareTo(current.getPrice()) == 0)) {
                 int currentRemaining = current.getOrderSize() - current.getNumberMatched();
-                if (currentRemaining > remaining) {
-                    currentRemaining -= remaining;
-                    remaining = 0;
+                Trade trade = new Trade();
+                trade.setBuyorder(current);
+                trade.setSellorder(order);
+                
+                trade.setTradeprice(order.getPrice());
+                
+                if (currentRemaining > orderRemaining) {
+                    trade.setTradesize(orderRemaining);
+                    currentRemaining -= orderRemaining;
+                    orderRemaining = 0;
+                    order.setNumberMatched(order.getOrderSize());
+                    order.setStatus(StatusEnum.FULFILLED);
+                    current.setNumberMatched(current.getOrderSize() - currentRemaining);
                 } else {
-                    remaining -= currentRemaining;
+                    trade.setTradesize(currentRemaining);
+                    orderRemaining -= currentRemaining;
                     currentRemaining = 0;
                     current.setNumberMatched(current.getOrderSize());
                     current.setStatus(StatusEnum.FULFILLED);
+                    order.setNumberMatched(order.getOrderSize() - orderRemaining);
                 }
+                
+                tradeRepository.save(trade);
             }
         }
     }

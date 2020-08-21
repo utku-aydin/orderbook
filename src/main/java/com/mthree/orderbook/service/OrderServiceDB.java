@@ -75,13 +75,13 @@ public class OrderServiceDB implements OrderService {
         order.setUsersymbol(orderData.get("userSymbol"));
         OB_OrderId id = new OB_OrderId();
         id.setVersion(0);
-        if (orderRepository.findHighestId() == null) {
-            System.out.println("Nully");
-            id.setId(1);
-        } else {
-            id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
-        }
-        order.setId(id);
+//        if (orderRepository.findHighestId().isEmpty()) {
+//            System.out.println("Nully");
+//            id.setId(1);
+//        } else {
+//            id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
+//        }
+//        order.setId(id);
         //order.getId().setVersion(0);
         
         order = orderRepository.saveAndFlush(order);

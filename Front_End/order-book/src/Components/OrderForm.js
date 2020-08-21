@@ -33,8 +33,20 @@ class OrderForm extends React.Component {
                 </Form.Group>
                 <Form.Group controlId = "orderQuantity">
                     <Form.Label>Quantity: </Form.Label>
-                    <input type="number" id="stepperQuantity" name="stepperQuantity" step="1"></input>
+                    <Form.Group>
+                        <input type="number" id="stepperQuantity" name="stepperQuantity" step="1"></input>
+                    </Form.Group>
                 </Form.Group>
+                <Form.Group controlId = "orderPrice">
+                    <Form.Label>Price: </Form.Label>
+                    <Form.Group>
+                        <input type="number" id="stepperPrice" name="stepperPrice" step="1"></input>
+                    </Form.Group>
+                    
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
             </Form>
 
         )

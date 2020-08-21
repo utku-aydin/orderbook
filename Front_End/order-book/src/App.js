@@ -33,6 +33,15 @@ class App extends React.Component {
       ))
   }
 
+  // handleCancelOrder = (event) => {
+  //   if (event) event.preventDefault();
+  //   let orderId = event.target.value;
+
+  //   console.log(`sumbitting delete for order id ${orderId}`)
+
+  //   fetch(SERVICE_URL+)
+  // }
+
   render() {
     return (
       <Container fluid>

@@ -163,8 +163,14 @@ public class OrderServiceDB implements OrderService {
                 }
             } else {
                 break;
-            }*/
-            matchOrders(current, order);
+            }*/            Trade trade = matchOrders(current, order);
+            if (trade != null) {
+                System.out.println("Trade not null");
+                trade.setTradeprice(current.getPrice());
+                tradeRepository.save(trade);
+            } else {
+                System.out.println("Trade is null");
+            }
             marker++;
             if (marker == compared.size()) {
                 break;
@@ -236,7 +242,14 @@ public class OrderServiceDB implements OrderService {
             } else {
                 break;
             }*/
-            matchOrders(current, order);
+            Trade trade = matchOrders(current, order);
+            if (trade != null) {
+                System.out.println("Trade not null");
+                trade.setTradeprice(current.getPrice());
+                tradeRepository.save(trade);
+            } else {
+                System.out.println("Trade is null");
+            }
             marker++;
             if (marker == compared.size()) {
                 break;
@@ -244,51 +257,53 @@ public class OrderServiceDB implements OrderService {
         }
     }
     
-    private void matchOrders(OB_Order buy, OB_Order sell) {
-            int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
-            int sellRemaining = sell.getOrdersize() - sell.getNumbermatched();
-            if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
-                System.out.println("Order matched");
-                buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
-                Trade trade = new Trade();
-                trade.setBuyorder(buy);
-                trade.setSellorder(sell);
-                
-                trade.setTradeprice(sell.getPrice());
-                
-                if (buyRemaining > sellRemaining) {
-                    trade.setTradesize(sellRemaining);
-                    buyRemaining -= sellRemaining;
-                    sellRemaining = 0;
-                    sell.setNumbermatched(sell.getOrdersize());
-                    sell.setStatus(StatusEnum.FULFILLED);
-                    buy.setNumbermatched(buy.getOrdersize() - buyRemaining);
-                } else {
-                    trade.setTradesize(buyRemaining);
-                    sellRemaining -= buyRemaining;
-                    buyRemaining = 0;
-                    buy.setNumbermatched(buy.getOrdersize());
-                    buy.setStatus(StatusEnum.FULFILLED);
-                    sell.setNumbermatched(sell.getOrdersize() - sellRemaining);
-                    if(sell.getNumbermatched() == sell.getOrdersize()) {
-                        sell.setStatus(StatusEnum.FULFILLED);
-                    }
-                }
-                
-                trade.setTradetime(LocalDateTime.now());
-                
-                System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
-                + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());
+    private Trade matchOrders(OB_Order buy, OB_Order sell) {
+        int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
+        int sellRemaining = sell.getOrdersize() - sell.getNumbermatched();
+        if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
+            System.out.println("Order matched");
+            buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
+            Trade trade = new Trade();
+            trade.setBuyorder(buy);
+            trade.setSellorder(sell);
 
-                System.out.println("Sell order id: " + sell.getId() + " version: " + sell.getId().getVersion() + ""
-                + "Buy order id: " + buy.getId() + " version: " + buy.getId().getVersion());
-                
-                tradeRepository.save(trade);
-                orderRepository.save(sell);
-                orderRepository.save(buy);
+            trade.setTradeprice(sell.getPrice());
+
+            if (buyRemaining > sellRemaining) {
+                trade.setTradesize(sellRemaining);
+                buyRemaining -= sellRemaining;
+                sellRemaining = 0;
+                sell.setNumbermatched(sell.getOrdersize());
+                sell.setStatus(StatusEnum.FULFILLED);
+                buy.setNumbermatched(buy.getOrdersize() - buyRemaining);
             } else {
-                return;
+                trade.setTradesize(buyRemaining);
+                sellRemaining -= buyRemaining;
+                buyRemaining = 0;
+                buy.setNumbermatched(buy.getOrdersize());
+                buy.setStatus(StatusEnum.FULFILLED);
+                sell.setNumbermatched(sell.getOrdersize() - sellRemaining);
+                if(sell.getNumbermatched() == sell.getOrdersize()) {
+                    sell.setStatus(StatusEnum.FULFILLED);
+                }
             }
+
+            trade.setTradetime(LocalDateTime.now());
+
+            System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
+            + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());
+
+            System.out.println("Sell order id: " + sell.getId() + " version: " + sell.getId().getVersion() + ""
+            + "Buy order id: " + buy.getId() + " version: " + buy.getId().getVersion());
+
+            //tradeRepository.save(trade);
+            orderRepository.save(sell);
+            orderRepository.save(buy);
+            
+            return trade;
+        } else {
+            return null;
+        }
     }
     
 }

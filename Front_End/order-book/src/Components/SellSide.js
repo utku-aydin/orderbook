@@ -18,8 +18,8 @@ const SellSideRow = ({ order }) => {
 
     return (<tr>
         <td>{order.price}</td>
-        <td>{order.quantity}</td>
-        <td>{order.price * order.quantity}</td>
+        <td>{order.ordersize}</td>
+        <td>{order.price * order.ordersize}</td>
         <td>{order.symbol}</td>
         <td><Button>Cancel</Button></td>
     </tr>

@@ -14,7 +14,7 @@ public class User {
     @JoinColumn(
             name = "company_id",
             referencedColumnName = "id",
-            nullable = false),
+            nullable = false)
     private Company company;
 
     @Column(nullable = false)

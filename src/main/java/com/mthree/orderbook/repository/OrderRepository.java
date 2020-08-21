@@ -17,13 +17,15 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface OrderRepository extends JpaRepository<OB_Order, Integer> {
-    
+
     @Query(value = "SELECT * FROM `ob_order` WHERE side = \"buy\" ORDER BY \"price\"", nativeQuery = true)
     List<OB_Order> findBuyOrders();
-    
     @Query(value = "SELECT * FROM `ob_order` WHERE side = \"sell\" ORDER BY \"price\" ASC", nativeQuery = true)
     List<OB_Order> findSellOrders();
-    
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"buy\" AND status = \"ACTIVE\" ORDER BY \"price\", \"placedAt\"", nativeQuery = true)
+    List<OB_Order> findActiveBuyOrders();
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"sell\" AND status = \"ACTIVE\" ORDER BY \"price\" ASC, \"placedAt\"", nativeQuery = true)
+    List<OB_Order> findActiveSellOrders();
     @Query(value = "SELECT * FROM `ob_order` ORDER BY id DESC", nativeQuery = true)
     List<OB_Order> findHighestId();
   

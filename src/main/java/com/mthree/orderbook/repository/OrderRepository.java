@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<OB_Order, Integer> {
     @Query(value = "SELECT * FROM `ob_order` WHERE side = \"sell\" ORDER BY \"price\" ASC", nativeQuery = true)
     List<OB_Order> findSellOrders();
     
-    @Query(value = "SELECT * FROM `ob_order` ORDER BY \"placedat\" DESC", nativeQuery = true)
-    List<OB_Order> findMostRecentOrder();
+    @Query(value = "SELECT * FROM `ob_order` ORDER BY \"id\" DESC", nativeQuery = true)
+    List<OB_Order> findHighestId();
   
 }

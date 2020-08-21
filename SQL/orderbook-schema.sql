@@ -5,16 +5,16 @@ CREATE DATABASE orderbookdb;
 USE orderbookdb;
 
 CREATE TABLE ob_order (
-	id 				INT 										AUTO_INCREMENT,
-	version 		INT 										DEFAULT 0,
-    symbol 			VARCHAR(8) 									NOT NULL,
-	price 			DECIMAL(10,2) 								NOT NULL,
-	orderSize 		INT 										NOT NULL,
-	side 			ENUM('BUY', 'SELL') 						NOT NULL,
-    numberMatched 	INT 										NOT NULL,
-    placedAt 		DATETIME 									NOT NULL,
-	userSymbol 		VARCHAR(8) 									NOT NULL,
-	status 			ENUM('ACTIVE', 'CANCELLED', 'FULFILLED') 	NOT NULL,
+	id 				INT 													AUTO_INCREMENT,
+	version 		INT 													DEFAULT 0,
+    symbol 			VARCHAR(8) 												NOT NULL,
+	price 			DECIMAL(10,2) 											NOT NULL,
+	orderSize 		INT 													NOT NULL,
+	side 			ENUM('BUY', 'SELL') 									NOT NULL,
+    numberMatched 	INT 													NOT NULL,
+    placedAt 		DATETIME 												NOT NULL,
+	userSymbol 		VARCHAR(8) 												NOT NULL,
+	status 			ENUM('PENDING', 'ACTIVE', 'CANCELLED', 'FULFILLED') 	NOT NULL,
     CONSTRAINT PK_ob_order 
     	PRIMARY KEY (id, version)
 );

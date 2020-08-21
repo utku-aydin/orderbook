@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
@@ -27,6 +28,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "trade")
+//@IdClass(OB_OrderId.class)
 public class Trade implements Serializable {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,17 +36,29 @@ public class Trade implements Serializable {
     @Id    
     private int id;
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "buyid", nullable = false),
-        @JoinColumn(name = "buyversion", nullable = false)
+        @JoinColumn(
+                name = "buyid", 
+                referencedColumnName = "id",
+                nullable = false),
+        @JoinColumn(
+                name = "buyversion", 
+                referencedColumnName = "version",
+                nullable = false)
     })
     private OB_Order buyorder;
     
-    @ManyToOne(fetch=FetchType.LAZY)
+    @ManyToOne
     @JoinColumns({
-        @JoinColumn(name = "sellid", nullable = false),
-        @JoinColumn(name = "sellversion", nullable = false)
+        @JoinColumn(
+                name = "sellid", 
+                referencedColumnName = "id",
+                nullable = false),
+        @JoinColumn(
+                name = "sellversion", 
+                referencedColumnName = "version",
+                nullable = false)
     })
     private OB_Order sellorder;
     

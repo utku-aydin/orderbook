@@ -6,6 +6,7 @@
 package com.mthree.orderbook.service;
 
 import com.mthree.orderbook.entity.OB_Order;
+import com.mthree.orderbook.entity.OB_OrderId;
 import com.mthree.orderbook.entity.SideEnum;
 import com.mthree.orderbook.entity.StatusEnum;
 import com.mthree.orderbook.entity.Trade;
@@ -72,10 +73,19 @@ public class OrderServiceDB implements OrderService {
         order.setPlacedat(LocalDateTime.now());
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         order.setUsersymbol(orderData.get("userSymbol"));
-        order.setVersion(0);
+        OB_OrderId id = new OB_OrderId();
+        id.setVersion(0);
+        if (orderRepository.findHighestId() == null) {
+            System.out.println("Nully");
+            id.setId(1);
+        } else {
+            id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
+        }
+        order.setId(id);
+        //order.getId().setVersion(0);
         
         order = orderRepository.saveAndFlush(order);
-        order.setId(orderRepository.findMostRecentOrder().get(0).getId());
+        //order.setId(orderRepository.findMostRecentOrder().get(0).getId());
         //order.setId(10);
         System.out.println("Order id set: " + order.getId());
         
@@ -112,7 +122,8 @@ public class OrderServiceDB implements OrderService {
             return;
         }
         
-        while (orderRemaining > 0) {            
+        while (orderRemaining > 0) {
+            current = compared.get(marker);
             if ((order.getPrice().compareTo(current.getPrice()) > 0) || (order.getPrice().compareTo(current.getPrice()) == 0)) {
                 System.out.println("Order matched");
                 int currentRemaining = current.getOrdersize() - current.getNumbermatched();
@@ -144,6 +155,11 @@ public class OrderServiceDB implements OrderService {
                 orderRepository.save(order);
                 orderRepository.save(current);
                 marker++;
+                if (marker == compared.size()) {
+                    break;
+                }
+            } else {
+                break;
             }
         }
     }
@@ -164,7 +180,8 @@ public class OrderServiceDB implements OrderService {
             return;
         }
         
-        while (orderRemaining > 0) {            
+        while (orderRemaining > 0) {      
+            current = compared.get(marker);
             if ((order.getPrice().compareTo(current.getPrice()) < 0) || (order.getPrice().compareTo(current.getPrice()) == 0)) {
                 System.out.println("Order matched");
                 int currentRemaining = current.getOrdersize() - current.getNumbermatched();
@@ -192,16 +209,20 @@ public class OrderServiceDB implements OrderService {
                 
                 trade.setTradetime(LocalDateTime.now());
                 
-                System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getVersion() + ""
-                + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getVersion());
+                System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
+                + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());
 
-                System.out.println("Sell order id: " + order.getId() + " version: " + order.getVersion() + ""
-                + "Buy order id: " + current.getId() + " version: " + current.getVersion());
+                System.out.println("Sell order id: " + order.getId() + " version: " + order.getId().getVersion() + ""
+                + "Buy order id: " + current.getId() + " version: " + current.getId().getVersion());
                 
                 tradeRepository.save(trade);
                 orderRepository.save(order);
                 orderRepository.save(current);
-                marker++;
+                if (marker == compared.size()) {
+                    break;
+                }
+            } else {
+                break;
             }
         }
     }

@@ -5,10 +5,17 @@
  */
 package com.mthree.orderbook.entity;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 /**
  *
  * @author utkua
  */
 public class TradeOrderId {
     
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer buyid;
+    
+    private Integer version;
 }

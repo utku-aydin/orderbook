@@ -41,6 +41,16 @@ public class OB_OrderId implements Serializable {
         this.version = version;
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;

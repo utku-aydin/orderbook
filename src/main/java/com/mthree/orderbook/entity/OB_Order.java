@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,17 +31,11 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @Table(name = "ob_order")
-@IdClass(OB_OrderId.class)
+//@IdClass(OB_OrderId.class)
 public class OB_Order implements Serializable {
     
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "id")
-    @Id    
-    private int id;
-    
-    @Column(name = "version")
-    @Id
-    private int version;    
+    @EmbeddedId
+    private OB_OrderId id;  
     
     @Column(nullable = false)
     private String symbol;
@@ -74,22 +69,6 @@ public class OB_Order implements Serializable {
     
     @OneToMany(mappedBy = "sellorder")
     private Set<Trade> sellTrade = new HashSet<>();*/
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getVersion() {
-        return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
 
     public String getSymbol() {
         return symbol;
@@ -172,18 +151,26 @@ public class OB_Order implements Serializable {
         this.sellTrade = sellTrade;
     }*/
 
+    public OB_OrderId getId() {
+        return id;
+    }
+
+    public void setId(OB_OrderId id) {
+        this.id = id;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + this.id;
-        hash = 71 * hash + Objects.hashCode(this.symbol);
-        hash = 71 * hash + Objects.hashCode(this.price);
-        hash = 71 * hash + this.ordersize;
-        hash = 71 * hash + this.numbermatched;
-        hash = 71 * hash + Objects.hashCode(this.side);
-        hash = 71 * hash + Objects.hashCode(this.placedat);
-        hash = 71 * hash + Objects.hashCode(this.usersymbol);
-        hash = 71 * hash + Objects.hashCode(this.status);
+        int hash = 5;
+        hash = 13 * hash + Objects.hashCode(this.id);
+        hash = 13 * hash + Objects.hashCode(this.symbol);
+        hash = 13 * hash + Objects.hashCode(this.price);
+        hash = 13 * hash + this.ordersize;
+        hash = 13 * hash + this.numbermatched;
+        hash = 13 * hash + Objects.hashCode(this.side);
+        hash = 13 * hash + Objects.hashCode(this.placedat);
+        hash = 13 * hash + Objects.hashCode(this.usersymbol);
+        hash = 13 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -199,9 +186,6 @@ public class OB_Order implements Serializable {
             return false;
         }
         final OB_Order other = (OB_Order) obj;
-        if (this.id != other.id) {
-            return false;
-        }
         if (this.ordersize != other.ordersize) {
             return false;
         }
@@ -212,6 +196,9 @@ public class OB_Order implements Serializable {
             return false;
         }
         if (!Objects.equals(this.usersymbol, other.usersymbol)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         if (!Objects.equals(this.price, other.price)) {
@@ -228,5 +215,6 @@ public class OB_Order implements Serializable {
         }
         return true;
     }
+    
     
 }

@@ -10,6 +10,15 @@ CREATE TABLE ob_company (
     id              INT             primary key     AUTO_INCREMENT,
     company_symbol  VARCHAR(8)      NOT NULL
 );
+CREATE TABLE ob_user (
+    id              INT             primary key     AUTO_INCREMENT,
+    company_id      INT             NOT NULL,
+    symbol          VARCHAR(8)      NOT NULL,
+    
+    CONSTRAINT FK_ob_user
+        FOREIGN KEY (company_id)
+        REFERENCES ob_company(id)
+);
 CREATE TABLE ob_order (
     id              INT                                                     AUTO_INCREMENT,
     version         INT                                                     DEFAULT 0,
@@ -19,14 +28,17 @@ CREATE TABLE ob_order (
     side            ENUM('BUY', 'SELL')                                     NOT NULL,
     number_matched  INT                                                     NOT NULL,
     placed_at       DATETIME                                                NOT NULL,
-    user_symbol     VARCHAR(8)                                              NOT NULL,
+    usr_id			INT			                                              NOT NULL,
     status          ENUM('PENDING', 'ACTIVE', 'CANCELLED', 'FULFILLED')     NOT NULL,
     
     CONSTRAINT PK_ob_order 
         PRIMARY KEY (id, version),
     CONSTRAINT FK_ob_order_stock
         FOREIGN KEY (stock_id)
-        REFERENCES ob_stock(id)
+        REFERENCES ob_stock(id),
+    CONSTRAINT FK_ob_order_usr
+        FOREIGN KEY (usr_id)
+        REFERENCES ob_user(id)
 );
 CREATE TABLE ob_trade (
     id              INT         primary key     AUTO_INCREMENT,
@@ -44,15 +56,6 @@ CREATE TABLE ob_trade (
     CONSTRAINT FK_trade_sell
         FOREIGN KEY (sell_id, sell_version)
         REFERENCES ob_order(id, version)
-);
-CREATE TABLE ob_user (
-    id              INT             primary key     AUTO_INCREMENT,
-    company_id      INT             NOT NULL,
-    symbol          VARCHAR(8)      NOT NULL,
-    
-    CONSTRAINT FK_ob_user
-        FOREIGN KEY (company_id)
-        REFERENCES ob_company(id)
 );
 CREATE TABLE ob_trade_audit (
     id              INT             primary key     AUTO_INCREMENT,

@@ -177,6 +177,10 @@ public class OrderServiceDB implements OrderService {
     private Trade matchOrders(OB_Order buy, OB_Order sell) {
         int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
         int sellRemaining = sell.getOrdersize() - sell.getNumbermatched();
+        if (buyRemaining == 0 || sellRemaining == 0) {
+            return null;
+        }
+        
         if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
             System.out.println("Order matched");
             buyRemaining = buy.getOrdersize() - buy.getNumbermatched();

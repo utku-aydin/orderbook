@@ -7,20 +7,20 @@ USE orderbookdb;
 CREATE TABLE ob_order (
 	id 				INT 													AUTO_INCREMENT,
 	version 		INT 													DEFAULT 0,
-    stock_id			VARCHAR(8) 												NOT NULL,
+    stock_id		INT		 												NOT NULL,
 	price 			DECIMAL(10,2) 											NOT NULL,
 	order_size 		INT 													NOT NULL,
 	side 			ENUM('BUY', 'SELL') 									NOT NULL,
     number_matched 	INT 													NOT NULL,
     placed_at 		DATETIME 												NOT NULL,
-	user_symbol 		VARCHAR(8) 												NOT NULL,
+	user_symbol 	VARCHAR(8) 												NOT NULL,
 	status 			ENUM('PENDING', 'ACTIVE', 'CANCELLED', 'FULFILLED') 	NOT NULL,
 	
     CONSTRAINT PK_ob_order 
     	PRIMARY KEY (id, version),
 	CONSTRAINT FK_ob_order_stock
-		FOREIGN KEY (stockId)
-		REFERENCES 
+		FOREIGN KEY (stock_id)
+		REFERENCES ob_stock(id)
 );
 
 CREATE TABLE ob_trade (
@@ -54,7 +54,7 @@ CREATE TABLE ob_user (
 	
 	CONSTRAINT FK_ob_user
 		FOREIGN KEY (company_id)
-		REFERENCES company(id)
+		REFERENCES ob_company(id)
 );
 
 CREATE TABLE ob_company (

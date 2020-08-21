@@ -31,7 +31,6 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @Table(name = "ob_order")
-//@IdClass(OB_OrderId.class)
 public class OB_Order implements Serializable {
     
     @EmbeddedId

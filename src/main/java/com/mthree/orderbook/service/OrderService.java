@@ -18,6 +18,8 @@ public interface OrderService {
     public List<OB_Order> getOrders();
     public List<OB_Order> getBuyOrders();
     public List<OB_Order> getSellOrders();
+    public List<OB_Order> getActiveBuyOrders();
+    public List<OB_Order> getActiveSellOrders();
     public OB_Order getOrderByID(int id);
     public OB_Order addOrder(Map<String, String> orderData);
     public OB_Order updateOrder(Map<String, String> orderData);

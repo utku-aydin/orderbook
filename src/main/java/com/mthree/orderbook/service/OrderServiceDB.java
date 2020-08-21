@@ -49,6 +49,16 @@ public class OrderServiceDB implements OrderService {
     public List<OB_Order> getSellOrders() {
         return orderRepository.findSellOrders();
     }
+    
+    @Override
+    public List<OB_Order> getActiveBuyOrders() {
+        return orderRepository.findActiveBuyOrders();
+    }
+
+    @Override
+    public List<OB_Order> getActiveSellOrders() {
+        return orderRepository.findActiveSellOrders();
+    }
 
     @Override
     public OB_Order getOrderByID(int id) {

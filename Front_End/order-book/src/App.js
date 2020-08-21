@@ -1,25 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import OrderBook from "./Components/OrderBook"
+import OrderForm from "./Components/OrderForm"
+import Graph from "./Components/Graph"
+import TickerFeed from "./Components/TickerFeed"
+import SessionHistory from "./Components/SessionHistory"
+
+import { container, Row, Col } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <container fluid>
+      <Row>
+        <TickerFeed />
+      </Row>
+      <Row>
+        <Col>
+          <h1 className="text-center">Order Book</h1>
+        </Col>
+      </Row>
+      <Row>
+        <OrderBook />
+      </Row>
+      <Row>
+        <Col>
+          <Graph />
+        </Col>
+        <Col>
+          <OrderForm />
+        </Col>
+        <Col>
+          <SessionHistory />
+        </Col>
+
+
+      </Row>
+
+    </container>
+
   );
 }
 

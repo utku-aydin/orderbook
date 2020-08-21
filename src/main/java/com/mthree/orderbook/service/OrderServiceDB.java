@@ -242,7 +242,7 @@ public class OrderServiceDB implements OrderService {
             } else {
                 break;
             }*/
-            Trade trade = matchOrders(current, order);
+            Trade trade = matchOrders(order, current);
             if (trade != null) {
                 System.out.println("Trade not null");
                 trade.setTradeprice(current.getPrice());

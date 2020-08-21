@@ -53,7 +53,7 @@ CREATE TABLE ob_user (
 	symbol			VARCHAR(8)		NOT NULL,
 	
 	CONSTRAINT FK_ob_user
-		FOREIGN KEY (companyId)
+		FOREIGN KEY (company_id)
 		REFERENCES company(id)
 );
 

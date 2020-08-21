@@ -215,6 +215,20 @@ public class OB_Order implements Serializable {
         }
         return true;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "OB_Order{" +
+                "id=" + id.getId() +
+                ", versionId=" + id.getVersion() +
+                ", symbol='" + symbol +
+                ", price=" + price +
+                ", ordersize=" + ordersize +
+                ", numbermatched=" + numbermatched +
+                ", side=" + side +
+                ", placedat=" + placedat +
+                ", usersymbol='" + usersymbol +
+                ", status=" + status +
+                '}';
+    }
 }

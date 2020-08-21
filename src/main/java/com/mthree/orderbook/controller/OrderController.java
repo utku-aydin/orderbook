@@ -37,7 +37,7 @@ public class OrderController {
     
     @GetMapping("/buyOrders")
     public ResponseEntity<List<OB_Order>> getBuyOrders() {
-        List<OB_Order> orders = service.getBuyOrders();
+        List<OB_Order> orders = service.getActiveBuyOrders();
         if (orders.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
@@ -47,7 +47,7 @@ public class OrderController {
     
     @GetMapping("/sellOrders")
     public ResponseEntity<List<OB_Order>> getSellOrders() {
-        List<OB_Order> orders = service.getSellOrders();
+        List<OB_Order> orders = service.getActiveSellOrders();
         if (orders.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }

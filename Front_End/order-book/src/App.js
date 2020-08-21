@@ -10,7 +10,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
-const SERVICE_URL = "http://localhost:8080"
+const SERVICE_URL = "http://localhost:8080/api"
 
 class App extends React.Component {
 

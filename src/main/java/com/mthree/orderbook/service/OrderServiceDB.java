@@ -213,7 +213,6 @@ public class OrderServiceDB implements OrderService {
             System.out.println("Sell order id: " + sell.getId() + " version: " + sell.getId().getVersion() + ""
             + "Buy order id: " + buy.getId() + " version: " + buy.getId().getVersion());
 
-            //tradeRepository.save(trade);
             orderRepository.save(sell);
             orderRepository.save(buy);
             

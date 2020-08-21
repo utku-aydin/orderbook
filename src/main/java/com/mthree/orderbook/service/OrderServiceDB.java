@@ -75,13 +75,13 @@ public class OrderServiceDB implements OrderService {
         order.setUsersymbol(orderData.get("userSymbol"));
         OB_OrderId id = new OB_OrderId();
         id.setVersion(0);
-//        if (orderRepository.findHighestId().isEmpty()) {
-//            System.out.println("Nully");
-//            id.setId(1);
-//        } else {
-//            id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
-//        }
-//        order.setId(id);
+        if (orderRepository.findHighestId().isEmpty()) {
+            System.out.println("Nully");
+            id.setId(1);
+        } else {
+            id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
+        }
+        order.setId(id);
         //order.getId().setVersion(0);
         
         order = orderRepository.saveAndFlush(order);
@@ -109,7 +109,7 @@ public class OrderServiceDB implements OrderService {
     }
     
     private void matchBuyOrder(OB_Order order) {
-        List<OB_Order> compared = orderRepository.findSellOrders();
+        List<OB_Order> compared = orderRepository.findActiveSellOrders();
         int orderRemaining = order.getOrdersize()- order.getNumbermatched();
         int marker = 0;
         
@@ -147,6 +147,9 @@ public class OrderServiceDB implements OrderService {
                     current.setNumbermatched(current.getOrdersize());
                     current.setStatus(StatusEnum.FULFILLED);
                     order.setNumbermatched(order.getOrdersize() - orderRemaining);
+                    if(order.getNumbermatched() == order.getOrdersize()) {
+                        order.setStatus(StatusEnum.FULFILLED);
+                    }
                 }
                 
                 trade.setTradetime(LocalDateTime.now());
@@ -165,7 +168,7 @@ public class OrderServiceDB implements OrderService {
     }
     
     private void matchSellOrder(OB_Order order) {
-        List<OB_Order> compared = orderRepository.findBuyOrders();
+        List<OB_Order> compared = orderRepository.findActiveBuyOrders();
         int orderRemaining = order.getOrdersize()- order.getNumbermatched();
         int marker = 0;
         
@@ -205,6 +208,9 @@ public class OrderServiceDB implements OrderService {
                     current.setNumbermatched(current.getOrdersize());
                     current.setStatus(StatusEnum.FULFILLED);
                     order.setNumbermatched(order.getOrdersize() - orderRemaining);
+                    if(order.getNumbermatched() == order.getOrdersize()) {
+                        order.setStatus(StatusEnum.FULFILLED);
+                    }
                 }
                 
                 trade.setTradetime(LocalDateTime.now());
@@ -218,6 +224,7 @@ public class OrderServiceDB implements OrderService {
                 tradeRepository.save(trade);
                 orderRepository.save(order);
                 orderRepository.save(current);
+                marker++;
                 if (marker == compared.size()) {
                     break;
                 }

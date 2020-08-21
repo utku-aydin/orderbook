@@ -123,7 +123,6 @@ public class OrderServiceDB implements OrderService {
         }
         
         while (orderRemaining > 0) {
-            orderRemaining = order.getOrdersize()- order.getNumbermatched();   
             current = compared.get(marker);
             Trade trade = matchOrders(order, current);
             if (trade != null) {
@@ -133,6 +132,7 @@ public class OrderServiceDB implements OrderService {
             } else {
                 System.out.println("Trade is null");
             }
+            orderRemaining = order.getOrdersize()- order.getNumbermatched();   
             marker++;
             if (marker == compared.size()) {
                 break;
@@ -157,7 +157,6 @@ public class OrderServiceDB implements OrderService {
         }
         
         while (orderRemaining > 0) {  
-            orderRemaining = order.getOrdersize()- order.getNumbermatched();
             current = compared.get(marker);
             Trade trade = matchOrders(current, order);
             if (trade != null) {
@@ -167,6 +166,7 @@ public class OrderServiceDB implements OrderService {
             } else {
                 System.out.println("Trade is null");
             }
+            orderRemaining = order.getOrdersize() - order.getNumbermatched();
             marker++;
             if (marker == compared.size()) {
                 break;
@@ -177,9 +177,6 @@ public class OrderServiceDB implements OrderService {
     private Trade matchOrders(OB_Order buy, OB_Order sell) {
         int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
         int sellRemaining = sell.getOrdersize() - sell.getNumbermatched();
-        if (buyRemaining == 0 || sellRemaining == 0) {
-            return null;
-        }
         
         if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
             System.out.println("Order matched");

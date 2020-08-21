@@ -27,7 +27,7 @@ import javax.persistence.Table;
  * @author utkua
  */
 @Entity
-@Table(name = "trade")
+@Table(name = "ob_trade")
 //@IdClass(OB_OrderId.class)
 public class Trade implements Serializable {
     
@@ -39,11 +39,11 @@ public class Trade implements Serializable {
     @ManyToOne
     @JoinColumns({
         @JoinColumn(
-                name = "buyid", 
+                name = "buy_id", 
                 referencedColumnName = "id",
                 nullable = false),
         @JoinColumn(
-                name = "buyversion", 
+                name = "buy_version", 
                 referencedColumnName = "version",
                 nullable = false)
     })
@@ -52,11 +52,11 @@ public class Trade implements Serializable {
     @ManyToOne
     @JoinColumns({
         @JoinColumn(
-                name = "sellid", 
+                name = "sell_id", 
                 referencedColumnName = "id",
                 nullable = false),
         @JoinColumn(
-                name = "sellversion", 
+                name = "sell_version", 
                 referencedColumnName = "version",
                 nullable = false)
     })

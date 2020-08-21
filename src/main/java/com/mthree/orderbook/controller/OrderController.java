@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 // /api is a preference in this case
-@CrossOrigin(origins={"http://localhost:8080", "null"})
+@CrossOrigin(origins={"http://localhost:8080", "http://localhost:3000", "null"})
 @RequestMapping("/api")
 public class OrderController {
     

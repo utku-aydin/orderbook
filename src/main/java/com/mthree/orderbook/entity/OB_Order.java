@@ -20,6 +20,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,8 +38,9 @@ public class OB_Order implements Serializable {
     @EmbeddedId
     private OB_OrderId id;  
     
-    @Column(nullable = false)
-    private String symbol;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
     
     @Column(nullable = false)
     private BigDecimal price;
@@ -61,21 +64,6 @@ public class OB_Order implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusEnum status;
-    
-    /*
-    @OneToMany(mappedBy = "buyorder")
-    private Set<Trade> buyTrade = new HashSet<>();
-    
-    @OneToMany(mappedBy = "sellorder")
-    private Set<Trade> sellTrade = new HashSet<>();*/
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
-    }
 
     public BigDecimal getPrice() {
         return price;
@@ -133,23 +121,6 @@ public class OB_Order implements Serializable {
         this.status = status;
     }
 
-    /*
-    public Set<Trade> getBuyTrade() {
-        return buyTrade;
-    }
-
-    public void setBuyTrade(Set<Trade> buyTrade) {
-        this.buyTrade = buyTrade;
-    }
-
-    public Set<Trade> getSellTrade() {
-        return sellTrade;
-    }
-
-    public void setSellTrade(Set<Trade> sellTrade) {
-        this.sellTrade = sellTrade;
-    }*/
-
     public OB_OrderId getId() {
         return id;
     }
@@ -158,18 +129,26 @@ public class OB_Order implements Serializable {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + Objects.hashCode(this.id);
-        hash = 13 * hash + Objects.hashCode(this.symbol);
-        hash = 13 * hash + Objects.hashCode(this.price);
-        hash = 13 * hash + this.ordersize;
-        hash = 13 * hash + this.numbermatched;
-        hash = 13 * hash + Objects.hashCode(this.side);
-        hash = 13 * hash + Objects.hashCode(this.placedat);
-        hash = 13 * hash + Objects.hashCode(this.usersymbol);
-        hash = 13 * hash + Objects.hashCode(this.status);
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.user);
+        hash = 79 * hash + Objects.hashCode(this.price);
+        hash = 79 * hash + this.ordersize;
+        hash = 79 * hash + this.numbermatched;
+        hash = 79 * hash + Objects.hashCode(this.side);
+        hash = 79 * hash + Objects.hashCode(this.placedat);
+        hash = 79 * hash + Objects.hashCode(this.usersymbol);
+        hash = 79 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -191,13 +170,13 @@ public class OB_Order implements Serializable {
         if (this.numbermatched != other.numbermatched) {
             return false;
         }
-        if (!Objects.equals(this.symbol, other.symbol)) {
-            return false;
-        }
         if (!Objects.equals(this.usersymbol, other.usersymbol)) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
             return false;
         }
         if (!Objects.equals(this.price, other.price)) {
@@ -220,7 +199,7 @@ public class OB_Order implements Serializable {
         return "OB_Order{" +
                 "id=" + id.getId() +
                 ", versionId=" + id.getVersion() +
-                ", symbol='" + symbol +
+                ", user='" + user.toString() +
                 ", price=" + price +
                 ", ordersize=" + ordersize +
                 ", numbermatched=" + numbermatched +

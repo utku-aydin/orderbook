@@ -13,7 +13,7 @@ CREATE TABLE ob_company (
 CREATE TABLE ob_user (
     id              INT             primary key     AUTO_INCREMENT,
     company_id      INT             NOT NULL,
-    symbol          VARCHAR(8)      NOT NULL,
+    user_symbol     VARCHAR(8)      NOT NULL,
     
     CONSTRAINT FK_ob_user
         FOREIGN KEY (company_id)

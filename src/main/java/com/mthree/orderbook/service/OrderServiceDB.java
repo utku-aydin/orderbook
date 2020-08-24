@@ -117,12 +117,41 @@ public class OrderServiceDB implements OrderService {
 
     @Override
     public Order updateOrder(Map<String, String> orderData) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        OrderId id = new OrderId();
+        
+        id.setId(Integer.parseInt(orderData.get("id")));
+        id.setVersion(Integer.parseInt(orderData.get("version")));
+        
+        Order order = new Order();
+        order.setId(id);
+        order.setPrice(new BigDecimal(orderData.get("price")));
+        order.setOrder_size(Integer.parseInt(orderData.get("order_size")));
+        order.setSide(SideEnum.valueOf(orderData.get("side")));
+        order.setNumber_matched(Integer.parseInt(orderData.get("number_matched")));
+        order.setPlaced_at(LocalDateTime.parse(orderData.get("placed_at")));
+        order.setStatus(StatusEnum.valueOf(orderData.get("status")));
+        
+        // ERROR CHECK
+        Stock stock = stockRepository.findById(Integer.parseInt(orderData.get("stock_id"))).orElse(null);
+        User user = userRepository.findById(Integer.parseInt(orderData.get("usr_id"))).orElse(null);
+        
+        order.setStock(stock);
+        order.setUser(user);
+        
+        order = orderRepository.saveAndFlush(order);
+        System.out.println("Order id set: " + order.getId());
+        
+        return order;
     }
 
     @Override
     public Order cancelOrderByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // ERROR CHECK
+        Order order = orderRepository.findById(id).orElse(null);
+        order.setStatus(StatusEnum.CANCELLED);
+        order = orderRepository.saveAndFlush(order);
+        
+        return order;
     }
     
     private void matchBuyOrder(Order order) {

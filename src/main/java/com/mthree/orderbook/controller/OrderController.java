@@ -12,8 +12,10 @@ import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -59,7 +61,20 @@ public class OrderController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Order> addOrder(@RequestBody Map<String, String> orderData) {
         Order added = service.addOrder(orderData);
-        System.out.println("Order: " + added.toString());
+        return ResponseEntity.ok(added);
+    }
+    
+    @PutMapping("/order")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Order> updateOrder(@RequestBody Map<String, String> orderData) {
+        Order added = service.updateOrder(orderData);
+        return ResponseEntity.ok(added);
+    }
+    
+    @DeleteMapping("/order")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Order> cancelOrder(@RequestBody Integer id) {
+        Order added = service.cancelOrderByID(id);
         return ResponseEntity.ok(added);
     }
   

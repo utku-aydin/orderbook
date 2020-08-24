@@ -10,7 +10,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TradeServiceDB implements TradeService {
 
     private final TradeRepository tradeRepository;
@@ -21,8 +23,13 @@ public class TradeServiceDB implements TradeService {
 
     @Override
     public List<BigDecimal> getPricesWithStep(int interval, int count) {
-        List<Trade> trades = tradeRepository.findAll(Sort.by(Sort.Direction.DESC, "trade_time"));
+        List<Trade> trades = tradeRepository.findTradesByDate()/*findAll(Sort.by(Sort.Direction.DESC, "trade_time"))*/;
         List<BigDecimal> prices = new ArrayList<>();
+
+        if(trades.isEmpty()) {
+            return prices;
+        }
+
         prices.add(trades.get(0).getTrade_price());
         int checked = 1;
         while(checked < count) {
@@ -38,9 +45,17 @@ public class TradeServiceDB implements TradeService {
             }
             //otherwise, add the price of the previous trade
             else {
-                prices.add(prices.get(prices.size()-1));
+                prices.add(new BigDecimal("-1"));
             }
         }
+
+        //if there was no data available at a certain time, set the amount to the previously occurred trade
+        while(prices.contains(new BigDecimal("-1"))) {
+            int index = prices.indexOf(new BigDecimal("-1"));
+            
+            prices.set(index, prices.get(index+1));
+        }
+
         //if there is a need, add zeroes to match the needed size
         while(prices.size() < count) {
             prices.add(new BigDecimal("0"));

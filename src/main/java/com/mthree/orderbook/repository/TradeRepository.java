@@ -20,7 +20,7 @@ import java.util.List;
 @Repository
 public interface TradeRepository extends JpaRepository<Trade, Integer> {
 
-    @Query(value = "SELECT * FROM `ob_trade` WHERE trade_time >= ?", nativeQuery = true)
-    List<Trade> findTradesFromDate(LocalDateTime tradeTime);
+    @Query(value = "SELECT * FROM `ob_trade` ORDER BY trade_time DESC", nativeQuery = true)
+    List<Trade> findTradesByDate();
     
 }

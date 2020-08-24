@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
+import OrderAdjuster from "./OrderAdjuster"
 
 
 const BuySideHeader = () => {
@@ -22,7 +23,7 @@ const BuySideRow = ({ order }) => {
         <td><Button>Cancel</Button></td>
         <td>{stock.stock_symbol}</td>
         <td>{price * quantity}</td>
-        <td>{quantity}</td>
+        <td><OrderAdjuster value={quantity}/></td>
         <td>{price}</td>
 
     </tr>

@@ -36,6 +36,7 @@ public class StockController {
     public ResponseEntity<BigDecimal> getBuyOrders(@PathVariable Integer id) {
         BigDecimal change = stockService.getChangeForStock(id);
         if (change == null) {
+            // Not enough trades for stock
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         

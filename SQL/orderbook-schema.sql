@@ -28,7 +28,7 @@ CREATE TABLE ob_order (
     side            ENUM('BUY', 'SELL')                                     NOT NULL,
     number_matched  INT                                                     NOT NULL,
     placed_at       DATETIME                                                NOT NULL,
-    usr_id			INT			                                              NOT NULL,
+    usr_id			INT			                                            NOT NULL,
     status          ENUM('PENDING', 'ACTIVE', 'CANCELLED', 'FULFILLED')     NOT NULL,
     
     CONSTRAINT PK_ob_order 

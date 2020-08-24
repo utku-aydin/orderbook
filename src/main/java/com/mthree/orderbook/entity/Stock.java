@@ -11,12 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author utkua
  */
 @Entity
+@Table(name = "ob_stock")
 public class Stock {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)

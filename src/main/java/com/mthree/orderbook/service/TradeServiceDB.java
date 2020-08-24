@@ -23,7 +23,7 @@ public class TradeServiceDB implements TradeService {
 
     @Override
     public List<BigDecimal> getPricesWithStep(int interval, int count) {
-        List<Trade> trades = tradeRepository.findAll(Sort.by(Sort.Direction.DESC, "trade_time"));
+        List<Trade> trades = tradeRepository.findTradesByDate()/*findAll(Sort.by(Sort.Direction.DESC, "trade_time"))*/;
         List<BigDecimal> prices = new ArrayList<>();
         prices.add(trades.get(0).getTrade_price());
         int checked = 1;
@@ -46,7 +46,8 @@ public class TradeServiceDB implements TradeService {
 
         //if there was no data available at a certain time, set the amount to the previously occurred trade
         while(prices.contains(new BigDecimal("-1"))) {
-            int index = prices.indexOf(new BigDecimal("0"));
+            int index = prices.indexOf(new BigDecimal("-1"));
+            
             prices.set(index, prices.get(index+1));
         }
 

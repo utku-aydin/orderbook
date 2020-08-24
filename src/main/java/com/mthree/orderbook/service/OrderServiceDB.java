@@ -91,7 +91,7 @@ public class OrderServiceDB implements OrderService {
         order.setOrder_size(Integer.parseInt(orderData.get("order_size")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));
         order.setNumber_matched(Integer.parseInt(orderData.get("number_matched")));
-        order.setPlaced_at(LocalDateTime.parse(orderData.get("placed_at")));
+        order.setPlaced_at(LocalDateTime.now());
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         
         // ERROR CHECK

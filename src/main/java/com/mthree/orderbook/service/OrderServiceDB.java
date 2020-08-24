@@ -83,12 +83,12 @@ public class OrderServiceDB implements OrderService {
         
         //order.setUser(orderData.get("symbol"));
         order.setPrice(new BigDecimal(orderData.get("price")));
-        order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
+        //order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));
-        order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
-        order.setPlacedat(LocalDateTime.now());
+        //order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
+        //order.setPlacedat(LocalDateTime.now());
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
-        order.setUsersymbol(orderData.get("userSymbol"));
+        //order.setUsersymbol(orderData.get("userSymbol"));
         OB_OrderId id = new OB_OrderId();
         id.setVersion(0);
         if (orderRepository.findHighestId().isEmpty()) {
@@ -126,7 +126,7 @@ public class OrderServiceDB implements OrderService {
     
     private void matchBuyOrder(OB_Order order) {
         List<OB_Order> compared = orderRepository.findActiveSellOrders();
-        int orderRemaining = order.getOrdersize()- order.getNumbermatched();
+        /*int orderRemaining = order.getOrdersize()- order.getNumbermatched();
         int marker = 0;
         
         OB_Order current;
@@ -153,12 +153,12 @@ public class OrderServiceDB implements OrderService {
             if (marker == compared.size()) {
                 break;
             }
-        }
+        }*/
     }
     
     private void matchSellOrder(OB_Order order) {
         List<OB_Order> compared = orderRepository.findActiveBuyOrders();
-        int orderRemaining = order.getOrdersize()- order.getNumbermatched();
+        /*int orderRemaining = order.getOrdersize()- order.getNumbermatched();
         int marker = 0;
         
         OB_Order current;
@@ -187,11 +187,11 @@ public class OrderServiceDB implements OrderService {
             if (marker == compared.size()) {
                 break;
             }
-        }
+        }*/
     }
     
     private Trade matchOrders(OB_Order buy, OB_Order sell) {
-        int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
+        /*int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
         int sellRemaining = sell.getOrdersize() - sell.getNumbermatched();
         
         if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
@@ -236,7 +236,8 @@ public class OrderServiceDB implements OrderService {
             return trade;
         } else {
             return null;
-        }
+        }*/
+        return null;
     }
     
 }

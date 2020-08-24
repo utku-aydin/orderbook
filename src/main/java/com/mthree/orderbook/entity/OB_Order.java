@@ -46,17 +46,17 @@ public class OB_Order implements Serializable {
     private BigDecimal price;
     
     @Column(nullable = false)
-    private int ordersize;
+    private int order_size;
 
     @Column(nullable = false)
-    private int numbermatched;
+    private int number_matched;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private SideEnum side;
     
     @Column(nullable = false)
-    private LocalDateTime placedat;
+    private LocalDateTime placed_at;
     
     @ManyToOne
     @JoinColumn(name = "stock_id", nullable = false)
@@ -90,20 +90,20 @@ public class OB_Order implements Serializable {
         this.price = price;
     }
 
-    public int getOrdersize() {
-        return ordersize;
+    public int getOrder_size() {
+        return order_size;
     }
 
-    public void setOrdersize(int ordersize) {
-        this.ordersize = ordersize;
+    public void setOrder_size(int order_size) {
+        this.order_size = order_size;
     }
 
-    public int getNumbermatched() {
-        return numbermatched;
+    public int getNumber_matched() {
+        return number_matched;
     }
 
-    public void setNumbermatched(int numbermatched) {
-        this.numbermatched = numbermatched;
+    public void setNumber_matched(int number_matched) {
+        this.number_matched = number_matched;
     }
 
     public SideEnum getSide() {
@@ -114,12 +114,12 @@ public class OB_Order implements Serializable {
         this.side = side;
     }
 
-    public LocalDateTime getPlacedat() {
-        return placedat;
+    public LocalDateTime getPlaced_at() {
+        return placed_at;
     }
 
-    public void setPlacedat(LocalDateTime placedat) {
-        this.placedat = placedat;
+    public void setPlaced_at(LocalDateTime placed_at) {
+        this.placed_at = placed_at;
     }
 
     public Stock getStock() {
@@ -141,15 +141,15 @@ public class OB_Order implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.user);
-        hash = 37 * hash + Objects.hashCode(this.price);
-        hash = 37 * hash + this.ordersize;
-        hash = 37 * hash + this.numbermatched;
-        hash = 37 * hash + Objects.hashCode(this.side);
-        hash = 37 * hash + Objects.hashCode(this.placedat);
-        hash = 37 * hash + Objects.hashCode(this.stock);
-        hash = 37 * hash + Objects.hashCode(this.status);
+        hash = 29 * hash + Objects.hashCode(this.id);
+        hash = 29 * hash + Objects.hashCode(this.user);
+        hash = 29 * hash + Objects.hashCode(this.price);
+        hash = 29 * hash + this.order_size;
+        hash = 29 * hash + this.number_matched;
+        hash = 29 * hash + Objects.hashCode(this.side);
+        hash = 29 * hash + Objects.hashCode(this.placed_at);
+        hash = 29 * hash + Objects.hashCode(this.stock);
+        hash = 29 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -165,10 +165,10 @@ public class OB_Order implements Serializable {
             return false;
         }
         final OB_Order other = (OB_Order) obj;
-        if (this.ordersize != other.ordersize) {
+        if (this.order_size != other.order_size) {
             return false;
         }
-        if (this.numbermatched != other.numbermatched) {
+        if (this.number_matched != other.number_matched) {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
@@ -183,7 +183,7 @@ public class OB_Order implements Serializable {
         if (this.side != other.side) {
             return false;
         }
-        if (!Objects.equals(this.placedat, other.placedat)) {
+        if (!Objects.equals(this.placed_at, other.placed_at)) {
             return false;
         }
         if (!Objects.equals(this.stock, other.stock)) {
@@ -197,7 +197,7 @@ public class OB_Order implements Serializable {
 
     @Override
     public String toString() {
-        return "OB_Order{" + "id=" + id + ", user=" + user + ", price=" + price + ", ordersize=" + ordersize + ", numbermatched=" + numbermatched + ", side=" + side + ", placedat=" + placedat + ", stock=" + stock + ", status=" + status + '}';
+        return "OB_Order{" + "id=" + id + ", user=" + user + ", price=" + price + ", order_size=" + order_size + ", number_matched=" + number_matched + ", side=" + side + ", placed_at=" + placed_at + ", stock=" + stock + ", status=" + status + '}';
     }
     
 }

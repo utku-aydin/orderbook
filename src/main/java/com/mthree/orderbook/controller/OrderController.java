@@ -26,20 +26,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @author utkua
  */
 @RestController
-// /api is a preference in this case
 @CrossOrigin(origins={"http://localhost:8080", "http://localhost:3000", "null"})
 @RequestMapping("/api")
 public class OrderController {
     
-    private final OrderService service;
+    private final OrderService orderService;
 
     public OrderController(OrderService service) {
-        this.service = service;
+        this.orderService = service;
     }
     
     @GetMapping("/buyOrders")
     public ResponseEntity<List<Order>> getBuyOrders() {
-        List<Order> orders = service.getActiveBuyOrders();
+        List<Order> orders = orderService.getActiveBuyOrders();
         if (orders.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
@@ -49,7 +48,7 @@ public class OrderController {
     
     @GetMapping("/sellOrders")
     public ResponseEntity<List<Order>> getSellOrders() {
-        List<Order> orders = service.getActiveSellOrders();
+        List<Order> orders = orderService.getActiveSellOrders();
         if (orders.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
@@ -60,21 +59,21 @@ public class OrderController {
     @PostMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Order> addOrder(@RequestBody Map<String, String> orderData) {
-        Order added = service.addOrder(orderData);
+        Order added = orderService.addOrder(orderData);
         return ResponseEntity.ok(added);
     }
     
     @PutMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Order> updateOrder(@RequestBody Map<String, String> orderData) {
-        Order added = service.updateOrder(orderData);
+        Order added = orderService.updateOrder(orderData);
         return ResponseEntity.ok(added);
     }
     
     @DeleteMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Order> cancelOrder(@RequestBody Integer id) {
-        Order added = service.cancelOrderByID(id);
+        Order added = orderService.cancelOrderByID(id);
         return ResponseEntity.ok(added);
     }
   

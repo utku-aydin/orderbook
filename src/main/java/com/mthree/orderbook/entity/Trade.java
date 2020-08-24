@@ -46,7 +46,7 @@ public class Trade implements Serializable {
                 referencedColumnName = "version",
                 nullable = false)
     })
-    private OB_Order buyorder;
+    private Order buyorder;
     
     @ManyToOne
     @JoinColumns({
@@ -59,16 +59,16 @@ public class Trade implements Serializable {
                 referencedColumnName = "version",
                 nullable = false)
     })
-    private OB_Order sellorder;
+    private Order sellorder;
     
     @Column(nullable = false)
-    private LocalDateTime tradetime;
+    private LocalDateTime trade_time;
     
     @Column(nullable = false)
-    private BigDecimal tradeprice;
+    private BigDecimal trade_price;
     
     @Column(nullable = false)
-    private int tradesize;
+    private int trade_size;
 
     public int getId() {
         return id;
@@ -78,55 +78,55 @@ public class Trade implements Serializable {
         this.id = id;
     }
 
-    public OB_Order getBuyorder() {
+    public Order getBuyorder() {
         return buyorder;
     }
 
-    public void setBuyorder(OB_Order buyorder) {
+    public void setBuyorder(Order buyorder) {
         this.buyorder = buyorder;
     }
 
-    public OB_Order getSellorder() {
+    public Order getSellorder() {
         return sellorder;
     }
 
-    public void setSellorder(OB_Order sellorder) {
+    public void setSellorder(Order sellorder) {
         this.sellorder = sellorder;
     }
 
-    public LocalDateTime getTradetime() {
-        return tradetime;
+    public LocalDateTime getTrade_time() {
+        return trade_time;
     }
 
-    public void setTradetime(LocalDateTime tradetime) {
-        this.tradetime = tradetime;
+    public void setTrade_time(LocalDateTime trade_time) {
+        this.trade_time = trade_time;
     }
 
-    public BigDecimal getTradeprice() {
-        return tradeprice;
+    public BigDecimal getTrade_price() {
+        return trade_price;
     }
 
-    public void setTradeprice(BigDecimal tradeprice) {
-        this.tradeprice = tradeprice;
+    public void setTrade_price(BigDecimal trade_price) {
+        this.trade_price = trade_price;
     }
 
-    public int getTradesize() {
-        return tradesize;
+    public int getTrade_size() {
+        return trade_size;
     }
 
-    public void setTradesize(int tradesize) {
-        this.tradesize = tradesize;
+    public void setTrade_size(int trade_size) {
+        this.trade_size = trade_size;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + this.id;
-        hash = 73 * hash + Objects.hashCode(this.buyorder);
-        hash = 73 * hash + Objects.hashCode(this.sellorder);
-        hash = 73 * hash + Objects.hashCode(this.tradetime);
-        hash = 73 * hash + Objects.hashCode(this.tradeprice);
-        hash = 73 * hash + this.tradesize;
+        hash = 31 * hash + this.id;
+        hash = 31 * hash + Objects.hashCode(this.buyorder);
+        hash = 31 * hash + Objects.hashCode(this.sellorder);
+        hash = 31 * hash + Objects.hashCode(this.trade_time);
+        hash = 31 * hash + Objects.hashCode(this.trade_price);
+        hash = 31 * hash + this.trade_size;
         return hash;
     }
 
@@ -145,7 +145,7 @@ public class Trade implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.tradesize != other.tradesize) {
+        if (this.trade_size != other.trade_size) {
             return false;
         }
         if (!Objects.equals(this.buyorder, other.buyorder)) {
@@ -154,13 +154,18 @@ public class Trade implements Serializable {
         if (!Objects.equals(this.sellorder, other.sellorder)) {
             return false;
         }
-        if (!Objects.equals(this.tradetime, other.tradetime)) {
+        if (!Objects.equals(this.trade_time, other.trade_time)) {
             return false;
         }
-        if (!Objects.equals(this.tradeprice, other.tradeprice)) {
+        if (!Objects.equals(this.trade_price, other.trade_price)) {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Trade{" + "id=" + id + ", buyorder=" + buyorder + ", sellorder=" + sellorder + ", trade_time=" + trade_time + ", trade_price=" + trade_price + ", trade_size=" + trade_size + '}';
     }
     
 }

@@ -33,10 +33,10 @@ import javax.persistence.TableGenerator;
  */
 @Entity
 @Table(name = "ob_order")
-public class OB_Order implements Serializable {
+public class Order implements Serializable {
     
     @EmbeddedId
-    private OB_OrderId id;  
+    private OrderId id;  
     
     @ManyToOne
     @JoinColumn(name = "usr_id", nullable = false)
@@ -66,11 +66,11 @@ public class OB_Order implements Serializable {
     @Column(nullable = false)
     private StatusEnum status;
 
-    public OB_OrderId getId() {
+    public OrderId getId() {
         return id;
     }
 
-    public void setId(OB_OrderId id) {
+    public void setId(OrderId id) {
         this.id = id;
     }
 
@@ -164,7 +164,7 @@ public class OB_Order implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OB_Order other = (OB_Order) obj;
+        final Order other = (Order) obj;
         if (this.order_size != other.order_size) {
             return false;
         }

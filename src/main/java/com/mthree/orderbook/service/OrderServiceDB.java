@@ -5,21 +5,22 @@
  */
 package com.mthree.orderbook.service;
 
-import com.google.gson.Gson;
-import com.mthree.orderbook.entity.Company;
-import com.mthree.orderbook.entity.OB_Order;
-import com.mthree.orderbook.entity.OB_OrderId;
+import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.OrderId;
 import com.mthree.orderbook.entity.SideEnum;
 import com.mthree.orderbook.entity.StatusEnum;
+import com.mthree.orderbook.entity.Stock;
 import com.mthree.orderbook.entity.Trade;
+import com.mthree.orderbook.entity.User;
+import com.mthree.orderbook.repository.CompanyRepository;
 import com.mthree.orderbook.repository.OrderRepository;
+import com.mthree.orderbook.repository.StockRepository;
 import com.mthree.orderbook.repository.TradeRepository;
+import com.mthree.orderbook.repository.UserRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -31,65 +32,51 @@ public class OrderServiceDB implements OrderService {
     
     private final OrderRepository orderRepository;
     private final TradeRepository tradeRepository;
-    
-    public OrderServiceDB (OrderRepository orderRepository, TradeRepository tradeRepository) {
+    private final StockRepository stockRepository;
+    private final UserRepository userRepository;
+    private final CompanyRepository companyRepository;
+
+    public OrderServiceDB(OrderRepository orderRepository, TradeRepository tradeRepository, StockRepository stockRepository, UserRepository userRepository, CompanyRepository companyRepository) {
         this.orderRepository = orderRepository;
         this.tradeRepository = tradeRepository;
+        this.stockRepository = stockRepository;
+        this.userRepository = userRepository;
+        this.companyRepository = companyRepository;
     }
-
+    
     @Override
-    public List<OB_Order> getOrders() {
+    public List<Order> getOrders() {
         return orderRepository.findAll();
     }
     
     @Override
-    public List<OB_Order> getBuyOrders() {
+    public List<Order> getBuyOrders() {
         return orderRepository.findBuyOrders();
     }
 
     @Override
-    public List<OB_Order> getSellOrders() {
+    public List<Order> getSellOrders() {
         return orderRepository.findSellOrders();
     }
     
     @Override
-    public List<OB_Order> getActiveBuyOrders() {
+    public List<Order> getActiveBuyOrders() {
         return orderRepository.findActiveBuyOrders();
     }
 
     @Override
-    public List<OB_Order> getActiveSellOrders() {
+    public List<Order> getActiveSellOrders() {
         return orderRepository.findActiveSellOrders();
     }
 
     @Override
-    public OB_Order getOrderByID(int id) {
+    public Order getOrderByID(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public OB_Order addOrder(Map<String, String> orderData) {
-        
-        
-        Set<String> keys = orderData.keySet();
-        Collection<String> values = orderData.values();
-        for (int i = 0; i < orderData.size(); i++) {
-            System.out.println();
-        }
-        
-        Gson gson = new Gson();
-        //Company company = gson.fromJson(json, classOfT)
-        OB_Order order = new OB_Order();
-        
-        //order.setUser(orderData.get("symbol"));
-        order.setPrice(new BigDecimal(orderData.get("price")));
-        //order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
-        order.setSide(SideEnum.valueOf(orderData.get("side")));
-        //order.setNumbermatched(Integer.parseInt(orderData.get("numbermatched")));
-        //order.setPlacedat(LocalDateTime.now());
-        order.setStatus(StatusEnum.valueOf(orderData.get("status")));
-        //order.setUsersymbol(orderData.get("userSymbol"));
-        OB_OrderId id = new OB_OrderId();
+    public Order addOrder(Map<String, String> orderData) {
+        OrderId id = new OrderId();
         id.setVersion(0);
         if (orderRepository.findHighestId().isEmpty()) {
             System.out.println("Nully");
@@ -97,12 +84,26 @@ public class OrderServiceDB implements OrderService {
         } else {
             id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
         }
-        order.setId(id);
-        //order.getId().setVersion(0);
         
+        Order order = new Order();
+        order.setId(id);
+        order.setPrice(new BigDecimal(orderData.get("price")));
+        order.setOrder_size(Integer.parseInt(orderData.get("order_size")));
+        order.setSide(SideEnum.valueOf(orderData.get("side")));
+        order.setNumber_matched(Integer.parseInt(orderData.get("number_matched")));
+        order.setPlaced_at(LocalDateTime.parse(orderData.get("placed_at")));
+        order.setStatus(StatusEnum.valueOf(orderData.get("status")));
+        
+        // ERROR CHECK
+        Stock stock = stockRepository.findById(Integer.parseInt(orderData.get("stock_id"))).orElse(null);
+        User user = userRepository.findById(Integer.parseInt(orderData.get("usr_id"))).orElse(null);
+        
+        order.setStock(stock);
+        order.setUser(user);
+        
+        //companyRepository.saveAndFlush(order.getUser().getCompany());
+        //userRepository.saveAndFlush(order.getUser());
         order = orderRepository.saveAndFlush(order);
-        //order.setId(orderRepository.findMostRecentOrder().get(0).getId());
-        //order.setId(10);
         System.out.println("Order id set: " + order.getId());
         
         if (order.getSide() == SideEnum.BUY) {
@@ -115,21 +116,21 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public OB_Order updateOrder(Map<String, String> orderData) {
+    public Order updateOrder(Map<String, String> orderData) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public OB_Order cancelOrderByID(int id) {
+    public Order cancelOrderByID(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void matchBuyOrder(OB_Order order) {
-        List<OB_Order> compared = orderRepository.findActiveSellOrders();
-        /*int orderRemaining = order.getOrdersize()- order.getNumbermatched();
+    private void matchBuyOrder(Order order) {
+        List<Order> compared = orderRepository.findActiveSellOrders();
+        int orderRemaining = order.getOrder_size() - order.getNumber_matched();
         int marker = 0;
         
-        OB_Order current;
+        Order current;
         if (compared.size() > 0) {
             System.out.println("Current has something here");
             current = compared.get(marker);
@@ -143,25 +144,25 @@ public class OrderServiceDB implements OrderService {
             Trade trade = matchOrders(order, current);
             if (trade != null) {
                 System.out.println("Trade not null");
-                trade.setTradeprice(current.getPrice());
+                trade.setTrade_price(current.getPrice());
                 tradeRepository.save(trade);
             } else {
                 System.out.println("Trade is null");
             }
-            orderRemaining = order.getOrdersize()- order.getNumbermatched();   
+            orderRemaining = order.getOrder_size() - order.getNumber_matched();   
             marker++;
             if (marker == compared.size()) {
                 break;
             }
-        }*/
+        }
     }
     
-    private void matchSellOrder(OB_Order order) {
-        List<OB_Order> compared = orderRepository.findActiveBuyOrders();
-        /*int orderRemaining = order.getOrdersize()- order.getNumbermatched();
+    private void matchSellOrder(Order order) {
+        List<Order> compared = orderRepository.findActiveBuyOrders();
+        int orderRemaining = order.getOrder_size()- order.getNumber_matched();
         int marker = 0;
         
-        OB_Order current;
+        Order current;
         if (compared.size() > 0) {
             System.out.println("Current has something here");
             current = compared.get(marker);
@@ -177,52 +178,52 @@ public class OrderServiceDB implements OrderService {
             Trade trade = matchOrders(current, order);
             if (trade != null) {
                 System.out.println("Trade not null");
-                trade.setTradeprice(current.getPrice());
+                trade.setTrade_price(current.getPrice());
                 tradeRepository.save(trade);
             } else {
                 System.out.println("Trade is null");
             }
-            orderRemaining = order.getOrdersize() - order.getNumbermatched();
+            orderRemaining = order.getOrder_size() - order.getNumber_matched();
             marker++;
             if (marker == compared.size()) {
                 break;
             }
-        }*/
+        }
     }
     
-    private Trade matchOrders(OB_Order buy, OB_Order sell) {
-        /*int buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
-        int sellRemaining = sell.getOrdersize() - sell.getNumbermatched();
+    private Trade matchOrders(Order buy, Order sell) {
+        int buyRemaining = buy.getOrder_size() - buy.getNumber_matched();
+        int sellRemaining = sell.getOrder_size() - sell.getNumber_matched();
         
         if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
             System.out.println("Order matched");
-            buyRemaining = buy.getOrdersize() - buy.getNumbermatched();
+            buyRemaining = buy.getOrder_size() - buy.getNumber_matched();
             Trade trade = new Trade();
             trade.setBuyorder(buy);
             trade.setSellorder(sell);
 
-            trade.setTradeprice(sell.getPrice());
+            trade.setTrade_price(sell.getPrice());
 
             if (buyRemaining > sellRemaining) {
-                trade.setTradesize(sellRemaining);
+                trade.setTrade_size(sellRemaining);
                 buyRemaining -= sellRemaining;
                 sellRemaining = 0;
-                sell.setNumbermatched(sell.getOrdersize());
+                sell.setNumber_matched(sell.getOrder_size());
                 sell.setStatus(StatusEnum.FULFILLED);
-                buy.setNumbermatched(buy.getOrdersize() - buyRemaining);
+                buy.setNumber_matched(buy.getOrder_size() - buyRemaining);
             } else {
-                trade.setTradesize(buyRemaining);
+                trade.setTrade_size(buyRemaining);
                 sellRemaining -= buyRemaining;
                 buyRemaining = 0;
-                buy.setNumbermatched(buy.getOrdersize());
+                buy.setNumber_matched(buy.getOrder_size());
                 buy.setStatus(StatusEnum.FULFILLED);
-                sell.setNumbermatched(sell.getOrdersize() - sellRemaining);
-                if(sell.getNumbermatched() == sell.getOrdersize()) {
+                sell.setNumber_matched(sell.getOrder_size() - sellRemaining);
+                if(sell.getNumber_matched() == sell.getOrder_size()) {
                     sell.setStatus(StatusEnum.FULFILLED);
                 }
             }
 
-            trade.setTradetime(LocalDateTime.now());
+            trade.setTrade_time(LocalDateTime.now());
 
             System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
             + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());
@@ -236,8 +237,8 @@ public class OrderServiceDB implements OrderService {
             return trade;
         } else {
             return null;
-        }*/
-        return null;
+        }
+        
     }
     
 }

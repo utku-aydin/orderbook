@@ -17,18 +17,18 @@ import javax.persistence.TableGenerator;
  * @author utkua
  */
 @Embeddable
-public class OB_OrderId implements Serializable {
+public class OrderId implements Serializable {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
     
     private Integer version;
     
-    public OB_OrderId() {
+    public OrderId() {
         
     }
     
-    public OB_OrderId(Integer id, Integer version) {
+    public OrderId(Integer id, Integer version) {
         this.id = id;
         this.version = version;
     }
@@ -70,7 +70,7 @@ public class OB_OrderId implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final OB_OrderId other = (OB_OrderId) obj;
+        final OrderId other = (OrderId) obj;
         if (this.id != other.id) {
             return false;
         }

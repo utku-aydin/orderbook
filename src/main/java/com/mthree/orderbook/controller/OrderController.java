@@ -57,7 +57,7 @@ public class OrderController {
     
     @PostMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<OB_Order> addOrder(/*@RequestBody Map<String, String> orderData*/ OB_Order order) {
+    public ResponseEntity<OB_Order> addOrder(/*@RequestBody Map<String, String> orderData*/ @RequestBody OB_Order order) {
         //OB_Order added = service.addOrder(orderData);
         System.out.println("Order: " + order.toString());
         return ResponseEntity.ok(order);

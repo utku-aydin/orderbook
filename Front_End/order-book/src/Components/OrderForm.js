@@ -23,10 +23,10 @@ class OrderForm extends React.Component {
     
 
     render(){
-        let {orderData, handleChange,handleChangeNumber} = this.props;
+        let {orderData, handleChange,handleOrderFormSubmit,handleChangeNumber} = this.props;
         console.log(orderData.side);
         return (
-            <Form>
+            <Form onSubmit={handleOrderFormSubmit}>
                 <Form.Group controlId="orderSide" >
                     <Form.Label>Side: </Form.Label>
                     {/* <ComboBox controlId="sideComboBox" data={this.sides}/> */}

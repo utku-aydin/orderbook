@@ -15,14 +15,15 @@ const BuySideHeader = () => {
 }
 
 const BuySideRow = ({ order }) => {
-    
+    let {price,order_size,number_matched,side,stock} = order;
+    let quantity = order_size - number_matched;
 
     return (<tr>
         <td><Button>Cancel</Button></td>
-        <td>{order.symbol}</td>
-        <td>{order.price * order.ordersize}</td>
-        <td>{order.ordersize}</td>
-        <td>{order.price}</td>
+        <td>{stock.stock_symbol}</td>
+        <td>{price * quantity}</td>
+        <td>{quantity}</td>
+        <td>{price}</td>
 
     </tr>
     );

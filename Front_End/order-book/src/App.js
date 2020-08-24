@@ -17,6 +17,13 @@ class App extends React.Component {
   state = {
     buyOrders: [],
     sellOrders: [],
+    newOrderData: {
+      side: [],
+      symbol: "",
+      owner: "",
+      quantity: "",
+      price: ""
+    }
   }
 
   componentDidMount() {
@@ -35,6 +42,43 @@ class App extends React.Component {
       )).catch((error) => {
         console.log('error:', error);
       });
+  }
+
+  handleAddFormChange = (name,event) => {
+    console.log(event)
+    let inputName = name;
+    let inputValue= event.value;
+    let label = event.label
+    let orderData = this.state.newOrderData;
+    console.log(orderData);
+
+    console.log(`Updating new Order data: ${inputName} : ${inputValue}`)
+    console.log(`name: ${inputName}` )
+
+    if(orderData.hasOwnProperty(inputName)){
+      console.log("this condition is met");
+      orderData[inputName] = {label,inputValue};
+      console.log(orderData[inputName]);
+      this.setState({newOrderData : orderData})
+      console.log(this.state.newOrderData)
+    }
+  }
+
+  handleChangeNumber =(event) =>{
+    let inputName = event.target.name;
+    let inputValue = event.target.value;
+
+    let orderData = this.state.newOrderData;
+    
+    if(orderData.hasOwnProperty(inputName))
+    {
+      orderData[inputName] = inputValue;
+      this.setState({newOrderData: orderData})
+    }
+  }
+
+  handleOrderFormSubmit = (event) =>{
+    console.log("Adding order")
   }
 
   // handleCancelOrder = (event) => {
@@ -65,7 +109,10 @@ class App extends React.Component {
             <Graph />
           </Col>
           <Col>
-            <OrderForm />
+            <OrderForm
+            handleChangeNumber={this.handleChangeNumber}
+            handleChange={this.handleAddFormChange}
+            orderData ={this.state.newOrderData}/>
           </Col>
           <Col>
             <SessionHistory />

@@ -13,69 +13,46 @@ class OrderForm extends React.Component {
         { value: "SELL", label: "SELL"}
     ];
     symbols = [
-        { value: "AMZN", label: "AMZN"}
+        { value: "1", label: "AMZN"}
             ]
     owners = [
-        { value: "CP1", label: "CP1"},
-        { value: "CP2", label: "CP2"}
+        { value: "1", label: "CP1"},
+        { value: "2", label: "CP2"}
     ];
-    
 
-    // constructor(props){
-    //     super(props);
-    //     this.handleOrderChange = this.handleOrderChange.bind(this);
-    //     this.handleSubmit = this.handleSubmit.bind(this);
-    // }
-
-    // handleOrderChange(event){
-    //     let name = event.target.name;
-    //     let value = event.target.value;
-
-    //     this.setState(
-    //         prevState => {
-    //             return {newOrder : {... prevState.newOrder, [name]: value}}
-    //         },
-    //         () => 
-    //             console.log('changed' + name + "to: " + this.state.newOrder[name])
-    //     );
-    // }
-
-    // handleSubmit(event) {
-    //     if (event) event.preventDefault();
-    //     const { newOrder } = this.state;
-    //     alert(JSON.stringify(submi))
-    // }
     
 
     render(){
+        let {orderData, handleChange,handleChangeNumber} = this.props;
+        console.log(orderData.side);
         return (
             <Form>
-                <Form.Group controlId="orderSide">
+                <Form.Group controlId="orderSide" >
                     <Form.Label>Side: </Form.Label>
                     {/* <ComboBox controlId="sideComboBox" data={this.sides}/> */}
-                    <Select options={this.sides} />
+                    <Select options={this.sides} value={orderData.side} onChange={(evt) => this.props.handleChange("side",evt)} />
                     
                 </Form.Group>
                 <Form.Group controlId="orderSymbol">
                     <Form.Label>Symbol: </Form.Label>
                     {/* <ComboBox controlId = "symbolComboBox" data={this.symbols}/> */}
-                    <Select options={this.symbols} />
+                    <Select options={this.symbols} name="symbol" value={orderData.symbol} onChange={(evt) => this.props.handleChange("symbol",evt)}/>
                 </Form.Group>
                 <Form.Group controlId = "orderOwner">
                     <Form.Label >Owner: </Form.Label>
                     {/* <ComboBox controlId = "ownerComboBox" data={this.owners}/> */}
-                    <Select options={this.owners} />
+                    <Select options={this.owners} name="owner"  value={orderData.owner} onChange={(evt) => this.props.handleChange("owner",evt)}/>
                 </Form.Group>
                 <Form.Group controlId = "orderQuantity">
                     <Form.Label>Quantity: </Form.Label>
                     <Form.Group>
-                        <input type="number" id="stepperQuantity" name="stepperQuantity" step="1"></input>
+                        <input type="number" id="stepperQuantity" name="quantity" step="1" value={orderData.quantity} onChange={handleChangeNumber}></input>
                     </Form.Group>
                 </Form.Group>
                 <Form.Group controlId = "orderPrice">
                     <Form.Label>Price: </Form.Label>
                     <Form.Group>
-                        <input type="number" id="stepperPrice" name="stepperPrice" step="0.01"></input>
+                        <input type="number" id="stepperPrice" name="price" step="0.01" value={orderData.price} onChange={handleChangeNumber}></input>
                     </Form.Group>
                     
                 </Form.Group>

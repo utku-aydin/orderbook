@@ -39,7 +39,7 @@ public class OB_Order implements Serializable {
     private OB_OrderId id;  
     
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "usr_id", nullable = false)
     private User user;
     
     @Column(nullable = false)
@@ -58,12 +58,29 @@ public class OB_Order implements Serializable {
     @Column(nullable = false)
     private LocalDateTime placedat;
     
-    @Column(nullable = false)
-    private String usersymbol;
+    @ManyToOne
+    @JoinColumn(name = "stock_id", nullable = false)
+    private Stock stock;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private StatusEnum status;
+
+    public OB_OrderId getId() {
+        return id;
+    }
+
+    public void setId(OB_OrderId id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public BigDecimal getPrice() {
         return price;
@@ -105,12 +122,12 @@ public class OB_Order implements Serializable {
         this.placedat = placedat;
     }
 
-    public String getUsersymbol() {
-        return usersymbol;
+    public Stock getStock() {
+        return stock;
     }
 
-    public void setUsersymbol(String usersymbol) {
-        this.usersymbol = usersymbol;
+    public void setStock(Stock stock) {
+        this.stock = stock;
     }
 
     public StatusEnum getStatus() {
@@ -121,34 +138,18 @@ public class OB_Order implements Serializable {
         this.status = status;
     }
 
-    public OB_OrderId getId() {
-        return id;
-    }
-
-    public void setId(OB_OrderId id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.user);
-        hash = 79 * hash + Objects.hashCode(this.price);
-        hash = 79 * hash + this.ordersize;
-        hash = 79 * hash + this.numbermatched;
-        hash = 79 * hash + Objects.hashCode(this.side);
-        hash = 79 * hash + Objects.hashCode(this.placedat);
-        hash = 79 * hash + Objects.hashCode(this.usersymbol);
-        hash = 79 * hash + Objects.hashCode(this.status);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.user);
+        hash = 37 * hash + Objects.hashCode(this.price);
+        hash = 37 * hash + this.ordersize;
+        hash = 37 * hash + this.numbermatched;
+        hash = 37 * hash + Objects.hashCode(this.side);
+        hash = 37 * hash + Objects.hashCode(this.placedat);
+        hash = 37 * hash + Objects.hashCode(this.stock);
+        hash = 37 * hash + Objects.hashCode(this.status);
         return hash;
     }
 
@@ -170,9 +171,6 @@ public class OB_Order implements Serializable {
         if (this.numbermatched != other.numbermatched) {
             return false;
         }
-        if (!Objects.equals(this.usersymbol, other.usersymbol)) {
-            return false;
-        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -188,6 +186,9 @@ public class OB_Order implements Serializable {
         if (!Objects.equals(this.placedat, other.placedat)) {
             return false;
         }
+        if (!Objects.equals(this.stock, other.stock)) {
+            return false;
+        }
         if (this.status != other.status) {
             return false;
         }
@@ -196,17 +197,7 @@ public class OB_Order implements Serializable {
 
     @Override
     public String toString() {
-        return "OB_Order{" +
-                "id=" + id.getId() +
-                ", versionId=" + id.getVersion() +
-                ", user='" + user.toString() +
-                ", price=" + price +
-                ", ordersize=" + ordersize +
-                ", numbermatched=" + numbermatched +
-                ", side=" + side +
-                ", placedat=" + placedat +
-                ", usersymbol='" + usersymbol +
-                ", status=" + status +
-                '}';
+        return "OB_Order{" + "id=" + id + ", user=" + user + ", price=" + price + ", ordersize=" + ordersize + ", numbermatched=" + numbermatched + ", side=" + side + ", placedat=" + placedat + ", stock=" + stock + ", status=" + status + '}';
     }
+    
 }

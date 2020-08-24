@@ -78,10 +78,10 @@ public class OrderServiceDB implements OrderService {
         }
         
         Gson gson = new Gson();
-        Company company = gson.fromJson(json, classOfT)
+        //Company company = gson.fromJson(json, classOfT)
         OB_Order order = new OB_Order();
         
-        order.setUser(orderData.get("symbol"));
+        //order.setUser(orderData.get("symbol"));
         order.setPrice(new BigDecimal(orderData.get("price")));
         order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));

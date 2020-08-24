@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface TradeService {
 
-    List<BigDecimal> getPricesWithStep(long days);
+    BigDecimal[] getPricesWithStep(int days);
 }

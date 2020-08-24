@@ -28,7 +28,6 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ob_trade")
-//@IdClass(OB_OrderId.class)
 public class Trade implements Serializable {
     
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -5,6 +5,8 @@
  */
 package com.mthree.orderbook.service;
 
+import com.google.gson.Gson;
+import com.mthree.orderbook.entity.Company;
 import com.mthree.orderbook.entity.OB_Order;
 import com.mthree.orderbook.entity.OB_OrderId;
 import com.mthree.orderbook.entity.SideEnum;
@@ -67,7 +69,7 @@ public class OrderServiceDB implements OrderService {
 
     @Override
     public OB_Order addOrder(Map<String, String> orderData) {
-        OB_Order order = new OB_Order();
+        
         
         Set<String> keys = orderData.keySet();
         Collection<String> values = orderData.values();
@@ -75,7 +77,11 @@ public class OrderServiceDB implements OrderService {
             System.out.println();
         }
         
-        order.setSymbol(orderData.get("symbol"));
+        Gson gson = new Gson();
+        Company company = gson.fromJson(json, classOfT)
+        OB_Order order = new OB_Order();
+        
+        order.setUser(orderData.get("symbol"));
         order.setPrice(new BigDecimal(orderData.get("price")));
         order.setOrdersize(Integer.parseInt(orderData.get("ordersize")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));

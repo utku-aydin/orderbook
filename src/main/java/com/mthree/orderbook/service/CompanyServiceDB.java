@@ -8,11 +8,13 @@ package com.mthree.orderbook.service;
 import com.mthree.orderbook.entity.Company;
 import com.mthree.orderbook.repository.CompanyRepository;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author utkua
  */
+@Repository
 public class CompanyServiceDB implements CompanyService {
     
     private final CompanyRepository companyRepository;

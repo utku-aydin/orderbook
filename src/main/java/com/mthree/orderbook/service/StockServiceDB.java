@@ -5,6 +5,7 @@
  */
 package com.mthree.orderbook.service;
 
+import com.mthree.orderbook.entity.Stock;
 import com.mthree.orderbook.repository.StockRepository;
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,6 +37,10 @@ public class StockServiceDB implements StockService {
         
         System.out.println("1: " + changes.get(0) + " 2: " + changes.get(1));
         return change;
+    }
+    
+    public List<Stock> getAllStocks() {
+        return stockRepository.findAll();
     }
     
 }

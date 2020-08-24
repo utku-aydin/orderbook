@@ -6,6 +6,7 @@
 package com.mthree.orderbook.controller;
 
 import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.Stock;
 import com.mthree.orderbook.service.StockService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -41,6 +42,16 @@ public class StockController {
         }
         
         return ResponseEntity.ok(change);
+    }
+    
+    @GetMapping("/stocks")
+    public ResponseEntity<List<Stock>> getBuyOrders() {
+        List<Stock> stocks = stockService.getAllStocks();
+        if (stocks.isEmpty()) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        
+        return ResponseEntity.ok(stocks);
     }
     
 }

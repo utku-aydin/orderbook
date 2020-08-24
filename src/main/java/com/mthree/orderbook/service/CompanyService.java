@@ -5,17 +5,15 @@
  */
 package com.mthree.orderbook.service;
 
-import com.mthree.orderbook.entity.Stock;
-import java.math.BigDecimal;
+import com.mthree.orderbook.entity.Company;
 import java.util.List;
 
 /**
  *
  * @author utkua
  */
-public interface StockService {
+public interface CompanyService {
     
-    public BigDecimal getChangeForStock(int stock_id);
-    public List<Stock> getAllStocks();
+    public List<Company> getAllCompanies();
     
 }

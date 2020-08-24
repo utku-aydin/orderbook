@@ -10,7 +10,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TradeServiceDB implements TradeService {
 
     private final TradeRepository tradeRepository;

@@ -3,7 +3,14 @@ import { Table, Button, Col, Row } from "react-bootstrap";
 import { ArrowUpShort, ArrowDownShort } from 'react-bootstrap-icons'
 import styled from 'styled-components';
 
-const HoverText = styled.p`
+const GreenText = styled.p`
+	color: #000;
+	:hover {
+		color: 	#008000;
+		cursor: pointer;
+	}
+`
+const RedText = styled.p`
 	color: #000;
 	:hover {
 		color: #ed1212;
@@ -27,14 +34,14 @@ class OrderAdjuster extends React.Component {
             <React.Fragment>
                 <Row sm="12">
                     {this.state.value}
-                    <HoverText><div width="10" height="5" onMouseOver="this.style.cursor='pointer'">
+                    <div width="10" height="5" >
                         <Col>
-                            <ArrowUpShort />
+                           <GreenText><ArrowUpShort /></GreenText> 
                         </Col>
                         <Col>
-                            <ArrowDownShort />
+                            <RedText><ArrowDownShort /></RedText>
                         </Col>
-                        </div></HoverText>
+                        </div>
                 </Row>
             </React.Fragment>
         )

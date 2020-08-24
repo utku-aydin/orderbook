@@ -5,12 +5,47 @@ import Select from 'react-select'
 
 
 class OrderForm extends React.Component {
+
+    
+    
     sides = [ 
         { value: "BUY", label: "BUY"},
         { value: "SELL", label: "SELL"}
     ];
-    symbols = ["XLON"];
-    owners = ["CP1", "CP2"]
+    symbols = [
+        { value: "AMZN", label: "AMZN"}
+            ]
+    owners = [
+        { value: "CP1", label: "CP1"},
+        { value: "CP2", label: "CP2"}
+    ];
+    
+
+    // constructor(props){
+    //     super(props);
+    //     this.handleOrderChange = this.handleOrderChange.bind(this);
+    //     this.handleSubmit = this.handleSubmit.bind(this);
+    // }
+
+    // handleOrderChange(event){
+    //     let name = event.target.name;
+    //     let value = event.target.value;
+
+    //     this.setState(
+    //         prevState => {
+    //             return {newOrder : {... prevState.newOrder, [name]: value}}
+    //         },
+    //         () => 
+    //             console.log('changed' + name + "to: " + this.state.newOrder[name])
+    //     );
+    // }
+
+    // handleSubmit(event) {
+    //     if (event) event.preventDefault();
+    //     const { newOrder } = this.state;
+    //     alert(JSON.stringify(submi))
+    // }
+    
 
     render(){
         return (
@@ -40,7 +75,7 @@ class OrderForm extends React.Component {
                 <Form.Group controlId = "orderPrice">
                     <Form.Label>Price: </Form.Label>
                     <Form.Group>
-                        <input type="number" id="stepperPrice" name="stepperPrice" step="1"></input>
+                        <input type="number" id="stepperPrice" name="stepperPrice" step="0.01"></input>
                     </Form.Group>
                     
                 </Form.Group>

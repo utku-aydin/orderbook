@@ -15,6 +15,7 @@ const BuySideHeader = () => {
 }
 
 const BuySideRow = ({ order }) => {
+    
 
     return (<tr>
         <td><Button>Cancel</Button></td>

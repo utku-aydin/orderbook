@@ -1,21 +1,42 @@
 import React from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Col, Row } from "react-bootstrap";
+import { ArrowUpShort, ArrowDownShort } from 'react-bootstrap-icons'
+import styled from 'styled-components';
 
-class OrderAdjuster extends React.Component{
+const HoverText = styled.p`
+	color: #000;
+	:hover {
+		color: #ed1212;
+		cursor: pointer;
+	}
+`
+class OrderAdjuster extends React.Component {
 
     state = {
         value: ""
     };
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state.value = this.props.value;
     }
 
-    render(){
+    render() {
         console.log("VAlue in order adjuster is " + this.state.value)
         return (
-        <p>{this.state.value}</p>
+            <React.Fragment>
+                <Row sm="12">
+                    {this.state.value}
+                    <HoverText><div width="10" height="5" onMouseOver="this.style.cursor='pointer'">
+                        <Col>
+                            <ArrowUpShort />
+                        </Col>
+                        <Col>
+                            <ArrowDownShort />
+                        </Col>
+                        </div></HoverText>
+                </Row>
+            </React.Fragment>
         )
     }
 

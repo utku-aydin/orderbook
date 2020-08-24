@@ -25,6 +25,11 @@ public class TradeServiceDB implements TradeService {
     public List<BigDecimal> getPricesWithStep(int interval, int count) {
         List<Trade> trades = tradeRepository.findTradesByDate()/*findAll(Sort.by(Sort.Direction.DESC, "trade_time"))*/;
         List<BigDecimal> prices = new ArrayList<>();
+
+        if(trades.isEmpty()) {
+            return prices;
+        }
+
         prices.add(trades.get(0).getTrade_price());
         int checked = 1;
         while(checked < count) {

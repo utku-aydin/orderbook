@@ -10,6 +10,7 @@ package com.mthree.orderbook.entity;
  * @author utkua
  */
 public enum StatusEnum {
+    PENDING,
     ACTIVE,
     CANCELLED,
     FULFILLED

@@ -231,6 +231,12 @@ public class OrderServiceDB implements OrderService {
             System.out.println("Sell order id: " + sell.getId() + " version: " + sell.getId().getVersion() + ""
             + "Buy order id: " + buy.getId() + " version: " + buy.getId().getVersion());
 
+            if (buy.getStatus() == StatusEnum.PENDING)
+                buy.setStatus(StatusEnum.ACTIVE);
+            
+            if (sell.getStatus() == StatusEnum.PENDING)
+                sell.setStatus(StatusEnum.ACTIVE);
+            
             orderRepository.save(sell);
             orderRepository.save(buy);
             

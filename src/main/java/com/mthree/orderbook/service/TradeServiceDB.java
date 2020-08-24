@@ -58,6 +58,11 @@ public class TradeServiceDB implements TradeService {
                 prices.add(new BigDecimal("-1"));
             }
         }
+        
+        //if there is a need, add zeroes to match the needed size
+        while(prices.size() < count) {
+            prices.add(new BigDecimal("0"));
+        }
 
         //if there was no data available at a certain time, set the amount to the previously occurred trade
         while(prices.contains(new BigDecimal("-1"))) {
@@ -67,11 +72,6 @@ public class TradeServiceDB implements TradeService {
             } else {
                 break;
             }
-        }
-
-        //if there is a need, add zeroes to match the needed size
-        while(prices.size() < count) {
-            prices.add(new BigDecimal("0"));
         }
         return prices;
     }

@@ -38,9 +38,16 @@ public class TradeServiceDB implements TradeService {
             }
             //otherwise, add the price of the previous trade
             else {
-                prices.add(prices.get(prices.size()-1));
+                prices.add(new BigDecimal("-1"));
             }
         }
+
+        //if there was no data available at a certain time, set the amount to the previously occurred trade
+        while(prices.contains(new BigDecimal("-1"))) {
+            int index = prices.indexOf(new BigDecimal("0"));
+            prices.add(index, prices.get(index+1));
+        }
+
         //if there is a need, add zeroes to match the needed size
         while(prices.size() < count) {
             prices.add(new BigDecimal("0"));

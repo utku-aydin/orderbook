@@ -61,6 +61,8 @@ class SellSide extends React.Component {
 
 
         return (
+            <React.Fragment>
+                <h1 className="text-center">SELL</h1>
             <Table striped bordered hover>
                 <thead>
                     <SellSideHeader/>
@@ -71,7 +73,8 @@ class SellSide extends React.Component {
                     })}
 
                 </tbody>
-            </Table>)
+            </Table>
+            </React.Fragment>)
     }
 }
 

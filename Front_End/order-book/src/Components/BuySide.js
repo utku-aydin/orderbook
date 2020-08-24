@@ -62,7 +62,9 @@ class BuySide extends React.Component {
 
 
         return (
-            <Table striped bordered hover>
+            <React.Fragment>
+                <h1 className="text-center">BUY</h1>
+            <Table class="table table-sm" striped bordered hover>
                 <thead>
                     <BuySideHeader />
                 </thead>
@@ -72,7 +74,9 @@ class BuySide extends React.Component {
                     })}
 
                 </tbody>
-            </Table>)
+            </Table>
+            </React.Fragment>)
+
     }
 }
 

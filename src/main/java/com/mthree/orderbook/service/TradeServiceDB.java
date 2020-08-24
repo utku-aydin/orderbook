@@ -45,7 +45,7 @@ public class TradeServiceDB implements TradeService {
         //if there was no data available at a certain time, set the amount to the previously occurred trade
         while(prices.contains(new BigDecimal("-1"))) {
             int index = prices.indexOf(new BigDecimal("0"));
-            prices.add(index, prices.get(index+1));
+            prices.set(index, prices.get(index+1));
         }
 
         //if there is a need, add zeroes to match the needed size

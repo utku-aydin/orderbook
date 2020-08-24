@@ -1,7 +1,18 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
+import StockChart from './StockChart'
 
-function Graph (){
-    return <h1>Graph</h1>
+class Graph extends React.Component{
+
+    render(){
+        return(
+            <Container>
+                
+                <StockChart/>
+                
+            </Container>
+        )
+    }
 }
 
 export default Graph

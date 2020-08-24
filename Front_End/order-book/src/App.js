@@ -16,7 +16,7 @@ class App extends React.Component {
 
   state = {
     buyOrders: [],
-    sellOrders: []
+    sellOrders: [],
   }
 
   componentDidMount() {
@@ -26,11 +26,15 @@ class App extends React.Component {
     fetch(SERVICE_URL + "/buyOrders")
       .then(data => data.json())
       .then(data => this.setState({ buyOrders: data }
-      ))
+      )).catch((error) => {
+        console.log('error:', error);
+      });
     fetch(SERVICE_URL + "/sellOrders")
       .then(data => data.json())
       .then(data => this.setState({ sellOrders: data }
-      ))
+      )).catch((error) => {
+        console.log('error:', error);
+      });
   }
 
   // handleCancelOrder = (event) => {

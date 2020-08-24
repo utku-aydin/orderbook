@@ -34,14 +34,12 @@ public class OrderServiceDB implements OrderService {
     private final TradeRepository tradeRepository;
     private final StockRepository stockRepository;
     private final UserRepository userRepository;
-    private final CompanyRepository companyRepository;
 
-    public OrderServiceDB(OrderRepository orderRepository, TradeRepository tradeRepository, StockRepository stockRepository, UserRepository userRepository, CompanyRepository companyRepository) {
+    public OrderServiceDB(OrderRepository orderRepository, TradeRepository tradeRepository, StockRepository stockRepository, UserRepository userRepository) {
         this.orderRepository = orderRepository;
         this.tradeRepository = tradeRepository;
         this.stockRepository = stockRepository;
         this.userRepository = userRepository;
-        this.companyRepository = companyRepository;
     }
     
     @Override

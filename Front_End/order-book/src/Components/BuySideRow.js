@@ -42,6 +42,15 @@ class BuySideRow extends React.Component {
         }
     }
 
+    resetEdit =() => {
+        let newOrderData = {
+            quantity : this.props.order.order_size - this.props.order.number_matched,
+            price : this.props.order.price
+        }
+        
+        this.setState({editOrder : newOrderData});
+    }
+
 
     handleChangeNumber = (name,value,event) => {
         let inputName = name
@@ -73,8 +82,8 @@ class BuySideRow extends React.Component {
     
         return (<tr>
             <td>
-                <Button size="sm">Cancel</Button>
-                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button size="sm" onClick={this.updateOrder}>Update</Button>
+                <Button size="sm" onClick={this.props.cancelOrder}>Cancel</Button>
+                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button size="sm" onClick={this.props.updateOrder}>Update</Button>
                 <Button size="sm" onClick={this.resetEdit}>Reset</Button></React.Fragment> : null}
                 </td>
             <td>{stock.stock_symbol}</td>

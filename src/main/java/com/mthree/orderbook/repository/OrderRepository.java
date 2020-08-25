@@ -18,13 +18,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"buy\" ORDER BY \"price\"", nativeQuery = true)
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"BUY\" ORDER BY \"price\"", nativeQuery = true)
     List<Order> findBuyOrders();
-    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"sell\" ORDER BY \"price\" ASC", nativeQuery = true)
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"SELL\" ORDER BY \"price\" ASC", nativeQuery = true)
     List<Order> findSellOrders();
-    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"buy\" AND status = \"ACTIVE\" ORDER BY \"price\", \"placedAt\"", nativeQuery = true)
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"BUY\" AND status = \"ACTIVE\" "
+            + "ORDER BY cast(price as DECIMAL(10,2)) DESC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveBuyOrders();
-    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"sell\" AND status = \"ACTIVE\" ORDER BY \"price\" ASC, \"placedAt\"", nativeQuery = true)
+    @Query(value = "SELECT * FROM `ob_order` WHERE side = \"SELL\" AND status = \"ACTIVE\" "
+            + "ORDER BY cast(price as DECIMAL(10,2)) ASC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveSellOrders();
     @Query(value = "SELECT * FROM `ob_order` ORDER BY id DESC", nativeQuery = true)
     List<Order> findHighestId();

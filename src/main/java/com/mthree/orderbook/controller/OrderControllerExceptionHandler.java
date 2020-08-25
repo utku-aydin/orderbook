@@ -24,7 +24,7 @@ import org.springframework.web.context.request.WebRequest;
 @RestController
 public class OrderControllerExceptionHandler {
     
-    private static final String SQL_EXCEPTION = "Could not process your guess. "
+    private static final String SQL_EXCEPTION = "Could not process your request. "
             + "Please ensure it is valid and try again.";
     
     private static final String EMPTY_RESULT_EXCEPTION = "The result of your query is empty. "
@@ -37,7 +37,7 @@ public class OrderControllerExceptionHandler {
             + "Ensure you have started your apache/mysql if you are connecting to localhost.";
     
     private static final String OUT_OF_BOUNDS = "A String index is out of bounds. "
-            + "Ensure the 'guess' attribute value length is at most 4.";
+            + "";
 
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
     public final ResponseEntity<Error> handleSqlException(

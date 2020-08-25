@@ -19,6 +19,7 @@ import com.mthree.orderbook.repository.TradeRepository;
 import com.mthree.orderbook.repository.UserRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
@@ -68,8 +69,8 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public Order getOrderByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Order> getOrderHistory(int id) {
+        return orderRepository.getOrderHistory(id);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class OrderServiceDB implements OrderService {
         order.setOrder_size(Integer.parseInt(orderData.get("order_size")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));
         order.setNumber_matched(Integer.parseInt(orderData.get("number_matched")));
-        order.setPlaced_at(LocalDateTime.now());
+        order.setPlaced_at(LocalDateTime.now(ZoneId.of("GMT")));
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         
         // ERROR CHECK
@@ -118,7 +119,7 @@ public class OrderServiceDB implements OrderService {
         OrderId id = new OrderId();
         
         id.setId(Integer.parseInt(orderData.get("id")));
-        id.setVersion(Integer.parseInt(orderData.get("version")));
+        id.setVersion(Integer.parseInt(orderData.get("version")) + 1);
         
         Order order = new Order();
         order.setId(id);
@@ -139,13 +140,20 @@ public class OrderServiceDB implements OrderService {
         order = orderRepository.saveAndFlush(order);
         System.out.println("Order id set: " + order.getId());
         
+        if (order.getSide() == SideEnum.BUY) {
+            matchBuyOrder(order);
+        } else {
+            matchSellOrder(order);
+        }
+        
         return order;
     }
 
     @Override
-    public Order cancelOrderByID(int id) {
+    public Order cancelOrderByID(int id, int version) {
         // ERROR CHECK
-        Order order = orderRepository.findById(id).orElse(null);
+        OrderId orderId = new OrderId(id, version);
+        Order order = orderRepository.findById(orderId).orElse(null);
         order.setStatus(StatusEnum.CANCELLED);
         order = orderRepository.saveAndFlush(order);
         
@@ -249,8 +257,10 @@ public class OrderServiceDB implements OrderService {
                     sell.setStatus(StatusEnum.FULFILLED);
                 }
             }
-
-            trade.setTrade_time(LocalDateTime.now());
+            
+            buy.setId(new OrderId(buy.getId().getId(), buy.getId().getVersion() + 1));
+            sell.setId(new OrderId(sell.getId().getId(), sell.getId().getVersion() + 1));
+            trade.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
 
             System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
             + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());

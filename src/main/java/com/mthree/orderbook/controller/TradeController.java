@@ -6,6 +6,7 @@
 package com.mthree.orderbook.controller;
 
 import com.mthree.orderbook.entity.Order;
+import com.mthree.orderbook.entity.Trade;
 import com.mthree.orderbook.service.TradeService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -34,13 +35,23 @@ public class TradeController {
     }
     
     @GetMapping("/interval")
-    public ResponseEntity<List<BigDecimal>> getTrade(@RequestBody Map<String, Integer> graphData) {
+    public ResponseEntity<List<BigDecimal>> getTradesIntervalCount(@RequestBody Map<String, Integer> graphData) {
         List<BigDecimal> prices = tradeService.getPricesWithStep(graphData.get("interval"), graphData.get("count"));
         if (prices.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         
         return ResponseEntity.ok(prices);
+    }
+    
+    @GetMapping("/count")
+    public ResponseEntity<List<Trade>> getTradesCount(@RequestBody Map<String, Integer> graphData) {
+        List<Trade> trades = tradeService.getCountTrades(graphData.get("count"));
+        if (trades.isEmpty()) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        
+        return ResponseEntity.ok(trades);
     }
     
 }

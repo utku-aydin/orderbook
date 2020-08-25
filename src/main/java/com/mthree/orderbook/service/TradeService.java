@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface TradeService {
 
-    List<BigDecimal> getPricesWithStep(int interval, int count);
+    public List<BigDecimal> getPricesWithStep(int interval, int count);
+    public List<Trade> getCountTrades(int count);
     
 }

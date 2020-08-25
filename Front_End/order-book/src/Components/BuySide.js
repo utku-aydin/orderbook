@@ -7,7 +7,7 @@ import BuySideRow from "./BuySideRow"
 const BuySideHeader = () => {
     return (
         <tr>
-            <th>Cancel</th>
+            <th>Options</th>
             <th>Symbol</th>
             <th>total</th>
             <th>quantity</th>

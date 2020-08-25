@@ -23,4 +23,7 @@ public interface TradeRepository extends JpaRepository<Trade, Integer> {
     @Query(value = "SELECT * FROM `ob_trade` ORDER BY trade_time DESC", nativeQuery = true)
     List<Trade> findTradesByDate();
     
+    @Query(value = "SELECT * FROM `ob_trade` ORDER BY trade_time DESC LIMIT ?1", nativeQuery = true)
+    List<Trade> getCountTrades(int count);
+    
 }

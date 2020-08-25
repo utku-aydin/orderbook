@@ -140,6 +140,12 @@ public class OrderServiceDB implements OrderService {
         order = orderRepository.saveAndFlush(order);
         System.out.println("Order id set: " + order.getId());
         
+        if (order.getSide() == SideEnum.BUY) {
+            matchBuyOrder(order);
+        } else {
+            matchSellOrder(order);
+        }
+        
         return order;
     }
 

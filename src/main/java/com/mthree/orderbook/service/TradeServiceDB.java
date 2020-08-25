@@ -6,6 +6,7 @@ import com.mthree.orderbook.repository.TradeRepository;
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,14 @@ public class TradeServiceDB implements TradeService {
             return prices;
         }
         
-        ChronoUnit comparison = ChronoUnit.SECONDS;
-        if (interval > 60) {
+        ChronoUnit comparison;
+        if (interval < 59) {
+            comparison = ChronoUnit.SECONDS;
+        } else if (interval < 3599) {
             comparison = ChronoUnit.MINUTES;
-        } else if (interval > 3600) {
+        } else if (interval < 86399) {
             comparison = ChronoUnit.HOURS;
-        } else if (interval > 86400) {
+        } else {
             comparison = ChronoUnit.DAYS;
         }
 
@@ -48,7 +51,9 @@ public class TradeServiceDB implements TradeService {
             }
             Trade t = trades.get(checked++);
             //if there's a trade at that time, add its price
-            if(LocalDateTime.now().minusSeconds(interval*checked).truncatedTo(comparison)
+            System.out.println("What is now: " + LocalDateTime.now(ZoneId.of("GMT")));
+            System.out.println("What is compared: " + LocalDateTime.now(ZoneId.of("GMT")).minusSeconds(interval*checked).truncatedTo(comparison));
+            if(LocalDateTime.now(ZoneId.of("GMT")).minusSeconds(interval*checked).truncatedTo(comparison)
                     .isEqual(t.getTrade_time().truncatedTo(comparison))) {
                 prices.add(t.getTrade_price());
             }

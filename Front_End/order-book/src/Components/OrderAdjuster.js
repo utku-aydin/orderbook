@@ -49,20 +49,19 @@ class OrderAdjuster extends React.Component {
 
 render() {
     console.log("VAlue in order adjuster is " + this.props.value)
+    let roundedNumber = (Math.round(this.props.editValue * 100) / 100).toFixed(2);
     return (
         <React.Fragment>
-            <Row sm="12">
+            <Row>
                 {this.props.value}
-                <div width="10" height="5" >
-                    <Col>
+                <div>
+                    
                         <GreenPointer onClick={(evt) => this.props.handleChangeNumber(this.props.name,this.props.tickSize,evt)}><ArrowUpShort /></GreenPointer>
-                    </Col>
-                    <Col>
+                    
                         <RedPointer onClick={(evt) => this.props.handleChangeNumber(this.props.name,-this.props.tickSize,evt)}><ArrowDownShort /></RedPointer>
-                    </Col>
                 </div>
-                {this.props.editValue >= this.props.value ? null : <RedText>{this.props.editValue}</RedText>}
-                {this.props.editValue <= this.props.value ? null : <GreenText>{this.props.editValue}</GreenText>}
+                {this.props.editValue >= this.props.value ? null : <RedText>{roundedNumber}</RedText>}
+                {this.props.editValue <= this.props.value ? null : <GreenText>{roundedNumber}</GreenText>}
             </Row>
         </React.Fragment>
     )

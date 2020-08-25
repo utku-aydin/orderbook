@@ -1,14 +1,22 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
 import OrderAdjuster from "./OrderAdjuster";
+import styled from 'styled-components';
+
+const RedText = styled.p`
+    color: #ed1212;
+`
+
+const GreenText = styled.p`
+    color: #008000;
+`
 
 class BuySideRow extends React.Component {
 
     state = {
         editOrder: {
             quantity: "",
-            price: "",
-            total: ""
+            price: ""
         }
     }
 
@@ -41,7 +49,7 @@ class BuySideRow extends React.Component {
             console.log(orderData[inputName])
             console.log(inputValue)
           orderData[inputName] += inputValue;
-          
+         
           this.setState({ newOrderData: orderData })
         }
       }
@@ -50,11 +58,23 @@ class BuySideRow extends React.Component {
     render(){
         let {price,order_size,number_matched,side,stock} = this.props.order;
         let quantity = order_size - number_matched;
+        let total = price * quantity;
+        let sum = this.state.editOrder.price * this.state.editOrder.quantity
+        
+        let editTotal = (Math.round(sum * 100) / 100).toFixed(2);
+        
     
         return (<tr>
-            <td><Button>Cancel</Button></td>
+            <td>
+                <Button>Cancel</Button>
+                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button>Update</Button>
+                <Button>Reset</Button></React.Fragment> : null}
+                </td>
             <td>{stock.stock_symbol}</td>
-            <td>{price * quantity}</td>
+            <td>{total}{" "}
+         {editTotal > total ? <GreenText>{editTotal}</GreenText> : null}
+         {editTotal < total ? <RedText>{editTotal}</RedText> : null}
+         </td>
             <td><OrderAdjuster value={quantity}
              editValue={this.state.editOrder.quantity}
              handleChangeNumber = {this.handleChangeNumber}

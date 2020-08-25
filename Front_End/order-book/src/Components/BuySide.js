@@ -33,6 +33,15 @@ const BuySideHeader = () => {
 
 class BuySide extends React.Component {
 
+    state = {
+        displayAll: false
+    }
+
+    constructor(props){
+        super(props);
+        this.state.displayAll = false;
+    }
+
     static defaultProps = {
         orders: [
             {
@@ -56,19 +65,27 @@ class BuySide extends React.Component {
         ]
     }
 
+    changeDisplay(){
+       // console.log(this.state.displayAll)
+        this.setState({displayAll:!this.state.displayAll})
+    }
+
 
     render() {
         // Here is a debug method to moniter incoming contact data
         console.log("Rending Order Book:")
         console.log(this.props.orders)
-        let length = this.props.orders.length;
-        let orderSlice = this.props.orders.slice(0,5);
-
+        let orderSlice
+        if(!this.state.displayAll){
+         orderSlice = this.props.orders.slice(0,5);
+        } else{
+            orderSlice=this.props.orders;
+        }
 
         return (
             <React.Fragment>
                 <h1 className="text-center">BUY</h1>
-            <Table class="table table-sm" striped bordered hover>
+            <Table  striped bordered hover size="sm">
                 <thead>
                     <BuySideHeader />
                 </thead>
@@ -79,7 +96,7 @@ class BuySide extends React.Component {
 
                 </tbody>
             </Table>
-            <Button>Show {this.props.orders.length} more orders</Button>
+                <Button onClick={ () => this.changeDisplay()}>{this.state.displayAll? <p>Show {this.props.orders.length -5} less orders</p> : <p>Show {this.props.orders.length -5} more orders</p> }</Button>
             </React.Fragment>)
 
     }

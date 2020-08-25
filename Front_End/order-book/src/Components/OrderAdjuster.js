@@ -8,14 +8,18 @@ const GreenPointer = styled.p`
 	:hover {
 		color: 	#008000;
 		cursor: pointer;
-	}
+    }
+    height: 1px
+    
 `
 const RedPointer = styled.p`
 	color: #000;
 	:hover {
 		color: #ed1212;
 		cursor: pointer;
-	}
+    }
+    height: 1px
+    
 `
 const RedText = styled.p`
     color: #ed1212;
@@ -54,12 +58,8 @@ render() {
         <React.Fragment>
             <Row>
                 {this.props.value}
-                <div>
-                    
                         <GreenPointer onClick={(evt) => this.props.handleChangeNumber(this.props.name,this.props.tickSize,evt)}><ArrowUpShort /></GreenPointer>
-                    
                         <RedPointer onClick={(evt) => this.props.handleChangeNumber(this.props.name,-this.props.tickSize,evt)}><ArrowDownShort /></RedPointer>
-                </div>
                 {this.props.editValue >= this.props.value ? null : <RedText>{roundedNumber}</RedText>}
                 {this.props.editValue <= this.props.value ? null : <GreenText>{roundedNumber}</GreenText>}
             </Row>

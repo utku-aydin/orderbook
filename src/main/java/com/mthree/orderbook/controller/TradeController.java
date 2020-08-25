@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,9 +35,9 @@ public class TradeController {
         this.tradeService = tradeService;
     }
     
-    @GetMapping("/interval")
-    public ResponseEntity<List<BigDecimal>> getTradesIntervalCount(@RequestBody Map<String, Integer> graphData) {
-        List<BigDecimal> prices = tradeService.getPricesWithStep(graphData.get("interval"), graphData.get("count"));
+    @GetMapping("/interval/{interval}/{count}")
+    public ResponseEntity<List<BigDecimal>> getTradesIntervalCount(@PathVariable("interval") int interval, @PathVariable("count") int count) {
+        List<BigDecimal> prices = tradeService.getPricesWithStep(interval, count);
         if (prices.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
@@ -44,9 +45,9 @@ public class TradeController {
         return ResponseEntity.ok(prices);
     }
     
-    @GetMapping("/count")
-    public ResponseEntity<List<Trade>> getTradesCount(@RequestBody Map<String, Integer> graphData) {
-        List<Trade> trades = tradeService.getCountTrades(graphData.get("count"));
+    @GetMapping("/count/{count}")
+    public ResponseEntity<List<Trade>> getTradesCount(@PathVariable int count) {
+        List<Trade> trades = tradeService.getCountTrades(count);
         if (trades.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }

@@ -4,6 +4,7 @@ import com.mthree.orderbook.entity.Trade;
 import com.mthree.orderbook.repository.TradeRepository;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -24,7 +25,9 @@ public class TradeServiceDB implements TradeService {
 
     @Override
     public List<BigDecimal> getPricesWithStep(int interval, int count) {
-        List<Trade> trades = tradeRepository.findTradesByDate()/*findAll(Sort.by(Sort.Direction.DESC, "trade_time"))*/;
+        Timestamp compTime = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("GMT")).minusSeconds(interval*count));
+        String timeStr = "\"" + compTime + "\"";
+        List<Trade> trades = tradeRepository.findTradesByDate(compTime)/*findAll(Sort.by(Sort.Direction.DESC, "trade_time"))*/;
         List<BigDecimal> prices = new ArrayList<>();
 
         if(trades.isEmpty()) {

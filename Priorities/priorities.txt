@@ -1,0 +1,27 @@
+Front End
+
+Graph 1
+Edit orders 1
+Cancel orders 1
+Session history -
+Ticker feed 2
+Instant Buy Option 3
+Hide/Show all orders (show 5 orders) 2
+Order Form should use props 3
+history For order 2
+
+Back End
+Recent Trades
+Basic Testing
+Error Checking
+
+Documentation
+Implementation plan
+Rollback plan
+Release notes
+
+
+Packaging
+
+
+

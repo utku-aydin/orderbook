@@ -23,6 +23,6 @@ public interface OrderService {
     public Order getOrderByID(int id);
     public Order addOrder(Map<String, String> orderData);
     public Order updateOrder(Map<String, String> orderData);
-    public Order cancelOrderByID(int id);
+    public Order cancelOrderByID(int id, int version);
     
 }

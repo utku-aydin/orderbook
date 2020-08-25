@@ -144,9 +144,10 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public Order cancelOrderByID(int id) {
+    public Order cancelOrderByID(int id, int version) {
         // ERROR CHECK
-        Order order = orderRepository.findById(id).orElse(null);
+        OrderId orderId = new OrderId(id, version);
+        Order order = orderRepository.findById(orderId).orElse(null);
         order.setStatus(StatusEnum.CANCELLED);
         order = orderRepository.saveAndFlush(order);
         

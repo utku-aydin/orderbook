@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -41,6 +43,15 @@ public class TradeServiceDB implements TradeService {
         } else {
             comparison = ChronoUnit.DAYS;
         }
+        
+        Comparator<Trade> c = new Comparator<Trade>() 
+        { 
+            @Override
+            public int compare(Trade t1, Trade t2) 
+            { 
+                return t1.getTrade_time().compareTo(t2.getTrade_time()); 
+            } 
+        }; 
 
         prices.add(trades.get(0).getTrade_price());
         int checked = 1;
@@ -49,6 +60,9 @@ public class TradeServiceDB implements TradeService {
             if(checked >= trades.size()) {
                 break;
             }
+            //Trade comp = new Trade();
+            //comp.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")).minusSeconds(interval*checked).truncatedTo(comparison));
+            //int index = Collections.binarySearch(prices, comp, c);
             Trade t = trades.get(checked++);
             //if there's a trade at that time, add its price
             //System.out.println("What is now: " + LocalDateTime.now(ZoneId.of("GMT")));
@@ -60,15 +74,13 @@ public class TradeServiceDB implements TradeService {
             }
             //otherwise, add the price of the previous trade
             else {
-                prices.add(prices.get(prices.size() - 1));
+                prices.add(new BigDecimal(-1));
             }
         }
         
         //if there is a need, add zeroes to match the needed size
-        /*while(prices.size() < count) {
-            prices.add(new BigDecimal("0"));
-        }
 
+        /*
         //if there was no data available at a certain time, set the amount to the previously occurred trade
         while(prices.contains(new BigDecimal("-1"))) {
             int index = prices.indexOf(new BigDecimal("-1"));
@@ -78,14 +90,40 @@ public class TradeServiceDB implements TradeService {
                 break;
             }
         }
+        */
         
-        for (int i = prices.size() - 1; i >= 0; i--) {
-            if (prices()) {
-                
+        BigDecimal mOne = new BigDecimal(-1);
+        boolean flag = true;
+        BigDecimal first = prices.get(0);
+        
+        for (int i = prices.size() - 1; i >= 1; i--) {
+            if (!prices.get(i).equals(mOne)) {
+                if (flag) {
+                    flag = false;
+                    first = prices.get(i);
+                }
+                if (prices.get(i - 1).equals(mOne)) {
+                    prices.set(i - 1, prices.get(i));
+                }
             }
-        }*/
+        }
+        
+        for (int i = 0; i < prices.size(); i++) {
+            if (prices.get(i).equals(mOne)) {
+                prices.set(i, first);
+            }
+        }
+        
+        while(prices.size() < count) {
+            prices.add(new BigDecimal("0"));
+        }
         
         return prices;
+    }
+    
+    @Override
+    public List<Trade> getCountTrades(int count) {
+        return tradeRepository.getCountTrades(count);
     }
     
 }

@@ -13,9 +13,13 @@ class StockChart extends React.Component {
       this.state = {
         orders: [],
         config:{
-            type: 'bar',
+            type: 'line',
             series: [{
-              values: [this.props.orders]
+              values: [21,
+                21,
+                21,
+                24,
+                22]
             }]
         }
           

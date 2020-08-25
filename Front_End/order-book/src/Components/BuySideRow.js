@@ -29,12 +29,19 @@ class BuySideRow extends React.Component {
         this.state.editOrder.total = this.props.order.price * this.state.editOrder.quantity;
     }
 
-    addOne = (name,event) =>{
-        console.log(name);
-        
-
-
+    componentDidUpdate(prevProps){
+        if(this.props.order.id !== prevProps.order.id){
+            let quantity = this.props.order.order_size - this.props.order.number_matched;
+            let price = this.props.order.price;
+            let newOrderData = {
+                quantity : this.props.order.order_size - this.props.order.number_matched,
+                price : this.props.order.price
+            }
+            
+            this.setState({editOrder : newOrderData});
+        }
     }
+
 
     handleChangeNumber = (name,value,event) => {
         let inputName = name
@@ -50,7 +57,7 @@ class BuySideRow extends React.Component {
             console.log(inputValue)
           orderData[inputName] += inputValue;
          
-          this.setState({ newOrderData: orderData })
+          this.setState({ editOrder: orderData })
         }
       }
 

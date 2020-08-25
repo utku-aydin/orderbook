@@ -19,6 +19,7 @@ import com.mthree.orderbook.repository.TradeRepository;
 import com.mthree.orderbook.repository.UserRepository;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
@@ -89,7 +90,7 @@ public class OrderServiceDB implements OrderService {
         order.setOrder_size(Integer.parseInt(orderData.get("order_size")));
         order.setSide(SideEnum.valueOf(orderData.get("side")));
         order.setNumber_matched(Integer.parseInt(orderData.get("number_matched")));
-        order.setPlaced_at(LocalDateTime.now());
+        order.setPlaced_at(LocalDateTime.now(ZoneId.of("GMT")));
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
         
         // ERROR CHECK
@@ -250,7 +251,7 @@ public class OrderServiceDB implements OrderService {
                 }
             }
 
-            trade.setTrade_time(LocalDateTime.now());
+            trade.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
 
             System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
             + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());

@@ -51,8 +51,9 @@ public class TradeServiceDB implements TradeService {
             }
             Trade t = trades.get(checked++);
             //if there's a trade at that time, add its price
-            System.out.println("What is now: " + LocalDateTime.now(ZoneId.of("GMT")));
+            //System.out.println("What is now: " + LocalDateTime.now(ZoneId.of("GMT")));
             System.out.println("What is compared: " + LocalDateTime.now(ZoneId.of("GMT")).minusSeconds(interval*checked).truncatedTo(comparison));
+            System.out.println("What it is compared to: " + t.getTrade_time().truncatedTo(comparison));
             if(LocalDateTime.now(ZoneId.of("GMT")).minusSeconds(interval*checked).truncatedTo(comparison)
                     .isEqual(t.getTrade_time().truncatedTo(comparison))) {
                 prices.add(t.getTrade_price());

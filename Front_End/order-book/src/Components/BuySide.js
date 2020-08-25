@@ -61,6 +61,8 @@ class BuySide extends React.Component {
         // Here is a debug method to moniter incoming contact data
         console.log("Rending Order Book:")
         console.log(this.props.orders)
+        let length = this.props.orders.length;
+        let orderSlice = this.props.orders.slice(0,5);
 
 
         return (
@@ -71,12 +73,13 @@ class BuySide extends React.Component {
                     <BuySideHeader />
                 </thead>
                 <tbody>
-                    {this.props.orders.map((order, i) => {
+                    {orderSlice.map((order, i) => {
                         return <BuySideRow order={order} key={i} />
                     })}
 
                 </tbody>
             </Table>
+            <Button>Show {this.props.orders.length} more orders</Button>
             </React.Fragment>)
 
     }

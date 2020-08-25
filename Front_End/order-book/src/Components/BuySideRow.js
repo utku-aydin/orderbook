@@ -66,14 +66,14 @@ class BuySideRow extends React.Component {
     
         return (<tr>
             <td>
-                <Button>Cancel</Button>
-                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button onClick={this.updateOrder}>Update</Button>
-                <Button onClick={this.resetEdit}>Reset</Button></React.Fragment> : null}
+                <Button size="sm">Cancel</Button>
+                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button size="sm" onClick={this.updateOrder}>Update</Button>
+                <Button size="sm" onClick={this.resetEdit}>Reset</Button></React.Fragment> : null}
                 </td>
             <td>{stock.stock_symbol}</td>
-            <td>{total}{" "}
-         {editTotal > total ? <GreenText>{editTotal}</GreenText> : null}
-         {editTotal < total ? <RedText>{editTotal}</RedText> : null}
+            <td>{total}
+         {editTotal > total ? <GreenText> {editTotal}</GreenText> : null}
+         {editTotal < total ? <RedText> {editTotal}</RedText> : null}
          </td>
             <td><OrderAdjuster value={quantity}
              editValue={this.state.editOrder.quantity}

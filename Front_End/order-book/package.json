@@ -16,6 +16,7 @@
     "react-scripts": "3.4.3",
     "react-select": "^3.1.0",
     "react-stockcharts": "^0.7.8",
+    "react-ticker": "^1.2.2",
     "styled-components": "^5.1.1",
     "zingchart-react": "^3.0.0"
   },

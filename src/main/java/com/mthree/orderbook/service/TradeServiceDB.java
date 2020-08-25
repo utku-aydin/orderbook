@@ -31,7 +31,6 @@ public class TradeServiceDB implements TradeService {
         }
         
         ChronoUnit comparison = ChronoUnit.SECONDS;
-        
         if (interval > 60) {
             comparison = ChronoUnit.MINUTES;
         } else if (interval > 3600) {
@@ -55,12 +54,12 @@ public class TradeServiceDB implements TradeService {
             }
             //otherwise, add the price of the previous trade
             else {
-                prices.add(new BigDecimal("-1"));
+                prices.add(prices.get(prices.size() - 1));
             }
         }
         
         //if there is a need, add zeroes to match the needed size
-        while(prices.size() < count) {
+        /*while(prices.size() < count) {
             prices.add(new BigDecimal("0"));
         }
 
@@ -73,6 +72,13 @@ public class TradeServiceDB implements TradeService {
                 break;
             }
         }
+        
+        for (int i = prices.size() - 1; i >= 0; i--) {
+            if (prices()) {
+                
+            }
+        }*/
+        
         return prices;
     }
     

@@ -258,8 +258,10 @@ public class OrderServiceDB implements OrderService {
                 }
             }
             
-            buy.setId(new OrderId(buy.getId().getId(), buy.getId().getVersion() + 1));
-            sell.setId(new OrderId(sell.getId().getId(), sell.getId().getVersion() + 1));
+
+            
+            Order newSell = copyOrder(sell);
+            Order newBuy = copyOrder(buy);
             trade.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
 
             System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
@@ -274,14 +276,29 @@ public class OrderServiceDB implements OrderService {
             if (sell.getStatus() == StatusEnum.PENDING)
                 sell.setStatus(StatusEnum.ACTIVE);
             
-            orderRepository.save(sell);
-            orderRepository.save(buy);
+            orderRepository.save(newSell);
+            orderRepository.save(newBuy);
             
             return trade;
         } else {
             return null;
         }
         
+    }
+    
+    private Order copyOrder(Order order) {
+            Order newOrder = new Order();
+            newOrder.setId(new OrderId(order.getId().getId(), order.getId().getVersion() + 1));
+            newOrder.setPrice(order.getPrice());
+            newOrder.setOrder_size(order.getOrder_size());
+            newOrder.setSide(order.getSide());
+            newOrder.setNumber_matched(order.getNumber_matched());
+            newOrder.setPlaced_at(order.getPlaced_at());
+            newOrder.setStatus(order.getStatus());
+            newOrder.setStock(order.getStock());
+            newOrder.setUser(order.getUser());
+            
+            return newOrder;
     }
     
 }

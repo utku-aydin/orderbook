@@ -1,6 +1,7 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
 import OrderAdjuster from "./OrderAdjuster"
+import BuySideRow from "./BuySideRow"
 
 
 const BuySideHeader = () => {
@@ -15,20 +16,20 @@ const BuySideHeader = () => {
     );
 }
 
-const BuySideRow = ({ order }) => {
-    let {price,order_size,number_matched,side,stock} = order;
-    let quantity = order_size - number_matched;
+// const BuySideRow = ({ order }) => {
+//     let {price,order_size,number_matched,side,stock} = order;
+//     let quantity = order_size - number_matched;
 
-    return (<tr>
-        <td><Button>Cancel</Button></td>
-        <td>{stock.stock_symbol}</td>
-        <td>{price * quantity}</td>
-        <td><OrderAdjuster value={quantity}/></td>
-        <td>{price}</td>
+//     return (<tr>
+//         <td><Button>Cancel</Button></td>
+//         <td>{stock.stock_symbol}</td>
+//         <td>{price * quantity}</td>
+//         <td><OrderAdjuster value={quantity}/></td>
+//         <td>{price}</td>
 
-    </tr>
-    );
-}
+//     </tr>
+//     );
+// }
 
 class BuySide extends React.Component {
 

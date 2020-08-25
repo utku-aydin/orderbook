@@ -57,6 +57,16 @@ public class OrderController {
         return ResponseEntity.ok(orders);
     }
     
+    @GetMapping("/orderHistory/{id}")
+    public ResponseEntity<List<Order>> getOrderHistory(@PathVariable int id) {
+        List<Order> history = orderService.getOrderHistory(id);
+        if (history.isEmpty()) {
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        
+        return ResponseEntity.ok(history);
+    }
+    
     @PostMapping("/order")
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Order> addOrder(@RequestBody Map<String, String> orderData) {

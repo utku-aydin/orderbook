@@ -20,7 +20,8 @@ public interface OrderService {
     public List<Order> getSellOrders();
     public List<Order> getActiveBuyOrders();
     public List<Order> getActiveSellOrders();
-    public Order getOrderByID(int id);
+    //public Order getOrderByID(int id);
+    public List<Order> getOrderHistory(int id);
     public Order addOrder(Map<String, String> orderData);
     public Order updateOrder(Map<String, String> orderData);
     public Order cancelOrderByID(int id, int version);

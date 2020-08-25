@@ -69,8 +69,8 @@ public class OrderServiceDB implements OrderService {
     }
 
     @Override
-    public Order getOrderByID(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Order> getOrderHistory(int id) {
+        return orderRepository.getOrderHistory(id);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class OrderServiceDB implements OrderService {
         OrderId id = new OrderId();
         
         id.setId(Integer.parseInt(orderData.get("id")));
-        id.setVersion(Integer.parseInt(orderData.get("version")));
+        id.setVersion(Integer.parseInt(orderData.get("version")) + 1);
         
         Order order = new Order();
         order.setId(id);
@@ -251,7 +251,9 @@ public class OrderServiceDB implements OrderService {
                     sell.setStatus(StatusEnum.FULFILLED);
                 }
             }
-
+            
+            buy.setId(new OrderId(buy.getId().getId(), buy.getId().getVersion() + 1));
+            sell.setId(new OrderId(sell.getId().getId(), sell.getId().getVersion() + 1));
             trade.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
 
             System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""

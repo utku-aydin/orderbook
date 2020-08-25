@@ -8,12 +8,12 @@ class OrderBook extends Component {
 
     render() {
         return (
-            <Container>
+            <Container fluid>
                 <Row>
-                    <Col sm={6}>
+                    <Col>
                         <BuySide orders={this.props.buyOrders} />
                     </Col>
-                    <Col sm={6}>
+                    <Col>
                         <SellSide orders={this.props.sellOrders} />
                     </Col>
                 </Row>

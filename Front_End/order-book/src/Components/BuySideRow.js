@@ -23,7 +23,28 @@ class BuySideRow extends React.Component {
 
     addOne = (name,event) =>{
         console.log(name);
+        
+
+
     }
+
+    handleChangeNumber = (name,value,event) => {
+        let inputName = name
+        let inputValue = value
+        if(event.shiftKey){
+            inputValue = value *5;
+        }
+    
+        let orderData = this.state.editOrder;
+    
+        if (orderData.hasOwnProperty(inputName)) {
+            console.log(orderData[inputName])
+            console.log(inputValue)
+          orderData[inputName] += inputValue;
+          
+          this.setState({ newOrderData: orderData })
+        }
+      }
 
 
     render(){
@@ -36,9 +57,14 @@ class BuySideRow extends React.Component {
             <td>{price * quantity}</td>
             <td><OrderAdjuster value={quantity}
              editValue={this.state.editOrder.quantity}
-             addOne = {this.addOne}
-             name={"quantity"}/></td>
-            <td>{price}</td>
+             handleChangeNumber = {this.handleChangeNumber}
+             name={"quantity"}
+             tickSize={1}/></td>
+            <td><OrderAdjuster value={price}
+             editValue={this.state.editOrder.price}
+             handleChangeNumber = {this.handleChangeNumber}
+             name={"price"}
+             tickSize={0.01}/></td>
     
         </tr>
         );  

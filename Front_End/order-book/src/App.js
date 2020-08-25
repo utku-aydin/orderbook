@@ -25,8 +25,8 @@ class App extends React.Component {
       price: 0
     },
     graphData: {
-      interval: 0,
-      count: 0
+      interval: 5,
+      count: 10
     },
     trades: {
       prices: []
@@ -48,6 +48,21 @@ class App extends React.Component {
       this.setState({ graphData: newGraphData })
     }
 
+  }
+
+  handleGraphDataSubmit = (event) => {
+    console.log("Loading trade data")
+    
+    fetch(SERVICE_URL + "/interval/10/5")
+    .then(data => data.json())
+    // .then(data => console.log(data.json()))
+    .then(data => this.setState({ trades: data }
+    )).catch((error) => {
+      console.log('error:', error);
+    });
+      
+
+      
   }
 
   
@@ -84,21 +99,7 @@ class App extends React.Component {
     }
   }
 
-  handleGraphDataSubmit = (event) => {
-    console.log("Loading trade data")
-    fetch(SERVICE_URL + "/interval", {
-      method: 'GET',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(this.state.graphData)
-    })
-      .then(data => data.json())
-      .then(data => this.setState({ trades: data }
-      )).catch((error) => {
-        console.log('error:', error);
-      });
-  }
+  
 
   handleOrderFormSubmit = (event) => {
 

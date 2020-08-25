@@ -6,6 +6,8 @@ class Graph extends React.Component{
 
     render(){
         let {graphData, handleGraphDataChange, handleGraphDataSubmit} = this.props;
+        console.log("here");
+        console.log(this.props.graphData);
         return(
             
             <Form onSubmit={handleGraphDataSubmit}>
@@ -22,6 +24,7 @@ class Graph extends React.Component{
                 </Form.Group>
                 
                 <StockChart 
+                
                 orders = {this.props.graphData}/>
             </Form>
                 

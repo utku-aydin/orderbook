@@ -85,7 +85,7 @@ class BuySide extends React.Component {
         return (
             <React.Fragment>
                 <h1 className="text-center">BUY</h1>
-            <Table class="table table-sm" striped bordered hover>
+            <Table  striped bordered hover size="sm">
                 <thead>
                     <BuySideHeader />
                 </thead>
@@ -96,7 +96,7 @@ class BuySide extends React.Component {
 
                 </tbody>
             </Table>
-                <Button onClick={ () => this.changeDisplay()}>{this.state.displayAll? <p>Show {this.props.orders.length -5} more orders</p> : <p>Show {this.props.orders.length -5} less orders</p> }</Button>
+                <Button onClick={ () => this.changeDisplay()}>{this.state.displayAll? <p>Show {this.props.orders.length -5} less orders</p> : <p>Show {this.props.orders.length -5} more orders</p> }</Button>
             </React.Fragment>)
 
     }

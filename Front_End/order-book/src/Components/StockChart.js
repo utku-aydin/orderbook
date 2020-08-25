@@ -15,21 +15,17 @@ class StockChart extends React.Component {
         config:{
             type: 'bar',
             series: [{
-              values: []
+              values: [this.props.orders]
             }]
         }
           
-       }
+      }
     }
-
-    componentDidMount(){
-        axios.get('http://localhost:8080/api/sellOrders')
-        .then(res => this.setState({values: res.price}))
-    }
-
-
     render() {
+      console.log("Rending Graph:")
+      console.log(this.props.orders)
       return (
+        
         <div>
           <ZingChart data={this.state.config}/>
         </div>

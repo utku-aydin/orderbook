@@ -23,6 +23,13 @@ class App extends React.Component {
       owner: [],
       quantity: 0,
       price: 0
+    },
+    graphData: {
+      interval: 0,
+      count: 0
+    },
+    trades: {
+      prices: []
     }
   }
 
@@ -30,6 +37,20 @@ class App extends React.Component {
     console.log("App is now mounted. ")
     this.loadOrderData()
   }
+
+  handleGraphDataChange = (event) => {
+    let inputName = event.target.name;
+    let inputValue = event.target.value;
+    let newGraphData = this.state.graphData;
+
+    if (newGraphData.hasOwnProperty(inputName)) {
+      newGraphData[inputName] = inputValue;
+      this.setState({ graphData: newGraphData })
+    }
+
+  }
+
+  
 
   handleAddFormChange = (name, event) => {
     console.log(event)
@@ -61,6 +82,22 @@ class App extends React.Component {
       orderData[inputName] = inputValue;
       this.setState({ newOrderData: orderData })
     }
+  }
+
+  handleGraphDataSubmit = (event) => {
+    console.log("Loading trade data")
+    fetch(SERVICE_URL + "/interval", {
+      method: 'GET',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(this.state.graphData)
+    })
+      .then(data => data.json())
+      .then(data => this.setState({ trades: data }
+      )).catch((error) => {
+        console.log('error:', error);
+      });
   }
 
   handleOrderFormSubmit = (event) => {
@@ -151,7 +188,10 @@ class App extends React.Component {
         </Row>
         <Row>
           <Col>
-            <Graph />
+            <Graph 
+              graphData = {this.state.graphData}
+              handleGraphDataChange = {this.handleGraphDataChange}
+              handleGraphDataSubmit = {this.handleGraphDataSubmit}/>
           </Col>
           <Col>
             <OrderForm

@@ -170,9 +170,13 @@ class BuySideRow extends React.Component {
             delay={{ show: 250, hide: 400 }}
             overlay={this.renderTooltip}
           >
-            <Button onClick={this.loadHistory} variant="success"></Button>
+            <Button onClick={this.loadHistory} variant="success">
+              Order History
+            </Button>
           </OverlayTrigger>
-          <Button onClick={this.loadHistory} variant="success"></Button>
+          {/*<Button onClick={this.loadHistory} variant="success">
+            Load Prior to View
+          </Button>*/}
         </td>
         <td>{id.id}</td>
         <td>{stock.stock_symbol}</td>

@@ -12,25 +12,33 @@ class OrderForm extends React.Component {
         { value: "BUY", label: "BUY"},
         { value: "SELL", label: "SELL"}
     ];
-     symbols = [
-         { value: "1", label: "AMZN"}
-             ]
-    owners = [
-        { value: "1", label: "CP1"},
-        { value: "2", label: "CP2"}
-    ];
+    //  symbols = [
+    //      { value: "1", label: "AMZN"}
+    //          ]
+    // owners = [
+    //     { value: "1", label: "CP1"},
+    //     { value: "2", label: "CP2"}
+    // ];
 
      getSymbol(stock){
-        let value = stock.id;
-        console.log( "value is" + value);
-        let label = stock.stock_symbol;
-        console.log("label is" + label);
+       // let value = stock.id;
+      //  console.log( "value is" + value);
+      //  let label = stock.stock_symbol;
+      //  console.log("label is" + label);
         let symbol = {
-            value,
-            label
+            value : stock.id,
+            label : stock.stock_symbol
         };
-        console.log("symbol is" + symbol);
+        console.log("symbol is" + symbol.value + symbol.label);
         return symbol;
+    }
+
+    getOwner(user){
+        let owner = {
+            value : user.company.id,
+            label : user.company.company_symbol
+        }
+        return owner
     }
 
     
@@ -42,6 +50,7 @@ class OrderForm extends React.Component {
 
         let symbols = stocks.map(this.getSymbol);
         console.log( "symbols: " + symbols);
+        let owners = users.map(this.getOwner);
 
 
 
@@ -56,12 +65,12 @@ class OrderForm extends React.Component {
                 <Form.Group controlId="orderSymbol">
                     <Form.Label>Symbol: </Form.Label>
                     {/* <ComboBox controlId = "symbolComboBox" data={this.symbols}/> */}
-                    <Select options={this.symbols} name="symbol" value={orderData.symbol} onChange={(evt) => this.props.handleChange("symbol",evt)}/>
+                    <Select options={symbols} name="symbol" value={orderData.symbol} onChange={(evt) => this.props.handleChange("symbol",evt)}/>
                 </Form.Group>
                 <Form.Group controlId = "orderOwner">
                     <Form.Label >Owner: </Form.Label>
                     {/* <ComboBox controlId = "ownerComboBox" data={this.owners}/> */}
-                    <Select options={this.owners} name="owner"  value={orderData.owner} onChange={(evt) => this.props.handleChange("owner",evt)}/>
+                    <Select options={owners} name="owner"  value={orderData.owner} onChange={(evt) => this.props.handleChange("owner",evt)}/>
                 </Form.Group>
                 <Form.Group controlId = "orderQuantity">
                     <Form.Label>Quantity: </Form.Label>

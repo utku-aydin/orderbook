@@ -1,7 +1,6 @@
 package com.mthree.orderbook.repository;
 
 import com.mthree.orderbook.entity.Stock;
-import com.mthree.orderbook.entity.Trade;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;

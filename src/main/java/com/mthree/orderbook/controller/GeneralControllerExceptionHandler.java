@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mthree.orderbook.controller;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -16,10 +11,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.WebRequest;
 
-/**
- *
- * @author utkua
- */
 @ControllerAdvice
 @RestController
 public class GeneralControllerExceptionHandler {

@@ -151,37 +151,6 @@ class OrderServiceDBTest {
     }
 
     @Test
-    public void getOrderByID() {
-        OrderId id5 = new OrderId();
-        id5.setVersion(0);
-        id5.setId(5);
-        Order order5 = new Order();
-        order5.setId(id5);
-        order5.setPrice(new BigDecimal("150.00"));
-        order5.setOrder_size(15);
-        order5.setSide(SideEnum.SELL);
-        order5.setNumber_matched(0);
-        order5.setPlaced_at(LocalDateTime.now(ZoneId.of("GMT")));
-        order5.setStatus(StatusEnum.FULFILLED);
-        Stock st = new Stock();
-        st.setStock_symbol("symb");
-        st.setTick_size("0.1");
-        stockRepository.saveAndFlush(st);
-        User user = new User();
-        Company c = new Company();
-        c.setCompany_symbol("comp");
-        companyRepository.saveAndFlush(c);
-        user.setCompany(c);
-        user.setUser_symbol("asd");
-        userRepository.saveAndFlush(user);
-        order5.setStock(st);
-        order5.setUser(user);
-        orderRepository.saveAndFlush(order5);
-
-        assertEquals(orderService.getOrderHistory(5).get(0).getId(), order5.getId());
-    }
-
-    @Test
     public void addOrder() {
 
         OrderId id5 = new OrderId();

@@ -186,7 +186,7 @@ class OrderServiceDBTest {
     @Test
     public void cancelOrderByID() {
         int activeOrders = orderService.getActiveBuyOrders().size() + orderService.getActiveSellOrders().size();
-        orderService.cancelOrderByID(3, 0);
+        orderService.cancelOrderByID(2, 0);
         assertNotEquals(activeOrders, orderService.getActiveSellOrders().size() + orderService.getActiveBuyOrders().size());
     }
 }

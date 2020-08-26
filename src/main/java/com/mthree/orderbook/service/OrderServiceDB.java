@@ -138,11 +138,13 @@ public class OrderServiceDB implements OrderService {
     public Order cancelOrderByID(int id, int version) {
         // ERROR CHECK
         OrderId orderId = new OrderId(id, version);
-        Order order = orderRepository.findById(orderId).orElse(null);
-        order.setStatus(StatusEnum.CANCELLED);
-        order = orderRepository.saveAndFlush(order);
         
-        return order;
+        Order order = orderRepository.findById(orderId).orElse(null);
+        Order newOrder = copyOrder(order);
+        newOrder.setStatus(StatusEnum.CANCELLED);
+        newOrder = orderRepository.saveAndFlush(newOrder);
+        
+        return newOrder;
     }
     
     private void matchBuyOrder(Order order) {

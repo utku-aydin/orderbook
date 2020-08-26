@@ -23,7 +23,11 @@ public interface OrderRepository extends JpaRepository<Order, OrderId> {
     @Query(value = "SELECT * FROM `ob_order` WHERE side = \"SELL\" AND status = \"ACTIVE\" "
             + "ORDER BY cast(price as DECIMAL(10,2)) ASC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveSellOrders();
-    
+
+    /**
+     * Finds the order with the highest id in the database
+     * @return a list with all Order object ordered by id descending
+     */
     @Query(value = "SELECT * FROM `ob_order` ORDER BY id DESC", nativeQuery = true)
     List<Order> findHighestId();
     

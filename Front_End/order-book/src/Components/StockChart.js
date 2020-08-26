@@ -73,7 +73,7 @@ class StockChart extends React.Component {
             type: "line",
             series: [
               {
-                values: this.state.trades,
+                values: this.state.trades.reverse(),
               },
             ],
           },
@@ -95,7 +95,10 @@ class StockChart extends React.Component {
       },
     });
 
-    fetch(SERVICE_URL + "/interval/10/5")
+    fetch(
+      SERVICE_URL +
+        `/interval/${this.props.graphData.interval}/${this.props.graphData.count}`
+    )
       .then((data) => data.json())
       //.then((data) => console.log(data.json()))
       .then((data) => {
@@ -105,7 +108,7 @@ class StockChart extends React.Component {
             type: "line",
             series: [
               {
-                values: this.state.trades,
+                values: this.state.trades.reverse(),
               },
             ],
           },

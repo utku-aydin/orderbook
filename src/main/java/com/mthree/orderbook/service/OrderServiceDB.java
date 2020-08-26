@@ -178,6 +178,11 @@ public class OrderServiceDB implements OrderService {
         int marker = 0;
         
         Order current;
+        if (compared.size() > 0) {
+            current = compared.get(marker);
+        } else {
+            return;
+        }
         
         while (orderRemaining > 0) {  
             current = compared.get(marker);

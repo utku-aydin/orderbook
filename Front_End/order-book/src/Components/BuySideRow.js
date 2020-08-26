@@ -90,7 +90,7 @@ class BuySideRow extends React.Component {
                 data-id={id.id}
                 data-version={id.version}
                 data-price={this.state.editOrder.price}
-                data-order_size={order_size}
+                data-order_size={this.state.editOrder.quantity +number_matched}
                 data-number_matched={number_matched}
                 data-side={side}
                 data-placed_at={placed_at}

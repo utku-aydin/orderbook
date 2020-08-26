@@ -25,7 +25,7 @@ var rates = [
   "Google: 1.191",
   "Microsoft: 118.71",
 ];
-class BuySideRow extends React.Component {
+class OverlayBuySideRow extends React.Component {
   state = {
     editOrder: {
       quantity: "",
@@ -134,4 +134,4 @@ class BuySideRow extends React.Component {
   }
 }
 
-export default BuySideRow;
+export default OverlayBuySideRow;

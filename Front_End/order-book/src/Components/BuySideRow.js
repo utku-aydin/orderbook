@@ -99,7 +99,7 @@ class BuySideRow extends React.Component {
   };
 
   loadHistory = (props) => {
-    fetch(SERVICE_URL + "/orderHistory/1")
+    fetch(SERVICE_URL + "/orderHistory/" + this.props.order.id.id)
       .then((data) => data.json())
       //.then((data) => console.log(data))
       .then((data) => (rates = data))

@@ -1,8 +1,14 @@
 import React from "react";
-import { Table, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  OverlayTrigger,
+  Tooltip,
+  Popover,
+} from "react-bootstrap";
 import OrderAdjuster from "./OrderAdjuster";
 import styled from "styled-components";
-
+import OverlayBuySide from "./OverlayBuySide";
 const RedText = styled.p`
   color: #ed1212;
 `;
@@ -10,7 +16,14 @@ const RedText = styled.p`
 const GreenText = styled.p`
   color: #008000;
 `;
-
+const SERVICE_URL = "http://localhost:8080/api";
+var rates = [
+  "Apple: 192.79",
+  "Citigroup: 64.68",
+  "General Electric: 10.10",
+  "Google: 1.191",
+  "Microsoft: 118.71",
+];
 class SellSideRow extends React.Component {
   state = {
     editOrder: {
@@ -41,6 +54,28 @@ class SellSideRow extends React.Component {
     }
   }
 
+  renderTooltip = (props) => {
+    return (
+      <Popover id="popover-basic">
+        <Popover.Title as="h3">Popover right</Popover.Title>
+        <Popover.Content>
+          And here's some <strong>amazing</strong> content. It's very engaging.
+          right?<OverlayBuySide orders={rates}></OverlayBuySide>
+        </Popover.Content>
+      </Popover>
+    );
+  };
+
+  loadHistory = (props) => {
+    fetch(SERVICE_URL + "/orderHistory/" + this.props.order.id.id)
+      .then((data) => data.json())
+      //.then((data) => console.log(data))
+      .then((data) => (rates = data))
+      .catch((error) => {
+        console.log("error:", error);
+      });
+  };
+
   resetEdit = () => {
     let newOrderData = {
       quantity: this.props.order.order_size - this.props.order.number_matched,
@@ -63,10 +98,9 @@ class SellSideRow extends React.Component {
       console.log(orderData[inputName]);
       console.log(inputValue);
       orderData[inputName] += inputValue;
-      if(orderData[inputName] < 0){
+      if (orderData[inputName] < 0) {
         orderData[inputName] = 0;
       }
-
 
       this.setState({ editOrder: orderData });
     }
@@ -125,7 +159,6 @@ class SellSideRow extends React.Component {
         </td>
         <td>{stock.stock_symbol}</td>
         <td>{id.id}</td>
-        
 
         <td>
           <Button
@@ -145,7 +178,7 @@ class SellSideRow extends React.Component {
                 data-id={id.id}
                 data-version={id.version}
                 data-price={this.state.editOrder.price}
-                data-order_size={this.state.editOrder.quantity +number_matched}
+                data-order_size={this.state.editOrder.quantity + number_matched}
                 data-number_matched={number_matched}
                 data-side={side}
                 data-placed_at={placed_at}
@@ -162,11 +195,15 @@ class SellSideRow extends React.Component {
             </React.Fragment>
           ) : null}
           <OverlayTrigger
-            placement="right"
+            rootClose
+            placement="left"
+            trigger="focus"
             delay={{ show: 250, hide: 400 }}
-            overlay={renderTooltip}
+            overlay={this.renderTooltip}
           >
-            <Button variant="success"></Button>
+            <Button onClick={this.loadHistory} variant="success">
+              Order History
+            </Button>
           </OverlayTrigger>
         </td>
       </tr>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
 import OrderAdjuster from "./OrderAdjuster";
-import OverlayRow from "./OverlayRow";
+import OverlayBuySideRow from "./OverlayBuySideRow";
 
 const BuySideHeader = () => {
   return (
@@ -86,7 +86,7 @@ class OverlayBuySide extends React.Component {
           <tbody>
             {orderSlice.map((order, i) => {
               return (
-                <OverlayRow
+                <OverlayBuySideRow
                   order={order}
                   key={i}
                   cancelOrder={this.props.cancelOrder}

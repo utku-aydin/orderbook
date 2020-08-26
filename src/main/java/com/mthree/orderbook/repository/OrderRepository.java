@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, OrderId> {
     
     @Query(value = "SELECT id, MAX(version) AS `version`, stock_id, price, order_size, side, number_matched, placed_at, usr_id, status "
             + "FROM `ob_order` "
-            + "WHERE side = \"BUY\" AND status = \"ACTIVE\" "
+            + "WHERE side = \"SELL\" AND status = \"ACTIVE\" "
             + "GROUP BY id, stock_id, price, order_size, side, number_matched, placed_at, usr_id, status ORDER BY cast(price as DECIMAL(10,2)) ASC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveSellOrders();
 

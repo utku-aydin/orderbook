@@ -34,13 +34,13 @@ public class TradeController {
     }
     
     @GetMapping("/count/{count}")
-    public ResponseEntity<List<Trade>> getTradesCount(@PathVariable int count) {
-        List<Trade> trades = tradeService.getCountTrades(count);
-        if (trades.isEmpty()) {
+    public ResponseEntity<List<BigDecimal>> getTradesCount(@PathVariable int count) {
+        List<BigDecimal> prices = tradeService.getPricesWithCount(count);
+        if (prices.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         
-        return ResponseEntity.ok(trades);
+        return ResponseEntity.ok(prices);
     }
     
 }

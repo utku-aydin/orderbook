@@ -63,7 +63,8 @@ class StockChart extends React.Component {
     console.log("Component will recieve called with: ", this.props.trades);
     this.state.config.series.values = this.props.trades;
     this.setState(this.state);
-    fetch(SERVICE_URL + "/interval/10/5")
+    /*fetch(SERVICE_URL + "/interval/10/5")*/
+    fetch(SERVICE_URL + `/count/${this.props.graphData.count}`)
       .then((data) => data.json())
       //.then((data) => console.log(data.json()))
       .then((data) => {
@@ -95,10 +96,7 @@ class StockChart extends React.Component {
       },
     });
 
-    fetch(
-      SERVICE_URL +
-        `/interval/${this.props.graphData.interval}/${this.props.graphData.count}`
-    )
+    fetch(SERVICE_URL + `/count/${this.props.graphData.count}`)
       .then((data) => data.json())
       //.then((data) => console.log(data.json()))
       .then((data) => {

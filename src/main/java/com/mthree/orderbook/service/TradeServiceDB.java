@@ -94,5 +94,10 @@ public class TradeServiceDB implements TradeService {
     public List<Trade> getCountTrades(int count) {
         return tradeRepository.getCountTrades(count);
     }
+
+    @Override
+    public List<BigDecimal> getPricesWithCount(int count) {
+        return tradeRepository.getCountPrices(count);
+    }
     
 }

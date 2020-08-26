@@ -16,6 +16,15 @@ public interface TradeService {
      * @return a list with prices
      */
     List<BigDecimal> getPricesWithStep(int interval, int count);
+    
+    /**
+     * Extracts the different price points.
+     * Fetches the price from from each most recent trade
+     * until the number of prices fetched matches the 'count' parameter
+     * @param count the number of prices desired
+     * @return a list with prices
+     */
+    List<BigDecimal> getPricesWithCount(int count);
 
     /**
      * Fetches a number of trades specified by the user

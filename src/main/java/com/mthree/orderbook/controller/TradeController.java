@@ -4,6 +4,8 @@ import com.mthree.orderbook.entity.Trade;
 import com.mthree.orderbook.service.TradeService;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins={"http://localhost:8080", "http://localhost:3000", "null"})
+@CrossOrigin(origins={"http://localhost:8080", TradeController.URL, "null"})
 @RequestMapping("/api")
 public class TradeController {
     
+    @Value("${URL}")
+    public static final String URL = "";
     public final TradeService tradeService;
 
     public TradeController(TradeService tradeService) {

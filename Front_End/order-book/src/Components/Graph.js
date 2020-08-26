@@ -37,7 +37,10 @@ class Graph extends React.Component {
           </Button>
         </Form.Group>
 
-        <StockChart trades={this.props.trades} />
+        <StockChart
+          trades={this.props.trades}
+          graphData={this.props.graphData}
+        />
       </Form>
     );
   }

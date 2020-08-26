@@ -78,10 +78,9 @@ class BuySideRow extends React.Component {
       console.log(orderData[inputName]);
       console.log(inputValue);
       orderData[inputName] += inputValue;
-      if(orderData[inputName] < 0){
+      if (orderData[inputName] < 0) {
         orderData[inputName] = 0;
       }
-
 
       this.setState({ editOrder: orderData });
     }
@@ -165,8 +164,9 @@ class BuySideRow extends React.Component {
             </React.Fragment>
           ) : null}
           <OverlayTrigger
+            rootClose
             placement="left"
-            trigger="click"
+            trigger="focus"
             delay={{ show: 250, hide: 400 }}
             overlay={this.renderTooltip}
           >

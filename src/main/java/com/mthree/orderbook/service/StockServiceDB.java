@@ -21,7 +21,8 @@ public class StockServiceDB implements StockService {
         List<BigDecimal> changes = stockRepository.findMostRecentTrades(stock_id);
         BigDecimal change;
         try {
-            change = changes.get(0).subtract(changes.get(1));
+            change = changes.get(0).subtract(changes.get(2));
+            System.out.println("0: " + changes.get(0) + " 2: " + changes.get(2));
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             return null;
         }
@@ -34,7 +35,7 @@ public class StockServiceDB implements StockService {
         List<Stock> stocks = stockRepository.findAll();
         List<String> stocksWithChange = new LinkedList<>();
         for (Stock stock: stocks) {
-            String stockWithChange = stock.getStock_symbol() + ": " + getMostRecentPriceForStock(stock.getId());
+            String stockWithChange = stock.getStock_symbol() + ": " + getMostRecentPriceForStock(stock.getId()) + "(" + getChangeForStock(stock.getId()) + ")";
             stocksWithChange.add(stockWithChange);
         }
         

@@ -39,11 +39,11 @@ class TradeServiceDBTest {
 
     @BeforeEach
     public void setUp() {
-        tradeRepository.deleteAll();
-        orderRepository.deleteAll();
-        userRepository.deleteAll();
         companyRepository.deleteAll();
+        userRepository.deleteAll();
         stockRepository.deleteAll();
+        orderRepository.deleteAll();
+        tradeRepository.deleteAll();
 
         OrderId id5 = new OrderId();
         id5.setVersion(0);
@@ -135,11 +135,11 @@ class TradeServiceDBTest {
 
     @AfterEach
     void tearDown() {
-        tradeRepository.deleteAll();
-        orderRepository.deleteAll();
-        userRepository.deleteAll();
         companyRepository.deleteAll();
+        userRepository.deleteAll();
         stockRepository.deleteAll();
+        orderRepository.deleteAll();
+        tradeRepository.deleteAll();
     }
 
     @Test

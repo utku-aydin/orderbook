@@ -37,8 +37,8 @@ class StockServiceDBTest {
 
     @BeforeEach
     public void setUp() {
-        orderRepository.deleteAll();
         tradeRepository.deleteAll();
+        orderRepository.deleteAll();
         userRepository.deleteAll();
         companyRepository.deleteAll();
         stockRepository.deleteAll();
@@ -46,8 +46,8 @@ class StockServiceDBTest {
 
     @AfterEach
     void tearDown() {
-        orderRepository.deleteAll();
         tradeRepository.deleteAll();
+        orderRepository.deleteAll();
         userRepository.deleteAll();
         companyRepository.deleteAll();
         stockRepository.deleteAll();

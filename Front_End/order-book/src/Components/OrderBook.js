@@ -12,11 +12,13 @@ class OrderBook extends Component {
                 <Row>
                     <Col>
                         <BuySide orders={this.props.buyOrders}
-                        cancelOrder={this.props.cancelOrder} />
+                        cancelOrder={this.props.cancelOrder}
+                        updateOrder={this.props.updateOrder} />
                     </Col>
                     <Col>
                         <SellSide orders={this.props.sellOrders}
-                        cancelOrder={this.props.cancelOrder} />
+                        cancelOrder={this.props.cancelOrder}
+                        updateOrder ={this.props.updateOrder} />
                     </Col>
                 </Row>
             </Container>

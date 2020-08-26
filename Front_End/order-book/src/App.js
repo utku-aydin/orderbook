@@ -109,6 +109,35 @@ class App extends React.Component {
   });
 }
 
+handleUpdateOrder = (event) =>{
+  console.log(event.target.dataset);
+  if (event) event.preventDefault();
+
+  console.log(event.target.dataset );
+ let version = event.target.dataset.version;
+ let id = event.target.dataset.id;
+ // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
+//  let id = event.target.value.id;
+//  let version = event.target.value.version;
+  console.log("Version is " + version);
+  
+
+  console.log(`Submitting update for order id ${id} `)
+
+  fetch(SERVICE_URL + "/order/", {
+    method: "PUT",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify(event.target.dataset),
+  }).then(data => {this.loadOrderData();
+})
+.catch((error) => {
+  console.error('Error:', error);
+});
+
+}
+
   handleChangeNumber = (event) => {
     let inputName = event.target.name;
     let inputValue = event.target.value;
@@ -215,6 +244,7 @@ class App extends React.Component {
             sellOrders={this.state.sellOrders}
             buyOrders={this.state.buyOrders}
             cancelOrder={this.handleCancelOrder}
+            updateOrder={this.handleUpdateOrder}
           />
         </Row>
         <Row>

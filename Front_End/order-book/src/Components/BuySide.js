@@ -92,7 +92,7 @@ class BuySide extends React.Component {
                 </thead>
                 <tbody>
                     {orderSlice.map((order, i) => {
-                        return <BuySideRow order={order} key={i} cancelOrder={this.props.cancelOrder} />
+                        return <BuySideRow order={order} key={i} cancelOrder={this.props.cancelOrder} updateOrder={this.props.updateOrder} />
                     })}
 
                 </tbody>

@@ -72,7 +72,7 @@ class BuySideRow extends React.Component {
 
 
     render(){
-        let {price,order_size,number_matched,side,stock,id} = this.props.order;
+        let {price,order_size,number_matched,side,stock,id,placed_at,status,user} = this.props.order;
         let quantity = order_size - number_matched;
         let total = price * quantity;
         let sum = this.state.editOrder.price * this.state.editOrder.quantity
@@ -86,7 +86,19 @@ class BuySideRow extends React.Component {
         return (<tr>
             <td>
                 <Button size="sm" data-id={id.id} data-version={id.version}   onClick={this.props.cancelOrder}>Cancel</Button>
-                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button size="sm" onClick={this.props.updateOrder}>Update</Button>
+                {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button size="sm"
+                data-id={id.id}
+                data-version={id.version}
+                data-price={this.state.editOrder.price}
+                data-order_size={order_size}
+                data-number_matched={number_matched}
+                data-side={side}
+                data-placed_at={placed_at}
+                data-status={status}
+                data-usr_id={user.id}
+                data-stock_id={stock.id}
+
+                onClick={this.props.updateOrder}>Update</Button>
                 <Button size="sm" onClick={this.resetEdit}>Reset</Button></React.Fragment> : null}
                 </td>
                 <td>{id.id}</td>

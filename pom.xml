@@ -69,6 +69,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                                <configuration>
+                                    <environmentVariables>
+                                        <ENV1>ORDERBOOK_URL</ENV1>
+                                    </environmentVariables>
+                                </configuration>
 			</plugin>
 		</plugins>
 	</build>

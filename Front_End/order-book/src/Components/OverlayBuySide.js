@@ -78,7 +78,7 @@ class OverlayBuySide extends React.Component {
 
     return (
       <React.Fragment>
-        <h1 className="text-center">BUY</h1>
+        <h1 className="text-center">Order</h1>
         <Table striped bordered hover size="sm">
           <thead>
             <BuySideHeader />

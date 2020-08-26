@@ -8,6 +8,7 @@ import SessionHistory from "./Components/SessionHistory";
 
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 
 const SERVICE_URL = "http://localhost:8080/api";
 
@@ -141,7 +142,7 @@ class App extends React.Component {
       });
     fetch(SERVICE_URL + "/sellOrders")
       .then((data) => data.json())
-      .then((data) => this.setState({ sellOrders: data }))
+      .then((data) => this.setState({ sellOrders: data}))
       .catch((error) => {
         console.log("error:", error);
       });

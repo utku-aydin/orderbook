@@ -1,12 +1,11 @@
 import React from "react";
 import { Table, Button } from "react-bootstrap";
 import OrderAdjuster from "./OrderAdjuster";
-import BuySideRow from "./BuySideRow";
+import OverlayRow from "./OverlayRow";
 
 const BuySideHeader = () => {
   return (
     <tr>
-      <th>Options</th>
       <th>id</th>
       <th>Symbol</th>
       <th>total</th>
@@ -31,7 +30,7 @@ const BuySideHeader = () => {
 //     );
 // }
 
-class BuySide extends React.Component {
+class OverlayBuySide extends React.Component {
   state = {
     displayAll: false,
   };
@@ -79,7 +78,7 @@ class BuySide extends React.Component {
 
     return (
       <React.Fragment>
-        <h1 className="text-center">BUY</h1>
+        <h1 className="text-center">Order</h1>
         <Table striped bordered hover size="sm">
           <thead>
             <BuySideHeader />
@@ -87,7 +86,7 @@ class BuySide extends React.Component {
           <tbody>
             {orderSlice.map((order, i) => {
               return (
-                <BuySideRow
+                <OverlayRow
                   order={order}
                   key={i}
                   cancelOrder={this.props.cancelOrder}
@@ -97,16 +96,9 @@ class BuySide extends React.Component {
             })}
           </tbody>
         </Table>
-        <Button onClick={() => this.changeDisplay()}>
-          {this.state.displayAll ? (
-            <p>Show {this.props.orders.length - 5} less orders</p>
-          ) : (
-            <p>Show {this.props.orders.length - 5} more orders</p>
-          )}
-        </Button>
       </React.Fragment>
     );
   }
 }
 
-export default BuySide;
+export default OverlayBuySide;

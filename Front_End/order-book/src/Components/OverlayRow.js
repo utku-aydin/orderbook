@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import OrderAdjuster from "./OrderAdjuster";
 import styled from "styled-components";
-import OverlayBuySide from "./OverlayBuySide";
+import BuySide from "./BuySide";
 const RedText = styled.p`
   color: #ed1212;
 `;
@@ -78,35 +78,9 @@ class BuySideRow extends React.Component {
       console.log(orderData[inputName]);
       console.log(inputValue);
       orderData[inputName] += inputValue;
-      if(orderData[inputName] < 0){
-        orderData[inputName] = 0;
-      }
-
 
       this.setState({ editOrder: orderData });
     }
-  };
-
-  renderTooltip = (props) => {
-    return (
-      <Popover id="popover-basic">
-        <Popover.Title as="h3">Popover right</Popover.Title>
-        <Popover.Content>
-          And here's some <strong>amazing</strong> content. It's very engaging.
-          right?<OverlayBuySide orders={rates}></OverlayBuySide>
-        </Popover.Content>
-      </Popover>
-    );
-  };
-
-  loadHistory = (props) => {
-    fetch(SERVICE_URL + "/orderHistory/1")
-      .then((data) => data.json())
-      //.then((data) => console.log(data))
-      .then((data) => (rates = data))
-      .catch((error) => {
-        console.log("error:", error);
-      });
   };
 
   render() {
@@ -130,50 +104,6 @@ class BuySideRow extends React.Component {
 
     return (
       <tr>
-        <td>
-          <Button
-            size="sm"
-            data-id={id.id}
-            data-version={id.version}
-            onClick={this.props.cancelOrder}
-          >
-            Cancel
-          </Button>
-          {this.state.editOrder.quantity != quantity ||
-          this.state.editOrder.price != price ? (
-            <React.Fragment>
-              {" "}
-              <Button
-                size="sm"
-                data-id={id.id}
-                data-version={id.version}
-                data-price={this.state.editOrder.price}
-                data-order_size={this.state.editOrder.quantity + number_matched}
-                data-number_matched={number_matched}
-                data-side={side}
-                data-placed_at={placed_at}
-                data-status={status}
-                data-usr_id={user.id}
-                data-stock_id={stock.id}
-                onClick={this.props.updateOrder}
-              >
-                Update
-              </Button>
-              <Button size="sm" onClick={this.resetEdit}>
-                Reset
-              </Button>
-            </React.Fragment>
-          ) : null}
-          <OverlayTrigger
-            placement="left"
-            trigger="click"
-            delay={{ show: 250, hide: 400 }}
-            overlay={this.renderTooltip}
-          >
-            <Button onClick={this.loadHistory} variant="success"></Button>
-          </OverlayTrigger>
-          <Button onClick={this.loadHistory} variant="success"></Button>
-        </td>
         <td>{id.id}</td>
         <td>{stock.stock_symbol}</td>
         <td>

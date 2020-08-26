@@ -15,8 +15,8 @@ public interface StockService {
     BigDecimal getChangeForStock(int stock_id);
 
     /**
-     * Get the change in price for all stocks
-     * @return a list of strings representing the stock and the change
+     * Get the most recent trade price for all stocks
+     * @return a list of strings representing the stock and the price
      */
     List<String> getAllStocksWithChange();
 

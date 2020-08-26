@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mthree.orderbook.entity;
 
 import java.io.Serializable;
@@ -27,10 +22,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-/**
- *
- * @author utkua
- */
 @Entity
 @Table(name = "ob_order")
 public class Order implements Serializable {

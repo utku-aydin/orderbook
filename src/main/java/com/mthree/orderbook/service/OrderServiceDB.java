@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mthree.orderbook.service;
 
 import com.mthree.orderbook.entity.Order;
@@ -12,7 +7,6 @@ import com.mthree.orderbook.entity.StatusEnum;
 import com.mthree.orderbook.entity.Stock;
 import com.mthree.orderbook.entity.Trade;
 import com.mthree.orderbook.entity.User;
-import com.mthree.orderbook.repository.CompanyRepository;
 import com.mthree.orderbook.repository.OrderRepository;
 import com.mthree.orderbook.repository.StockRepository;
 import com.mthree.orderbook.repository.TradeRepository;
@@ -24,10 +18,6 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author utkua
- */
 @Repository
 public class OrderServiceDB implements OrderService {
     
@@ -78,7 +68,6 @@ public class OrderServiceDB implements OrderService {
         OrderId id = new OrderId();
         id.setVersion(0);
         if (orderRepository.findHighestId().isEmpty()) {
-            System.out.println("Nully");
             id.setId(1);
         } else {
             id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
@@ -99,11 +88,8 @@ public class OrderServiceDB implements OrderService {
         
         order.setStock(stock);
         order.setUser(user);
-        
-        //companyRepository.saveAndFlush(order.getUser().getCompany());
-        //userRepository.saveAndFlush(order.getUser());
+
         order = orderRepository.saveAndFlush(order);
-        System.out.println("Order id set: " + order.getId());
         
         if (order.getSide() == SideEnum.BUY) {
             matchBuyOrder(order);
@@ -138,7 +124,6 @@ public class OrderServiceDB implements OrderService {
         order.setUser(user);
         
         order = orderRepository.saveAndFlush(order);
-        System.out.println("Order id set: " + order.getId());
         
         if (order.getSide() == SideEnum.BUY) {
             matchBuyOrder(order);
@@ -167,10 +152,8 @@ public class OrderServiceDB implements OrderService {
         
         Order current;
         if (compared.size() > 0) {
-            System.out.println("Current has something here");
             current = compared.get(marker);
         } else {
-            System.out.println("Exit here");
             return;
         }
         
@@ -178,11 +161,8 @@ public class OrderServiceDB implements OrderService {
             current = compared.get(marker);
             Trade trade = matchOrders(order, current);
             if (trade != null) {
-                System.out.println("Trade not null");
                 trade.setTrade_price(current.getPrice());
                 tradeRepository.save(trade);
-            } else {
-                System.out.println("Trade is null");
             }
             orderRemaining = order.getOrder_size() - order.getNumber_matched();   
             marker++;
@@ -198,25 +178,13 @@ public class OrderServiceDB implements OrderService {
         int marker = 0;
         
         Order current;
-        if (compared.size() > 0) {
-            System.out.println("Current has something here");
-            current = compared.get(marker);
-            System.out.println("Order price: " + order.getPrice() + " Current price: " + current.getPrice());
-            System.out.println("Orderremaining: " + orderRemaining);
-        } else {
-            System.out.println("Exit here");
-            return;
-        }
         
         while (orderRemaining > 0) {  
             current = compared.get(marker);
             Trade trade = matchOrders(current, order);
             if (trade != null) {
-                System.out.println("Trade not null");
                 trade.setTrade_price(current.getPrice());
                 tradeRepository.save(trade);
-            } else {
-                System.out.println("Trade is null");
             }
             orderRemaining = order.getOrder_size() - order.getNumber_matched();
             marker++;
@@ -231,7 +199,6 @@ public class OrderServiceDB implements OrderService {
         int sellRemaining = sell.getOrder_size() - sell.getNumber_matched();
         
         if ((sell.getPrice().compareTo(buy.getPrice()) < 0) || (sell.getPrice().compareTo(buy.getPrice()) == 0)) {
-            System.out.println("Order matched");
             buyRemaining = buy.getOrder_size() - buy.getNumber_matched();
             Trade trade = new Trade();
             trade.setBuyorder(buy);
@@ -263,12 +230,6 @@ public class OrderServiceDB implements OrderService {
             Order newSell = copyOrder(sell);
             Order newBuy = copyOrder(buy);
             trade.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
-
-            System.out.println("Trade sell order id: " + trade.getSellorder().getId() + " version: " + trade.getSellorder().getId().getVersion() + ""
-            + "Trade buy order id: " + trade.getBuyorder().getId() + " version: " + trade.getBuyorder().getId().getVersion());
-
-            System.out.println("Sell order id: " + sell.getId() + " version: " + sell.getId().getVersion() + ""
-            + "Buy order id: " + buy.getId() + " version: " + buy.getId().getVersion());
 
             if (buy.getStatus() == StatusEnum.PENDING)
                 buy.setStatus(StatusEnum.ACTIVE);

@@ -1,29 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mthree.orderbook.service;
 
 import com.mthree.orderbook.entity.Order;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author utkua
- */
 public interface OrderService {
     
-    public List<Order> getOrders();
-    public List<Order> getBuyOrders();
-    public List<Order> getSellOrders();
-    public List<Order> getActiveBuyOrders();
-    public List<Order> getActiveSellOrders();
-    //public Order getOrderByID(int id);
-    public List<Order> getOrderHistory(int id);
-    public Order addOrder(Map<String, String> orderData);
-    public Order updateOrder(Map<String, String> orderData);
-    public Order cancelOrderByID(int id, int version);
+    List<Order> getOrders();
+    List<Order> getBuyOrders();
+    List<Order> getSellOrders();
+    List<Order> getActiveBuyOrders();
+    List<Order> getActiveSellOrders();
+    List<Order> getOrderHistory(int id);
+    Order addOrder(Map<String, String> orderData);
+    Order updateOrder(Map<String, String> orderData);
+    Order cancelOrderByID(int id, int version);
     
 }

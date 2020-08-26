@@ -7,6 +7,7 @@ import java.util.List;
 public interface StockService {
     
     BigDecimal getChangeForStock(int stock_id);
+    List<String> getAllStocksWithChange();
     List<Stock> getAllStocks();
     
 }

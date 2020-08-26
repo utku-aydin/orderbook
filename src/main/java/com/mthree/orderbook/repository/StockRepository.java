@@ -12,4 +12,8 @@ public interface StockRepository extends JpaRepository<Stock, Integer> {
             + "obo.stock_id = obs.id WHERE obs.id = ?1 ORDER BY obt.trade_time DESC LIMIT 2", nativeQuery = true)
     List<BigDecimal> findMostRecentTrades(int stock_id);
     
+    @Query(value = "SELECT trade_price FROM `ob_trade` obt JOIN `ob_order` obo ON obt.buy_id = obo.id JOIN ob_stock obs ON "
+            + "obo.stock_id = obs.id WHERE obs.id = ?1 ORDER BY obt.trade_time DESC LIMIT 1", nativeQuery = true)
+    List<BigDecimal> findMostRecentTrade(int stock_id);
+    
 }

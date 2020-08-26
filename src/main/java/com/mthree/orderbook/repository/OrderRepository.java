@@ -23,7 +23,8 @@ public interface OrderRepository extends JpaRepository<Order, OrderId> {
             "            WHERE o.id = o2.id\n" +
             "            )\n" +
             "        && o.status = 'ACTIVE'\n" +
-            "        && o.side = 'BUY'", nativeQuery = true)
+            "        && o.side = 'BUY'\n" +
+            "ORDER BY cast(price as DECIMAL(10,2)) ASC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveBuyOrders();
     
     @Query(value = "SELECT * FROM ob_order o\n" +
@@ -33,7 +34,8 @@ public interface OrderRepository extends JpaRepository<Order, OrderId> {
             "            WHERE o.id = o2.id\n" +
             "            )\n" +
             "        && o.status = 'ACTIVE'\n" +
-            "        && o.side = 'SELL'", nativeQuery = true)
+            "        && o.side = 'SELL'" +
+            "ORDER BY cast(price as DECIMAL(10,2)) ASC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveSellOrders();
 
     /**

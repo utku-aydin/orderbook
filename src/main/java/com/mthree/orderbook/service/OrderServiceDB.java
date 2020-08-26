@@ -123,15 +123,16 @@ public class OrderServiceDB implements OrderService {
         order.setStock(stock);
         order.setUser(user);
         
-        order = orderRepository.saveAndFlush(order);
+        Order newOrder = copyOrder(order);
+        newOrder = orderRepository.saveAndFlush(newOrder);
         
-        if (order.getSide() == SideEnum.BUY) {
-            matchBuyOrder(order);
+        if (newOrder.getSide() == SideEnum.BUY) {
+            matchBuyOrder(newOrder);
         } else {
-            matchSellOrder(order);
+            matchSellOrder(newOrder);
         }
         
-        return order;
+        return newOrder;
     }
 
     @Override

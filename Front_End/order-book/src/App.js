@@ -35,6 +35,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log("App is now mounted. ");
     this.loadOrderData();
+    this.loadFormData();
   }
 
   handleGraphDataChange = (event) => {
@@ -170,13 +171,13 @@ class App extends React.Component {
       .catch((error) => {
         console.log("error:", error);
       });
-    //   console.log("Loading user data");
-    // fetch(SERVICE_URL + "/users")
-    //   .then((data) => data.json())
-    //   .then((data) => this.setState({ stocks: data }))
-    //   .catch((error) => {
-    //     console.log("error:", error);
-    //   });
+      console.log("Loading user data");
+    fetch(SERVICE_URL + "/users")
+      .then((data) => data.json())
+      .then((data) => this.setState({ users: data }))
+      .catch((error) => {
+        console.log("error:", error);
+      });
   }
 
   // handleCancelOrder = (event) => {
@@ -221,6 +222,7 @@ class App extends React.Component {
               handleOrderFormSubmit={this.handleOrderFormSubmit}
               orderData={this.state.newOrderData}
               stocks={this.state.stocks}
+              users={this.state.users}
             />
           </Col>
           <Col>

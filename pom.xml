@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.mthree</groupId>
 	<artifactId>orderbook</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.5</version>
 	<name>orderbook</name>
 	<description>Orderbook Web Application Backend</description>

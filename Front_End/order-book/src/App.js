@@ -204,7 +204,6 @@ class App extends React.Component {
             />
           </Col>
           <Col>
-            <SessionHistory />
           </Col>
         </Row>
       </Container>

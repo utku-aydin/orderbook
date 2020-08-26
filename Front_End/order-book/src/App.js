@@ -85,14 +85,14 @@ class App extends React.Component {
   handleCancelOrder = (event) => {
     if (event) event.preventDefault();
 
-    console.log(event.target.dataset );
-   let version = event.target.dataset.version;
-   let id = event.target.dataset.id;
-   // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
-  //  let id = event.target.value.id;
-  //  let version = event.target.value.version;
+    console.log(event.target.dataset);
+    let version = event.target.dataset.version;
+    let id = event.target.dataset.id;
+    // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
+    //  let id = event.target.value.id;
+    //  let version = event.target.value.version;
     console.log("Version is " + version);
-    
+
 
     console.log(`Submitting cancel for order id ${id} `)
 
@@ -102,41 +102,43 @@ class App extends React.Component {
         "content-Type": "application/json",
       },
       body: JSON.stringify(event.target.dataset),
-    }).then(data => {this.loadOrderData();
-  })
-  .catch((error) => {
-    console.error('Error:', error);
-  });
-}
+    }).then(data => {
+      this.loadOrderData();
+    })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
 
-handleUpdateOrder = (event) =>{
-  console.log(event.target.dataset);
-  if (event) event.preventDefault();
+  handleUpdateOrder = (event) => {
+    console.log(event.target.dataset);
+    if (event) event.preventDefault();
 
-  console.log(event.target.dataset );
- let version = event.target.dataset.version;
- let id = event.target.dataset.id;
- // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
-//  let id = event.target.value.id;
-//  let version = event.target.value.version;
-  console.log("Version is " + version);
-  
+    console.log(event.target.dataset);
+    let version = event.target.dataset.version;
+    let id = event.target.dataset.id;
+    // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
+    //  let id = event.target.value.id;
+    //  let version = event.target.value.version;
+    console.log("Version is " + version);
 
-  console.log(`Submitting update for order id ${id} `)
 
-  fetch(SERVICE_URL + "/order/", {
-    method: "PUT",
-    headers: {
-      "content-Type": "application/json",
-    },
-    body: JSON.stringify(event.target.dataset),
-  }).then(data => {this.loadOrderData();
-})
-.catch((error) => {
-  console.error('Error:', error);
-});
+    console.log(`Submitting update for order id ${id} `)
 
-}
+    fetch(SERVICE_URL + "/order/", {
+      method: "PUT",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(event.target.dataset),
+    }).then(data => {
+      this.loadOrderData();
+    })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+  }
 
   handleChangeNumber = (event) => {
     let inputName = event.target.name;
@@ -148,7 +150,7 @@ handleUpdateOrder = (event) =>{
       orderData[inputName] = inputValue;
       this.setState({ newOrderData: orderData });
     }
-  };
+  }
 
   handleOrderFormSubmit = (event) => {
     let newOrder = {
@@ -190,7 +192,7 @@ handleUpdateOrder = (event) =>{
         console.log("Add Order - Error:");
         console.log(error);
       });
-  };
+  }
 
   loadOrderData() {
     console.log("Loading order Data data");
@@ -202,14 +204,14 @@ handleUpdateOrder = (event) =>{
       });
     fetch(SERVICE_URL + "/sellOrders")
       .then((data) => data.json())
-      .then((data) => this.setState({ sellOrders: data}))
+      .then((data) => this.setState({ sellOrders: data }))
       .catch((error) => {
         console.log("error:", error);
       });
-    
+
   }
 
-  loadFormData(){
+  loadFormData() {
     console.log("Loading Stock data");
     fetch(SERVICE_URL + "/stocks")
       .then((data) => data.json())
@@ -217,7 +219,7 @@ handleUpdateOrder = (event) =>{
       .catch((error) => {
         console.log("error:", error);
       });
-      console.log("Loading user data");
+    console.log("Loading user data");
     fetch(SERVICE_URL + "/users")
       .then((data) => data.json())
       .then((data) => this.setState({ users: data }))

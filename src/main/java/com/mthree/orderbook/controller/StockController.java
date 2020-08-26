@@ -34,6 +34,17 @@ public class StockController {
         return ResponseEntity.ok(change);
     }
     
+    @GetMapping("/tickers")
+    public ResponseEntity<List<String>> getAllStockTickers() {
+        List<String> changes = stockService.getAllStocksWithChange();
+        if (changes == null) {
+            // Not enough trades for stock
+            return new ResponseEntity(null, HttpStatus.NOT_FOUND);
+        }
+        
+        return ResponseEntity.ok(changes);
+    }
+    
     @GetMapping("/stocks")
     public ResponseEntity<List<Stock>> getStocks() {
         List<Stock> stocks = stockService.getAllStocks();

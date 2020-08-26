@@ -78,6 +78,17 @@ class App extends React.Component {
     }
   };
 
+  // handleCancelOrder = (event) => {
+  //   if (event) event.preventDefault();
+  //   let orderId = event.target.value;
+
+  //   console.log(`Submitting cancel for order id ${orderId} `)
+
+  //   fetch(SERVICE_URL + '/order'),{
+  //     method : 'DELETE',
+  //   }
+  // }
+
   handleChangeNumber = (event) => {
     let inputName = event.target.name;
     let inputValue = event.target.value;

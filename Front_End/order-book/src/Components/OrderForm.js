@@ -75,13 +75,13 @@ class OrderForm extends React.Component {
                 <Form.Group controlId = "orderQuantity">
                     <Form.Label>Quantity: </Form.Label>
                     <Form.Group>
-                        <input type="number" id="stepperQuantity" name="quantity" step="1" value={orderData.quantity} onChange={handleChangeNumber}></input>
+                        <input type="number" id="stepperQuantity" name="quantity" step="1" min="0" value={orderData.quantity} onChange={handleChangeNumber}></input>
                     </Form.Group>
                 </Form.Group>
                 <Form.Group controlId = "orderPrice">
                     <Form.Label>Price: </Form.Label>
                     <Form.Group>
-                        <input type="number" id="stepperPrice" name="price" step="0.01" value={orderData.price} onChange={handleChangeNumber}></input>
+                        <input type="number" id="stepperPrice" name="price" step="0.01" min="0" value={orderData.price} onChange={handleChangeNumber}></input>
                     </Form.Group>
                     
                 </Form.Group>

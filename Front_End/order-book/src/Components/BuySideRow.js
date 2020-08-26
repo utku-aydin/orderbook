@@ -78,6 +78,10 @@ class BuySideRow extends React.Component {
       console.log(orderData[inputName]);
       console.log(inputValue);
       orderData[inputName] += inputValue;
+      if(orderData[inputName] < 0){
+        orderData[inputName] = 0;
+      }
+
 
       this.setState({ editOrder: orderData });
     }

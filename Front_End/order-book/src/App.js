@@ -16,6 +16,8 @@ class App extends React.Component {
   state = {
     buyOrders: [],
     sellOrders: [],
+    stocks: [],
+    users: [],
     newOrderData: {
       side: [],
       symbol: [],
@@ -33,6 +35,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log("App is now mounted. ");
     this.loadOrderData();
+    this.loadFormData();
   }
 
   handleGraphDataChange = (event) => {
@@ -160,6 +163,23 @@ class App extends React.Component {
     this.handleGraphDataSubmit();
   }
 
+  loadFormData(){
+    console.log("Loading Stock data");
+    fetch(SERVICE_URL + "/stocks")
+      .then((data) => data.json())
+      .then((data) => this.setState({ stocks: data }))
+      .catch((error) => {
+        console.log("error:", error);
+      });
+      console.log("Loading user data");
+    fetch(SERVICE_URL + "/users")
+      .then((data) => data.json())
+      .then((data) => this.setState({ users: data }))
+      .catch((error) => {
+        console.log("error:", error);
+      });
+  }
+
   // handleCancelOrder = (event) => {
   //   if (event) event.preventDefault();
   //   let orderId = event.target.value;
@@ -201,6 +221,8 @@ class App extends React.Component {
               handleChange={this.handleAddFormChange}
               handleOrderFormSubmit={this.handleOrderFormSubmit}
               orderData={this.state.newOrderData}
+              stocks={this.state.stocks}
+              users={this.state.users}
             />
           </Col>
           <Col>

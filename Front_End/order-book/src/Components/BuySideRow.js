@@ -31,8 +31,8 @@ class BuySideRow extends React.Component {
 
     componentDidUpdate(prevProps){
         if(this.props.order.id !== prevProps.order.id){
-            let quantity = this.props.order.order_size - this.props.order.number_matched;
-            let price = this.props.order.price;
+         //   let quantity = this.props.order.order_size - this.props.order.number_matched;
+         //   let price = this.props.order.price;
             let newOrderData = {
                 quantity : this.props.order.order_size - this.props.order.number_matched,
                 price : this.props.order.price
@@ -72,20 +72,24 @@ class BuySideRow extends React.Component {
 
 
     render(){
-        let {price,order_size,number_matched,side,stock} = this.props.order;
+        let {price,order_size,number_matched,side,stock,id} = this.props.order;
         let quantity = order_size - number_matched;
         let total = price * quantity;
         let sum = this.state.editOrder.price * this.state.editOrder.quantity
+        console.log("value of id in buyside row is :" + id.id + " " + id.version);
+        
+        
         
         let editTotal = (Math.round(sum * 100) / 100).toFixed(2);
         
     
         return (<tr>
             <td>
-                <Button size="sm" onClick={this.props.cancelOrder}>Cancel</Button>
+                <Button size="sm" data-id={id.id} data-version={id.version}   onClick={this.props.cancelOrder}>Cancel</Button>
                 {this.state.editOrder.quantity != quantity || this.state.editOrder.price !=price ? <React.Fragment> <Button size="sm" onClick={this.props.updateOrder}>Update</Button>
                 <Button size="sm" onClick={this.resetEdit}>Reset</Button></React.Fragment> : null}
                 </td>
+                <td>{id.id}</td>
             <td>{stock.stock_symbol}</td>
             <td>{total}
          {editTotal > total ? <GreenText> {editTotal}</GreenText> : null}

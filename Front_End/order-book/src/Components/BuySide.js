@@ -8,6 +8,7 @@ const BuySideHeader = () => {
     return (
         <tr>
             <th>Options</th>
+            <th>id</th>
             <th>Symbol</th>
             <th>total</th>
             <th>quantity</th>
@@ -91,7 +92,7 @@ class BuySide extends React.Component {
                 </thead>
                 <tbody>
                     {orderSlice.map((order, i) => {
-                        return <BuySideRow order={order} key={i} />
+                        return <BuySideRow order={order} key={i} cancelOrder={this.props.cancelOrder} />
                     })}
 
                 </tbody>

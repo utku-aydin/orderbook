@@ -36,6 +36,7 @@ class App extends React.Component {
     console.log("App is now mounted. ");
     this.loadOrderData();
     this.loadFormData();
+    this.handleGraphDataSubmit();
   }
 
   handleGraphDataChange = (event) => {
@@ -81,16 +82,32 @@ class App extends React.Component {
     }
   };
 
-  // handleCancelOrder = (event) => {
-  //   if (event) event.preventDefault();
-  //   let orderId = event.target.value;
+  handleCancelOrder = (event) => {
+    if (event) event.preventDefault();
 
-  //   console.log(`Submitting cancel for order id ${orderId} `)
+    console.log(event.target.dataset );
+   let version = event.target.dataset.version;
+   let id = event.target.dataset.id;
+   // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
+  //  let id = event.target.value.id;
+  //  let version = event.target.value.version;
+    console.log("Version is " + version);
+    
 
-  //   fetch(SERVICE_URL + '/order'),{
-  //     method : 'DELETE',
-  //   }
-  // }
+    console.log(`Submitting cancel for order id ${id} `)
+
+    fetch(SERVICE_URL + "/order/", {
+      method: "DELETE",
+      headers: {
+        "content-Type": "application/json",
+      },
+      body: JSON.stringify(event.target.dataset),
+    }).then(data => {this.loadOrderData();
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+}
 
   handleChangeNumber = (event) => {
     let inputName = event.target.name;
@@ -160,7 +177,7 @@ class App extends React.Component {
       .catch((error) => {
         console.log("error:", error);
       });
-    this.handleGraphDataSubmit();
+    
   }
 
   loadFormData(){
@@ -180,14 +197,7 @@ class App extends React.Component {
       });
   }
 
-  // handleCancelOrder = (event) => {
-  //   if (event) event.preventDefault();
-  //   let orderId = event.target.value;
 
-  //   console.log(`sumbitting delete for order id ${orderId}`)
-
-  //   fetch(SERVICE_URL+)
-  // }
 
   render() {
     return (
@@ -204,6 +214,7 @@ class App extends React.Component {
           <OrderBook
             sellOrders={this.state.sellOrders}
             buyOrders={this.state.buyOrders}
+            cancelOrder={this.handleCancelOrder}
           />
         </Row>
         <Row>

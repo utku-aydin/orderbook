@@ -33,7 +33,7 @@ public interface OrderRepository extends JpaRepository<Order, OrderId> {
             "            WHERE o.id = o2.id\n" +
             "            )\n" +
             "\t\t&& o.status = 'ACTIVE'\n" +
-            "        && o.side = 'SELL';", nativeQuery = true)
+            "        && o.side = 'SELL'", nativeQuery = true)
     List<Order> findActiveSellOrders();
 
     /**

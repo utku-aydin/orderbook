@@ -38,7 +38,7 @@ class StockChart extends React.Component {
     };
   }
   componentWillReceiveProps(nextProps) {
-    /*if (nextProps.trades !== this.props.trades) {
+    if (nextProps.trades !== this.props.trades) {
       this.setState({
         config: {
           type: "line",
@@ -62,7 +62,7 @@ class StockChart extends React.Component {
     });
     console.log("Component will recieve called with: ", this.props.trades);
     this.state.config.series.values = this.props.trades;
-    this.setState(this.state);*/
+    this.setState(this.state);
     fetch(SERVICE_URL + "/interval/10/5")
       .then((data) => data.json())
       //.then((data) => console.log(data.json()))
@@ -83,7 +83,7 @@ class StockChart extends React.Component {
         console.log("error:", error);
       });
   }
-  /*componentDidMount() {
+  componentDidMount() {
     this.setState({
       config: {
         type: "line",
@@ -114,32 +114,19 @@ class StockChart extends React.Component {
       .catch((error) => {
         console.log("error:", error);
       });
-  }*/
+  }
   render() {
     let { trades } = this.props;
     console.log("Rending Graph:");
     console.log(this.props.trades);
     //console.log(valueArr);
     console.log(this.state.trades);
-
     var valueArr2 = Array.from(this.props.trades);
     console.log("Value Arr2:");
     console.log(valueArr2);
-    this.state.series.values = valueArr2;
-    console.log("Series Arr in component:");
-    console.log(this.state.series.values);
-    
-    //this.setState({values : valueArr2});
-    // this.chart.current.addplot({
-    //   data: {
-    //     values: valueArr2,
-    //     text: "My new plot"
-    //   }
-    // });
     return (
       <div>
-        <div>{JSON.stringify(this.state.series.values)}</div>
-        <ZingChart ref={this.chart} data={this.state.config} series={this.state.series} />
+        <ZingChart data={this.state.config} />
       </div>
     );
   }

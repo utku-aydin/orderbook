@@ -22,7 +22,7 @@ import org.springframework.web.context.request.WebRequest;
  */
 @ControllerAdvice
 @RestController
-public class OrderControllerExceptionHandler {
+public class GeneralControllerExceptionHandler {
     
     private static final String SQL_EXCEPTION = "Could not process your request. "
             + "Please ensure it is valid and try again.";

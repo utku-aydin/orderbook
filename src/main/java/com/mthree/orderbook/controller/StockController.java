@@ -34,7 +34,7 @@ public class StockController {
     }
     
     @GetMapping("/ticker/{id}")
-    public ResponseEntity<BigDecimal> getBuyOrders(@PathVariable Integer id) {
+    public ResponseEntity<BigDecimal> getStockTickers(@PathVariable Integer id) {
         BigDecimal change = stockService.getChangeForStock(id);
         if (change == null) {
             // Not enough trades for stock
@@ -45,7 +45,7 @@ public class StockController {
     }
     
     @GetMapping("/stocks")
-    public ResponseEntity<List<Stock>> getBuyOrders() {
+    public ResponseEntity<List<Stock>> getStocks() {
         List<Stock> stocks = stockService.getAllStocks();
         if (stocks.isEmpty()) {
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);

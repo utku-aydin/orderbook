@@ -7,6 +7,7 @@ const BuySideHeader = () => {
   return (
     <tr>
       <th>id</th>
+      <th>version</th>
       <th>Symbol</th>
       <th>total</th>
       <th>quantity</th>

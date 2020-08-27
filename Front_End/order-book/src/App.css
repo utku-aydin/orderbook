@@ -37,5 +37,12 @@
   }
 }
 
-.ticker { width: 100%; }
-.tickerFeed {width: 100%}
+.ticker {
+  width: 100%;
+}
+.tickerFeed {
+  width: 100%;
+}
+.popover {
+  max-width: 400px;
+}

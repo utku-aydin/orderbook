@@ -100,30 +100,15 @@ class OverlayBuySideRow extends React.Component {
     return (
       <tr>
         <td>{id.id}</td>
+        <td>{id.version}</td>
         <td>{stock.stock_symbol}</td>
         <td>
           {total}
           {editTotal > total ? <GreenText> {editTotal}</GreenText> : null}
           {editTotal < total ? <RedText> {editTotal}</RedText> : null}
         </td>
-        <td>
-          <OrderAdjuster
-            value={quantity}
-            editValue={this.state.editOrder.quantity}
-            handleChangeNumber={this.handleChangeNumber}
-            name={"quantity"}
-            tickSize={1}
-          />
-        </td>
-        <td>
-          <OrderAdjuster
-            value={price}
-            editValue={this.state.editOrder.price}
-            handleChangeNumber={this.handleChangeNumber}
-            name={"price"}
-            tickSize={0.01}
-          />
-        </td>
+        <td>{quantity}</td>
+        <td>{price}</td>
       </tr>
     );
   }

@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, OrderId> {
             "            )\n" +
             "        && o.status = 'ACTIVE'\n" +
             "        && o.side = 'BUY'\n" +
-            "ORDER BY cast(price as DECIMAL(10,2)) ASC, placed_at ASC", nativeQuery = true)
+            "ORDER BY cast(price as DECIMAL(10,2)) DESC, placed_at ASC", nativeQuery = true)
     List<Order> findActiveBuyOrders();
     
     @Query(value = "SELECT * FROM ob_order o\n" +

@@ -65,12 +65,6 @@ CREATE TABLE ob_order_audit (
     id              INT             primary key     AUTO_INCREMENT,
     order_log       TEXT            NOT NULL
 );
-INSERT INTO ob_stock (id, tick_size, stock_symbol) VALUES
-    (1, 0.1, 'XYZ');
-INSERT INTO ob_company (id, company_symbol) VALUES
-    (1, 'UTKUKORP');
-INSERT INTO ob_user (id, user_symbol, company_id) VALUES
-    (1, 'UTKU', 1);
 DROP DATABASE IF EXISTS orderbookdbtest;
 CREATE DATABASE orderbookdbtest;
 USE orderbookdbtest;

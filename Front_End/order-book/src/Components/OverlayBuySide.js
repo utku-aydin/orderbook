@@ -15,21 +15,6 @@ const BuySideHeader = () => {
   );
 };
 
-// const BuySideRow = ({ order }) => {
-//     let {price,order_size,number_matched,side,stock} = order;
-//     let quantity = order_size - number_matched;
-
-//     return (<tr>
-//         <td><Button>Cancel</Button></td>
-//         <td>{stock.stock_symbol}</td>
-//         <td>{price * quantity}</td>
-//         <td><OrderAdjuster value={quantity}/></td>
-//         <td>{price}</td>
-
-//     </tr>
-//     );
-// }
-
 class OverlayBuySide extends React.Component {
   state = {
     displayAll: false,
@@ -61,14 +46,11 @@ class OverlayBuySide extends React.Component {
   };
 
   changeDisplay() {
-    // console.log(this.state.displayAll)
     this.setState({ displayAll: !this.state.displayAll });
   }
 
   render() {
     // Here is a debug method to moniter incoming contact data
-    console.log("Rending Order Book:");
-    console.log(this.props.orders);
     let orderSlice;
     if (!this.state.displayAll) {
       orderSlice = this.props.orders.slice(0, 5);

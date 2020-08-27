@@ -88,15 +88,12 @@ class SellSide extends React.Component {
     }
 
     changeDisplay(){
-        // console.log(this.state.displayAll)
          this.setState({displayAll:!this.state.displayAll})
      }
 
 
     render() {
         // Here is a debug method to moniter incoming contact data
-        console.log("Rending Order Book:")
-        console.log(this.props.orders)
         let orderSlice
         if(!this.state.displayAll){
          orderSlice = this.props.orders.slice(0,5);

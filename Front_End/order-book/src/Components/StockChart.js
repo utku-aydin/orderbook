@@ -13,17 +13,6 @@ class StockChart extends React.Component {
   constructor(props) {
     super(props);
     let { trades } = this.props;
-    //let valueArr = this.state.trades;
-    //var valueArr = [1, 2, 3, 4, 5];
-    //for (var i = 0; i < valueArr.length; i++)
-    //valueArr[i] = parseInt(this.props.trades[1]);
-    //valueArr[3] = 10;
-    //console.log("Value Arr in constructor:");
-    //console.log(valueArr);
-    //console.log("Prop Trades in constructor:");
-    //console.log(this.props.trades);
-    //console.log("Props in constructor:");
-    //console.log(this.props);
     this.state = {
       orders: [],
       config: {
@@ -60,13 +49,10 @@ class StockChart extends React.Component {
         ],
       },
     });
-    console.log("Component will recieve called with: ", this.props.trades);
     this.state.config.series.values = this.props.trades;
     this.setState(this.state);
-    /*fetch(SERVICE_URL + "/interval/10/5")*/
     fetch(SERVICE_URL + `/count/${this.props.graphData.count}`)
       .then((data) => data.json())
-      //.then((data) => console.log(data.json()))
       .then((data) => {
         this.setState({
           trades: data,
@@ -98,7 +84,6 @@ class StockChart extends React.Component {
 
     fetch(SERVICE_URL + `/count/${this.props.graphData.count}`)
       .then((data) => data.json())
-      //.then((data) => console.log(data.json()))
       .then((data) => {
         this.setState({
           trades: data,
@@ -118,13 +103,10 @@ class StockChart extends React.Component {
   }
   render() {
     let { trades } = this.props;
-    console.log("Rending Graph:");
-    console.log(this.props.trades);
-    //console.log(valueArr);
-    console.log(this.state.trades);
+
+ 
     var valueArr2 = Array.from(this.props.trades);
-    console.log("Value Arr2:");
-    console.log(valueArr2);
+
     return (
       <div>
         <ZingChart data={this.state.config} />

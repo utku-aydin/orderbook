@@ -4,7 +4,6 @@ import OrderBook from "./Components/OrderBook";
 import OrderForm from "./Components/OrderForm";
 import Graph from "./Components/Graph";
 import TickerFeed from "./Components/TickerFeed";
-import SessionHistory from "./Components/SessionHistory";
 
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,7 +32,6 @@ class App extends React.Component {
   };
 
   componentDidMount() {
-    console.log("App is now mounted. ");
     this.loadOrderData();
     this.loadFormData();
     this.handleGraphDataSubmit();
@@ -51,11 +49,10 @@ class App extends React.Component {
   };
 
   handleGraphDataSubmit = (event) => {
-    console.log("Loading trade data");
+
 
     fetch(SERVICE_URL + "/interval/10/5")
       .then((data) => data.json())
-      //.then((data) => console.log(data.json()))
       .then((data) => this.setState({ trades: data }))
       .catch((error) => {
         console.log("error:", error);
@@ -63,38 +60,21 @@ class App extends React.Component {
   };
 
   handleAddFormChange = (name, event) => {
-    console.log(event);
     let inputName = name;
     let inputValue = event.value;
     let label = event.label;
     let orderData = this.state.newOrderData;
-    console.log(orderData);
-
-    console.log(`Updating new Order data: ${inputName} : ${inputValue}`);
-    console.log(`name: ${inputName}`);
 
     if (orderData.hasOwnProperty(inputName)) {
-      console.log("this condition is met");
       orderData[inputName] = { label, inputValue };
-      console.log(orderData[inputName]);
       this.setState({ newOrderData: orderData });
-      console.log(this.state.newOrderData);
     }
   };
 
   handleCancelOrder = (event) => {
     if (event) event.preventDefault();
-
-    console.log(event.target.dataset);
     let version = event.target.dataset.version;
     let id = event.target.dataset.id;
-    // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
-    //  let id = event.target.value.id;
-    //  let version = event.target.value.version;
-    console.log("Version is " + version);
-
-
-    console.log(`Submitting cancel for order id ${id} `)
 
     fetch(SERVICE_URL + "/order/", {
       method: "DELETE",
@@ -111,19 +91,9 @@ class App extends React.Component {
   }
 
   handleUpdateOrder = (event) => {
-    console.log(event.target.dataset);
     if (event) event.preventDefault();
-
-    console.log(event.target.dataset);
     let version = event.target.dataset.version;
     let id = event.target.dataset.id;
-    // console.log("event value is " + event.target.value.id + " " + event.target.value.version);
-    //  let id = event.target.value.id;
-    //  let version = event.target.value.version;
-    console.log("Version is " + version);
-
-
-    console.log(`Submitting update for order id ${id} `)
 
     fetch(SERVICE_URL + "/order/", {
       method: "PUT",
@@ -163,8 +133,6 @@ class App extends React.Component {
       stock_id: this.state.newOrderData.symbol.inputValue,
     };
 
-    console.log(newOrder);
-    console.log("Adding order");
     if (event) event.preventDefault();
 
     fetch(SERVICE_URL + "/order/", {
@@ -176,7 +144,6 @@ class App extends React.Component {
     })
       .then((respose) => respose.json)
       .then((data) => {
-        console.log("add Order -Success", data);
         this.setState({
           newOrderData: {
             side: [],
@@ -195,7 +162,6 @@ class App extends React.Component {
   }
 
   loadOrderData() {
-    console.log("Loading order Data data");
     fetch(SERVICE_URL + "/buyOrders")
       .then((data) => data.json())
       .then((data) => this.setState({ buyOrders: data }))
@@ -212,14 +178,12 @@ class App extends React.Component {
   }
 
   loadFormData() {
-    console.log("Loading Stock data");
     fetch(SERVICE_URL + "/stocks")
       .then((data) => data.json())
       .then((data) => this.setState({ stocks: data }))
       .catch((error) => {
         console.log("error:", error);
       });
-    console.log("Loading user data");
     fetch(SERVICE_URL + "/users")
       .then((data) => data.json())
       .then((data) => this.setState({ users: data }))

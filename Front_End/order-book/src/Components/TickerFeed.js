@@ -24,65 +24,6 @@ const rates = [
   "Microsoft: 118.71",
 ];
 
-/*function MakeFakeAPICall() {
-  const number = getRandomIndex(0, 4);
-  return new Promise((resolve) => {
-    window.setTimeout(() => {
-      resolve(rates[number]);
-    }, 500);
-  });
-}*/
-/// /////////////////////////////////////
-/// /////////////////////////////////////
-/// /////////////////////////////////////
-
-/*const GetRatesFromAPI = () => {
-  // I am using the new React Hooks API here for brevity
-  const [rate, setRate] = useState("");
-  const rate = this.state.
-  /*useEffect(() => {
-    async function fetchData() {
-      const rateFromAPI = await MakeFakeAPICall();
-      setRate(rateFromAPI);
-    }
-    fetchData();
-  }, []);*/
-/*useEffect(() =>
-    fetch(SERVICE_URL + "/tickers")
-      .then((data) => data.json())
-      .then((data) => console.log(data.json()))
-      //.then((data) => this.setState({ rates: data }))
-      .catch((error) => {
-        console.log("error:", error);
-      })
-  );*/
-// A placeholder is needed, to tell react-ticker, that width and height might have changed
-// It uses MutationObserver internally
-/*return rate ? (
-    <p className="rate">{rate} +++ </p>
-  ) : (
-    <p className="rate rate--placeholder">Placeholder</p>
-  );
-};*/
-
-/*const TickerFeed = () => {
-  useEffect(() =>
-    fetch(SERVICE_URL + "/tickers")
-      .then((data) => data.json())
-      .then((data) => console.log(data.json()))
-      //.then((data) => this.setState({ rates: data }))
-      .catch((error) => {
-        console.log("error:", error);
-      })
-  );
-  return (
-    <Ticker offset="run-in" speed={10}>
-      {() => <GetRatesFromAPI />}
-    </Ticker>
-  );
-};*/
-
-//export default TickerFeed;
 
 class TickerFeed extends React.Component {
   constructor(props) {
@@ -104,24 +45,7 @@ class TickerFeed extends React.Component {
     // I am using the new React Hooks API here for brevity
     //const [rate, setRate] = useState("");
     const rate = this.state.rates;
-    /*useEffect(() => {
-      async function fetchData() {
-        const rateFromAPI = await MakeFakeAPICall();
-        setRate(rateFromAPI);
-      }
-      fetchData();
-    }, []);*/
-    /*useEffect(() =>
-      fetch(SERVICE_URL + "/tickers")
-        .then((data) => data.json())
-        .then((data) => console.log(data.json()))
-        //.then((data) => this.setState({ rates: data }))
-        .catch((error) => {
-          console.log("error:", error);
-        })
-    );*/
-    // A placeholder is needed, to tell react-ticker, that width and height might have changed
-    // It uses MutationObserver internally
+
     return rate ? (
       <p className="rate">{rate} +++ </p>
     ) : (
@@ -131,7 +55,6 @@ class TickerFeed extends React.Component {
   componentWillReceiveProps(nextProps) {
     fetch(SERVICE_URL + "/tickers")
       .then((data) => data.json())
-      //.then((data) => console.log(data.json()))
       .then((data) => this.setState({ rates: data }))
       .catch((error) => {
         console.log("error:", error);
@@ -140,7 +63,6 @@ class TickerFeed extends React.Component {
   componentDidMount() {
     fetch(SERVICE_URL + "/tickers")
       .then((data) => data.json())
-      //.then((data) => console.log(data.json()))
       .then((data) => this.setState({ rates: data }))
       .catch((error) => {
         console.log("error:", error);

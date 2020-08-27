@@ -30,29 +30,7 @@ const GreenText = styled.p`
 `
 class OrderAdjuster extends React.Component {
 
-    //     state = {
-    //         value: ""
-    //     };
-
-    //     constructor(props) {
-    //         super(props);
-    //         this.state.value = this.props.value;
-    //         this.addOne = this.addOne.bind(this);
-    //         this.minusOne = this.minusOne.bind(this);
-    //     }
-
-    //  addOne() {
-    //     this.setState({ value: this.state.value + 1 });
-
-    // }
-
-    // minusOne(){
-    //     this.setState({ value: this.state.value - 1 });
-    // }
-
-
     render() {
-        console.log("VAlue in order adjuster is " + this.props.value)
         let roundedNumber = (Math.round(this.props.editValue * 100) / 100).toFixed(2);
         return (
             <React.Fragment>

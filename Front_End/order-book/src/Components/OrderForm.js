@@ -12,24 +12,12 @@ class OrderForm extends React.Component {
         { value: "BUY", label: "BUY"},
         { value: "SELL", label: "SELL"}
     ];
-    //  symbols = [
-    //      { value: "1", label: "AMZN"}
-    //          ]
-    // owners = [
-    //     { value: "1", label: "CP1"},
-    //     { value: "2", label: "CP2"}
-    // ];
 
      getSymbol(stock){
-       // let value = stock.id;
-      //  console.log( "value is" + value);
-      //  let label = stock.stock_symbol;
-      //  console.log("label is" + label);
         let symbol = {
             value : stock.id,
             label : stock.stock_symbol
         };
-        console.log("symbol is" + symbol.value + symbol.label);
         return symbol;
     }
 
@@ -45,11 +33,7 @@ class OrderForm extends React.Component {
 
     render(){
         let {orderData, handleChange,handleOrderFormSubmit,handleChangeNumber,stocks,users} = this.props;
-        console.log(orderData.side);
-        console.log( "stocks" +stocks);
-
         let symbols = stocks.map(this.getSymbol);
-        console.log( "symbols: " + symbols);
         let owners = users.map(this.getOwner);
 
 

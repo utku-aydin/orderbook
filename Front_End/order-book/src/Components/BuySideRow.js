@@ -75,8 +75,6 @@ class BuySideRow extends React.Component {
     let orderData = this.state.editOrder;
 
     if (orderData.hasOwnProperty(inputName)) {
-      console.log(orderData[inputName]);
-      console.log(inputValue);
       orderData[inputName] += inputValue;
       if (orderData[inputName] < 0) {
         orderData[inputName] = 0;
@@ -101,7 +99,6 @@ class BuySideRow extends React.Component {
   loadHistory = (props) => {
     fetch(SERVICE_URL + "/orderHistory/" + this.props.order.id.id)
       .then((data) => data.json())
-      //.then((data) => console.log(data))
       .then((data) => (rates = data))
       .catch((error) => {
         console.log("error:", error);
@@ -123,8 +120,6 @@ class BuySideRow extends React.Component {
     let quantity = order_size - number_matched;
     
     let sum = this.state.editOrder.price * this.state.editOrder.quantity;
-    console.log("value of id in buyside row is :" + id.id + " " + id.version);
-
     let totalNR = price * quantity;
     let total = (Math.round(totalNR * 100) / 100).toFixed(2);
     

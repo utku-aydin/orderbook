@@ -9,8 +9,6 @@ class Graph extends React.Component {
       handleGraphDataChange,
       handleGraphDataSubmit,
     } = this.props;
-    console.log("here");
-    console.log(this.props.graphData);
     return (
       <Form onSubmit={handleGraphDataSubmit}>
         <Form.Group>

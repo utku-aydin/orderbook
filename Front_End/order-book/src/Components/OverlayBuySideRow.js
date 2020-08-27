@@ -74,9 +74,7 @@ class OverlayBuySideRow extends React.Component {
 
     let orderData = this.state.editOrder;
 
-    if (orderData.hasOwnProperty(inputName)) {
-      console.log(orderData[inputName]);
-      console.log(inputValue);
+    if (orderData.hasOwnProperty(inputName)) {;
       orderData[inputName] += inputValue;
 
       this.setState({ editOrder: orderData });
@@ -98,10 +96,7 @@ class OverlayBuySideRow extends React.Component {
     let quantity = order_size - number_matched;
     let total = price * quantity;
     let sum = this.state.editOrder.price * this.state.editOrder.quantity;
-    console.log("value of id in buyside row is :" + id.id + " " + id.version);
-
     let editTotal = (Math.round(sum * 100) / 100).toFixed(2);
-
     return (
       <tr>
         <td>{id.id}</td>

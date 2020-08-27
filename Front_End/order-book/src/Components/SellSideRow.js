@@ -122,8 +122,6 @@ class SellSideRow extends React.Component {
     let totalNR = price * quantity;
     let total = (Math.round(totalNR * 100) / 100).toFixed(2);
     let sum = this.state.editOrder.price * this.state.editOrder.quantity;
-    console.log("value of id in buyside row is :" + id.id + " " + id.version);
-
     let editTotal = (Math.round(sum * 100) / 100).toFixed(2);
 
     const renderTooltip = (props) => (

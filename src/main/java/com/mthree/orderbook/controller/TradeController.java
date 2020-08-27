@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins={"http://localhost:8080", "http://localhost:3000", "null"})
+@CrossOrigin(origins="*")
 @RequestMapping("/api")
 public class TradeController {
     

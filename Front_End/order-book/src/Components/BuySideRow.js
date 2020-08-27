@@ -121,10 +121,13 @@ class BuySideRow extends React.Component {
       user,
     } = this.props.order;
     let quantity = order_size - number_matched;
-    let total = price * quantity;
+    
     let sum = this.state.editOrder.price * this.state.editOrder.quantity;
     console.log("value of id in buyside row is :" + id.id + " " + id.version);
 
+    let totalNR = price * quantity;
+    let total = (Math.round(totalNR * 100) / 100).toFixed(2);
+    
     let editTotal = (Math.round(sum * 100) / 100).toFixed(2);
 
     return (

@@ -28,7 +28,7 @@ class Graph extends React.Component {
             type="number"
             id="count"
             name="count"
-            step="0.01"
+            step="1"
             value={graphData.count}
             onChange={handleGraphDataChange}
           ></input>

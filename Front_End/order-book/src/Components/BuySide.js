@@ -97,13 +97,14 @@ class BuySide extends React.Component {
             })}
           </tbody>
         </Table>
-        <Button onClick={() => this.changeDisplay()}>
-          {this.state.displayAll ? (
-            <p>Show {this.props.orders.length - 5} less orders</p>
-          ) : (
-            <p>Show {this.props.orders.length - 5} more orders</p>
-          )}
-        </Button>
+        {this.props.orders.length <= 5 ? null :
+          (<Button onClick={() => this.changeDisplay()}>
+            {this.state.displayAll ? (
+              <p>Show {this.props.orders.length - 5} less orders</p>
+            ) : (
+                <p>Show {this.props.orders.length - 5} more orders</p>
+              )}
+          </Button>)}
       </React.Fragment>
     );
   }

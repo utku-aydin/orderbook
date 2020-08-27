@@ -142,7 +142,7 @@ class StockServiceDBTest {
         trade2.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
         tradeRepository.saveAndFlush(trade2);
 
-        assertEquals(new BigDecimal("0"), stockService.getChangeForStock(stockRepository.findAll().get(0).getId()));
+        assertNull(stockService.getChangeForStock(stockRepository.findAll().get(0).getId()));
     }
 
     @Test
@@ -272,7 +272,7 @@ class StockServiceDBTest {
         trade3.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));
         tradeRepository.saveAndFlush(trade3);
 
-        assertEquals("AMZN: 220", stockService.getAllStocksWithChange().get(0));
+        assertEquals("AMZN: 220(70)", stockService.getAllStocksWithChange().get(0));
         System.out.println(stockService.getAllStocksWithChange());
     }
 

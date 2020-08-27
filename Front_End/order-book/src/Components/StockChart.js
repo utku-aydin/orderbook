@@ -7,7 +7,7 @@ import ZingChart from "zingchart-react";
 import "zingchart/modules-es6/zingchart-maps.min.js";
 import "zingchart/modules-es6/zingchart-maps-usa.min.js";
 
-const SERVICE_URL = "http://localhost:8080/api";
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
 
 class StockChart extends React.Component {
   constructor(props) {
@@ -104,7 +104,6 @@ class StockChart extends React.Component {
   render() {
     let { trades } = this.props;
 
- 
     var valueArr2 = Array.from(this.props.trades);
 
     return (

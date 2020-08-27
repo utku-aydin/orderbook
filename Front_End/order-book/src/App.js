@@ -8,8 +8,8 @@ import TickerFeed from "./Components/TickerFeed";
 import { Container, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-
-const SERVICE_URL = "http://localhost:8080/api";
+require("dotenv").config();
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
 
 class App extends React.Component {
   state = {
@@ -49,8 +49,6 @@ class App extends React.Component {
   };
 
   handleGraphDataSubmit = (event) => {
-
-
     fetch(SERVICE_URL + "/interval/10/5")
       .then((data) => data.json())
       .then((data) => this.setState({ trades: data }))
@@ -82,13 +80,14 @@ class App extends React.Component {
         "content-Type": "application/json",
       },
       body: JSON.stringify(event.target.dataset),
-    }).then(data => {
-      this.loadOrderData();
     })
+      .then((data) => {
+        this.loadOrderData();
+      })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
-  }
+  };
 
   handleUpdateOrder = (event) => {
     if (event) event.preventDefault();
@@ -101,14 +100,14 @@ class App extends React.Component {
         "content-Type": "application/json",
       },
       body: JSON.stringify(event.target.dataset),
-    }).then(data => {
-      this.loadOrderData();
     })
+      .then((data) => {
+        this.loadOrderData();
+      })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
-
-  }
+  };
 
   handleChangeNumber = (event) => {
     let inputName = event.target.name;
@@ -120,7 +119,7 @@ class App extends React.Component {
       orderData[inputName] = inputValue;
       this.setState({ newOrderData: orderData });
     }
-  }
+  };
 
   handleOrderFormSubmit = (event) => {
     let newOrder = {
@@ -159,7 +158,7 @@ class App extends React.Component {
         console.log("Add Order - Error:");
         console.log(error);
       });
-  }
+  };
 
   loadOrderData() {
     fetch(SERVICE_URL + "/buyOrders")
@@ -174,7 +173,6 @@ class App extends React.Component {
       .catch((error) => {
         console.log("error:", error);
       });
-
   }
 
   loadFormData() {
@@ -191,8 +189,6 @@ class App extends React.Component {
         console.log("error:", error);
       });
   }
-
-
 
   render() {
     return (
@@ -232,8 +228,7 @@ class App extends React.Component {
               users={this.state.users}
             />
           </Col>
-          <Col>
-          </Col>
+          <Col></Col>
         </Row>
       </Container>
     );

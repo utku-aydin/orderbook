@@ -7,7 +7,7 @@ import Ticker from "react-ticker";
 /// /////////////////////////////////////
 /// /////////////////////////////////////
 /// /////////////////////////////////////
-const SERVICE_URL = "http://localhost:8080/api";
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
 
 function getRandomIndex(min, max) {
   var offset = min;
@@ -23,7 +23,6 @@ const rates = [
   "Google: 1.191",
   "Microsoft: 118.71",
 ];
-
 
 class TickerFeed extends React.Component {
   constructor(props) {

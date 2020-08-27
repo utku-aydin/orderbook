@@ -17,7 +17,7 @@ const GreenText = styled.p`
   color: #008000;
 `;
 
-const SERVICE_URL = "http://localhost:8080/api";
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
 var rates = [
   "Apple: 192.79",
   "Citigroup: 64.68",
@@ -74,7 +74,7 @@ class OverlayBuySideRow extends React.Component {
 
     let orderData = this.state.editOrder;
 
-    if (orderData.hasOwnProperty(inputName)) {;
+    if (orderData.hasOwnProperty(inputName)) {
       orderData[inputName] += inputValue;
 
       this.setState({ editOrder: orderData });

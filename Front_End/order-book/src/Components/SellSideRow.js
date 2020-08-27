@@ -16,7 +16,8 @@ const RedText = styled.p`
 const GreenText = styled.p`
   color: #008000;
 `;
-const SERVICE_URL = "http://localhost:8080/api";
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
+require("dotenv").config();
 var rates = [
   "Apple: 192.79",
   "Citigroup: 64.68",
@@ -74,6 +75,7 @@ class SellSideRow extends React.Component {
       .catch((error) => {
         console.log("error:", error);
       });
+    console.log("Enviro: " + process.env.REACT_APP_SERVICE_URL);
   };
 
   resetEdit = () => {

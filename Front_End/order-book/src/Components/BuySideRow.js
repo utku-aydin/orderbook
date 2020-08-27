@@ -17,7 +17,7 @@ const GreenText = styled.p`
   color: #008000;
 `;
 
-const SERVICE_URL = "http://localhost:8080/api";
+const SERVICE_URL = process.env.REACT_APP_SERVICE_URL;
 var rates = [
   "Apple: 192.79",
   "Citigroup: 64.68",
@@ -118,11 +118,11 @@ class BuySideRow extends React.Component {
       user,
     } = this.props.order;
     let quantity = order_size - number_matched;
-    
+
     let sum = this.state.editOrder.price * this.state.editOrder.quantity;
     let totalNR = price * quantity;
     let total = (Math.round(totalNR * 100) / 100).toFixed(2);
-    
+
     let editTotal = (Math.round(sum * 100) / 100).toFixed(2);
 
     return (

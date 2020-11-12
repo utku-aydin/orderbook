@@ -87,10 +87,9 @@ class BuySideRow extends React.Component {
   renderTooltip = (props) => {
     return (
       <Popover id="popover-basic">
-        <Popover.Title as="h3">Popover right</Popover.Title>
+        <Popover.Title as="h3">Order History</Popover.Title>
         <Popover.Content>
-          And here's some <strong>amazing</strong> content. It's very engaging.
-          right?<OverlayBuySide orders={rates}></OverlayBuySide>
+          <OverlayBuySide orders={rates}></OverlayBuySide>
         </Popover.Content>
       </Popover>
     );

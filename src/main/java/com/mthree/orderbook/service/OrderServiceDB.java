@@ -66,13 +66,12 @@ public class OrderServiceDB implements OrderService {
     @Override
     public Order addOrder(Map<String, String> orderData) {
         OrderId id = new OrderId();
-        id.setVersion(0);
         if (orderRepository.findHighestId().isEmpty()) {
             id.setId(1);
         } else {
             id.setId(orderRepository.findHighestId().get(0).getId().getId() + 1);
         }
-        
+
         Order order = new Order();
         order.setId(id);
         order.setPrice(new BigDecimal(orderData.get("price")));
@@ -81,22 +80,27 @@ public class OrderServiceDB implements OrderService {
         order.setNumber_matched(Integer.parseInt(orderData.get("number_matched")));
         order.setPlaced_at(LocalDateTime.now(ZoneId.of("GMT")));
         order.setStatus(StatusEnum.valueOf(orderData.get("status")));
-        
+
         // ERROR CHECK
         Stock stock = stockRepository.findById(Integer.parseInt(orderData.get("stock_id"))).orElse(null);
         User user = userRepository.findById(Integer.parseInt(orderData.get("usr_id"))).orElse(null);
-        
+
         order.setStock(stock);
         order.setUser(user);
+        id.setVersion(0);
+
+        System.out.println("Order ID: " + order.getId().getId());
+        System.out.println("Order Version: " + order.getId().getVersion());
+        System.out.println("Order Price: " + order.getPrice());
 
         order = orderRepository.saveAndFlush(order);
-        
+
         if (order.getSide() == SideEnum.BUY) {
             matchBuyOrder(order);
         } else {
             matchSellOrder(order);
         }
-        
+
         return order;
     }
 

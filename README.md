@@ -4,7 +4,7 @@
 **Implementation Plan**: https://docs.google.com/document/d/1vcAyzN833MIv-DnNW1zf6JEDJ-kobmpZeC6L4VoxDtc/edit?usp=sharing  
 **Release Notes**: https://docs.google.com/document/d/1MTCaAIHR3eXnT8rF7gdrEyQCuSQkqRv9oDbb0X_PIPo/edit?usp=sharing
 
-**Release Notes (27.08.2020)**
+# Release Notes (27.08.2020)
 
 **Order Book - v1.0**
 

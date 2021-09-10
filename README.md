@@ -24,15 +24,15 @@ The purpose of this web application is to manage stock trading. The users of the
 3. **Implementation Details**
   - Backend Tools
     - Java with Spring Boot used for backend server implementation
-    2. JUnit used for testing
-    3. MySQL database used for storing the data
-    4. JPA used for managing the relationship with the database
-    5. NetBeans was used as main IDE
+    - JUnit used for testing
+    - MySQL database used for storing the data
+    - JPA used for managing the relationship with the database
+    - NetBeans was used as main IDE
   2. Frontend Tools
-    1. React with JavaScript
-    2. VSCode was used as main IDE
+    - React with JavaScript
+    - VSCode was used as main IDE
   3. Version Control
-    1. GitHub desktop
+    - GitHub desktop
 
 Further details regarding implementing and running the web application would be available in the Implementation Plan file.
 

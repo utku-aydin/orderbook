@@ -8,11 +8,11 @@
 
 ### Order Book - v1.0
 
-1. **Overview**
+1.**Overview**
 
 The purpose of this web application is to manage stock trading. The users of the system can create new buy/sell orders, update or cancel existing orders, commit trades, follow stock market trends using a ticker or observe changes in trade prices over time using a graph. Server data is kept in a MySQL database, which is dynamically updated as users interact with the web application.
 
-2. **Functionality of Order Book v1.0**
+2.**Functionality of Order Book v1.0**
 
 - Create buy/sell orders
 - Update/cancel existing orders

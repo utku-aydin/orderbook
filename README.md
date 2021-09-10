@@ -6,7 +6,7 @@
 
 # Release Notes (27.08.2020)
 
-**Order Book - v1.0**
+### Order Book - v1.0
 
 1. **Overview**
 
@@ -28,10 +28,10 @@ The purpose of this web application is to manage stock trading. The users of the
     - MySQL database used for storing the data
     - JPA used for managing the relationship with the database
     - NetBeans was used as main IDE
-  2. Frontend Tools
+  - Frontend Tools
     - React with JavaScript
     - VSCode was used as main IDE
-  3. Version Control
+  - Version Control
     - GitHub desktop
 
 Further details regarding implementing and running the web application would be available in the Implementation Plan file.

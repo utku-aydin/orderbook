@@ -22,8 +22,8 @@ The purpose of this web application is to manage stock trading. The users of the
 - MySQL database connectivity
 
 3. **Implementation Details**
-  1. Backend Tools
-    1. Java with Spring Boot used for backend server implementation
+  - Backend Tools
+    - Java with Spring Boot used for backend server implementation
     2. JUnit used for testing
     3. MySQL database used for storing the data
     4. JPA used for managing the relationship with the database
@@ -37,18 +37,10 @@ The purpose of this web application is to manage stock trading. The users of the
 Further details regarding implementing and running the web application would be available in the Implementation Plan file.
 
 4. **Supporting Files**
-  1. Implementation Plan: Specifies how to install the application and run it
-  2. Rollback Plan: Specifies how to roll back to a previous stable release in case of delivery failure
-  3. Change log: Has information regarding new additions to each release. Not available for Order Book v1.0 (current release) because it is the first release.
-  4. Wireframes: Act as a map for the web page
-  5. Entity Relationship Diagram: Visual representation of the structure of the MySQL database
-  6. Class Diagram: Visual representation of the relationships between classes in the backend
-  7. Flow Chart: Visual representation of the flow of operations of the web application
-
-5. **Contact Details**
-  1. Utku Aydin - utkuada1997@live.co.uk
-  2. Stanislav Minchev - \&lt;email\&gt;
-  3. Alexander Morrison - \&lt;email\&gt;
-  4. Simeon Enchev - \&lt;email\&gt;
-
-.
+  - Implementation Plan: Specifies how to install the application and run it
+  - Rollback Plan: Specifies how to roll back to a previous stable release in case of delivery failure
+  - Change log: Has information regarding new additions to each release. Not available for Order Book v1.0 (current release) because it is the first release.
+  - Wireframes: Act as a map for the web page
+  - Entity Relationship Diagram: Visual representation of the structure of the MySQL database
+  - Class Diagram: Visual representation of the relationships between classes in the backend
+  - Flow Chart: Visual representation of the flow of operations of the web application

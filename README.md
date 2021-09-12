@@ -41,39 +41,39 @@
 
  - If it says 32-bit, download the 32-bit version of 7-zip. Otherwise, download the 64-bit version.
 
-**Direct links to .exe files
+ - Direct links to .exe files
 
-- 32-Bit: https://www.7-zip.org/a/7z1900.exe
+  - 32-Bit: https://www.7-zip.org/a/7z1900.exe
 
-- 64-Bit: https://www.7-zip.org/a/7z1900-x64.exe
+  - 64-Bit: https://www.7-zip.org/a/7z1900-x64.exe
 
-After downloading the correct .exe file, double-click on it
+ - After downloading the correct .exe file, double-click on it
 
-Save it in a directory on your machine and follow the install wizard.
+ - Save it in a directory on your machine and follow the install wizard.
 
-At the end, click finish and 7zip should be on your system.
+ - At the end, click finish and 7zip should be on your system.
 
 ## **Instructions to verify JRE**
 
-1. Open the command prompt. Follow the menu path: Start \&gt; Programs \&gt; Accessories \&gt; Command Prompt
+- Open the command prompt. Follow the menu path: Start \&gt; Programs \&gt; Accessories \&gt; Command Prompt
 
-2. Type: java -version and press Enter on your keyboard
+- Type: java -version and press Enter on your keyboard
 
-3. Make sure the output looks something like this:
+- Make sure the output looks something like this:
 
-java version &quot;11.0.2&quot; 2019-01-15
+ - java version &quot;11.0.2&quot; 2019-01-15
 
-Java(TM) SE Runtime Environment (build 11.0.2+9)
+ - Java(TM) SE Runtime Environment (build 11.0.2+9)
 
-Java HotSpot(TM) 64-Bit Server VM (build 11.0.2+9, mixed mode, sharing)
+ - Java HotSpot(TM) 64-Bit Server VM (build 11.0.2+9, mixed mode, sharing)
 
 - Your java version should be at least 11.0
 
-If you don&#39;t have the correct Java version installed in your machine, please follow the instructions from this web page: https://www3.ntu.edu.sg/home/ehchua/programming/howto/JDK\_HowTo.html
+- If you don&#39;t have the correct Java version installed in your machine, please follow the instructions from this web page: https://www3.ntu.edu.sg/home/ehchua/programming/howto/JDK\_HowTo.html
 
-They can be found at section 1. How to Install JDK on Windows.
+- They can be found at section 1. How to Install JDK on Windows.
 
-Install Tomcat on Linux: [https://www.mulesoft.com/tcat/tomcat-linux](https://www.mulesoft.com/tcat/tomcat-linux) (Alternative).
+- Install Tomcat on Linux: [https://www.mulesoft.com/tcat/tomcat-linux](https://www.mulesoft.com/tcat/tomcat-linux) (Alternative).
 
 ## **Instructions to run the web application using XAMMP as database management tool**
 

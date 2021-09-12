@@ -27,13 +27,13 @@
 
 ## **Instructions to install 7-zip**
 
-1. Go to 7-zip home page at: https://www.7-zip.org/
+- Go to 7-zip home page at: https://www.7-zip.org/
 
-2. You will see two rectangles with blue hyperlinks. Download the latest stable version of 7zip which matches your version of Windows. The text above the rectangles highlights which one is the latest stable version.
+- You will see two rectangles with blue hyperlinks. Download the latest stable version of 7zip which matches your version of Windows. The text above the rectangles highlights which one is the latest stable version.
 
-- To check version of windows:
+ - To check version of windows:
 
-1. Open &quot;This PC&quot;
+ - Open &quot;This PC&quot;
 
 2. Right-click on empty space on the screen and click Properties
 

@@ -35,25 +35,23 @@
 
  - Open &quot;This PC&quot;
 
-2. Right-click on empty space on the screen and click Properties
+ - Right-click on empty space on the screen and click Properties
 
-3. A window will pop up and one of lines should read &quot;System Type&quot;
+ - A window will pop up and one of lines should read &quot;System Type&quot;
 
-4. If it says 32-bit, download the 32-bit version of 7-zip. Otherwise,
+ - If it says 32-bit, download the 32-bit version of 7-zip. Otherwise, download the 64-bit version.
 
-download the 64-bit version.
+**Direct links to .exe files
 
-- Direct links to .exe files
+- 32-Bit: https://www.7-zip.org/a/7z1900.exe
 
-32-Bit: https://www.7-zip.org/a/7z1900.exe
+- 64-Bit: https://www.7-zip.org/a/7z1900-x64.exe
 
-64-Bit: https://www.7-zip.org/a/7z1900-x64.exe
+After downloading the correct .exe file, double-click on it
 
-3. After downloading the correct .exe file, double-click on it
+Save it in a directory on your machine and follow the install wizard.
 
-4. Save it in a directory on your machine and follow the install wizard.
-
-5. At the end, click finish and 7zip should be on your system.
+At the end, click finish and 7zip should be on your system.
 
 ## **Instructions to verify JRE**
 
@@ -77,87 +75,87 @@ They can be found at section 1. How to Install JDK on Windows.
 
 Install Tomcat on Linux: [https://www.mulesoft.com/tcat/tomcat-linux](https://www.mulesoft.com/tcat/tomcat-linux) (Alternative).
 
-# **Instructions to run the web application using XAMMP as database management tool**
+## **Instructions to run the web application using XAMMP as database management tool**
 
-1.Install XAMPP with the following guide:[https://www.wikihow.com/Install-XAMPP-for-Windows](https://www.wikihow.com/Install-XAMPP-for-Windows).
+- Install XAMPP with the following guide:[https://www.wikihow.com/Install-XAMPP-for-Windows](https://www.wikihow.com/Install-XAMPP-for-Windows).
 
-2.Ensure XAMPP is running (the guide will show you how to run it).
+- Ensure XAMPP is running (the guide will show you how to run it).
 
-3.Click the start buttons to the right of Apache and MySQL to start them (shown below).
+- Click the start buttons to the right of Apache and MySQL to start them (shown below).
 
 ![](RackMultipart20210912-4-1ivmykj_html_c1d816012a1d5353.png)
 
-4.Click on this link then click the either the icon or link that pops up:https://drive.google.com/file/d/1LywTSyA62YUF5oHejpvsi\_XcHYHU32kh/view?usp=sharing
+- Click on this link then click the either the icon or link that pops up:https://drive.google.com/file/d/1LywTSyA62YUF5oHejpvsi\_XcHYHU32kh/view?usp=sharing
 
-5.Click the download button on the top right (shown below).
+- Click the download button on the top right (shown below).
 
 ![](RackMultipart20210912-4-1ivmykj_html_8fe4cb302928d3f0.png)
 
-6.Click on download anyway (show below).
+- Click on download anyway (show below).
 
-7.Go to the directory to which the file (orderbook\_release\_go.zip) was downloaded to – your &#39;Downloads&#39; folder is the default.
+- Go to the directory to which the file (orderbook\_release\_go.zip) was downloaded to – your &#39;Downloads&#39; folder is the default.
 
-a.Right click the file and click cut.
+- Right click the file and click cut.
 
-b.Go to your documents.
+- Go to your documents.
 
-c.Right-click in the folder and select &quot;New Folder&quot; – call it &quot;Orderbook\_Releases&quot;. Double click on it to enter it.
+- Right-click in the folder and select &quot;New Folder&quot; – call it &quot;Orderbook\_Releases&quot;. Double click on it to enter it.
 
-d.Right click in the folder and click paste.
+- Right click in the folder and click paste.
 
-8.Right click on the pasted zip file, and click extract all.
+- Right click on the pasted zip file, and click extract all.
 
-9.On the pop-up menu, ensure the box to the left of &#39;Show extracted files when complete&#39; is unchecked – if it is checked, click it to uncheck it.
+- On the pop-up menu, ensure the box to the left of &#39;Show extracted files when complete&#39; is unchecked – if it is checked, click it to uncheck it.
 
-a.It is unchecked if there is no tick in it.
+ - It is unchecked if there is no tick in it.
 
-10.Click the &#39;Extract&#39; button near the bottom right of the menu that has popped up, leaving everything else at the default.
+- Click the &#39;Extract&#39; button near the bottom right of the menu that has popped up, leaving everything else at the default.
 
-11.Delete the zip file once extraction is complete, by right clicking on it and clicking delete.
+- Delete the zip file once extraction is complete, by right clicking on it and clicking delete.
 
-a.Click on the search icon near the bottom left of your Windows taskbar.
+ - Click on the search icon near the bottom left of your Windows taskbar.
+ 
+ - Type &#39;recycle bin&#39; and press enter.
 
-b.Type &#39;recycle bin&#39; and press enter.
+ - Find and right click &#39;orderbook\_release\_go.zip&#39;, then click delete in the pop-up menu.
 
-c.Find and right click &#39;orderbook\_release\_go.zip&#39;, then click delete in the pop-up menu.
+- Double click on the &#39;orderbook\_release\_go&#39; folder that has been extracted.
 
-12.Double click on the &#39;orderbook\_release\_go&#39; folder that has been extracted.
+- Go back to XAMMP.
 
-13.Go back to XAMMP.
+ a. Click on the &quot;Admin&quot; button to the right of MySQL.
 
-a.Click on the &quot;Admin&quot; button to the right of MySQL.
+ b. A page should open on your default browser. Once it loads, click on the &quot;Import&quot; button (shown below)
 
-b.A page should open on your default browser. Once it loads, click on the &quot;Import&quot; button (shown below)
+ c. Click the &quot;Choose File&quot; button.
 
-c.Click the &quot;Choose File&quot; button.
+ d. On the pop-up window, go to your document -\&gt; Orderbook\_Releases -\&gt; orderbook\_release\_go -\&gt; SQL
 
-d.On the pop-up window, go to your document -\&gt; Orderbook\_Releases -\&gt; orderbook\_release\_go -\&gt; SQL
+ e. Double click &quot;orderbook-schema.sql&quot;
 
-e.Double click &quot;orderbook-schema.sql&quot;
+ f. Go to the bottom of the page (scroll down if necessary) and click on the &quot;Go&quot; button.
 
-f.Go to the bottom of the page (scroll down if necessary) and click on the &quot;Go&quot; button.
+ g. Wait for the execution to complete. Once it has completed, you should see this near the top of the page:
 
-g.Wait for the execution to complete. Once it has completed, you should see this near the top of the page:
+ h. Now go back to your &quot;orderbook\_release\_go&quot; folder.
 
-h.Now go back to your &quot;orderbook\_release\_go&quot; folder.
+- Repeat b to h for order-data.sql
 
-Repeat b to h for order-data.sql
+- Go to the config folder and open the file &#39;application.properties&#39; with a text editor
 
-14. Go to the config folder and open the file &#39;application.properties&#39; with a text editor
+- Inside the file, change the &#39;localhost:3306&#39; to the url and port for your database; adjust the username and password accordingly
 
-15. Inside the file, change the &#39;localhost:3306&#39; to the url and port for your database; adjust the username and password accordingly
+- Go back to the &#39;orderbook\_release\_go&#39; folder and go to Front\_End -\&gt; order-book then open &quot;.env&quot; with your preferred text editor and replace &quot;REACT\_APP\_SERVICE\_URL=[http://localhost:8080/api](http://localhost:8080/api)&quot; with &quot;REACT\_APP\_SERVICE\_URL=YOUR\_URL&quot;, substituting YOUR\_URL with your preferred url.
 
-16. Go back to the &#39;orderbook\_release\_go&#39; folder and go to Front\_End -\&gt; order-book then open &quot;.env&quot; with your preferred text editor and replace &quot;REACT\_APP\_SERVICE\_URL=[http://localhost:8080/api](http://localhost:8080/api)&quot; with &quot;REACT\_APP\_SERVICE\_URL=YOUR\_URL&quot;, substituting YOUR\_URL with your preferred url.
+- Go back to the &#39;orderbook\_release\_go&#39; folder and run linux\_run.sh and this should load both the backend and frontend. The script would download all required dependencies, which would take around 2-3 minutes. The frontend would be accessible from {YOUR\_URL}.
 
-17.Go back to the &#39;orderbook\_release\_go&#39; folder and run linux\_run.sh and this should load both the backend and frontend. The script would download all required dependencies, which would take around 2-3 minutes. The frontend would be accessible from {YOUR\_URL}.
+- If you don&#39;t have Google Chrome, install it here with this guide:[https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0](https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0)
 
-18.If you don&#39;t have Google Chrome, install it here with this guide:[https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0](https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0)
+- Start Google Chrome
 
-19.Start Google Chrome
+- Type{YOUR\_URL} (or copy and paste it) into the chrome search bar, and press enter. This should lead you to the home page of the site.
 
-20.Type{YOUR\_URL} (or copy and paste it) into the chrome search bar, and press enter. This should lead you to the home page of the site.
-
-21.You may now reference the Release Plan included as an attachment to the same email this Implementation Plan is included in, to find out about the features of this application and how to use them.
+- You may now reference the Release Plan included as an attachment to the same email this Implementation Plan is included in, to find out about the features of this application and how to use them.
 
 # Release Notes (27.08.2020)
 

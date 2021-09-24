@@ -1,4 +1,199 @@
-# orderbook
- An order book for traders. A CRUD web application with a Java + MySQL backend, and a React frontend. Allows order addition and modification, and tracks the history of each order. Automatic matching is performed, and a ticker feed is available alongside a simple trade history graph.
-Implementation Plan: https://docs.google.com/document/d/1vcAyzN833MIv-DnNW1zf6JEDJ-kobmpZeC6L4VoxDtc/edit?usp=sharing  
-Release Notes: https://docs.google.com/document/d/1MTCaAIHR3eXnT8rF7gdrEyQCuSQkqRv9oDbb0X_PIPo/edit?usp=sharing
+# Orderbook
+ An order book for traders. A CRUD web application with a Java + MySQL back end, and a React front end. Allows order addition and modification, and tracks the history of each order. Automatic matching is performed, and a ticker feed is available alongside a simple trade history graph.  
+ 
+# Implementation Plan
+
+**Prerequisites for this release:**
+
+- You will need WinRAR or 7-Zip
+
+- You will need a JRE of at least Java 11.0
+
+- You will need Node.js installed (how to below) [https://phoenixnap.com/kb/install-node-js-npm-on-windows](https://phoenixnap.com/kb/install-node-js-npm-on-windows)
+
+- MySQL or similar database management system
+
+- Any available browser (The application was tested on Google Chrome)
+
+**Environment Variables:**
+
+- SERVER\_SERVICE\_URL
+- SERVER\_HOSTNAME
+- SERVER\_PORT
+- SERVER\_USERNAME
+- SERVER\_PASSWORD
+
+[**https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/**](https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/) - To Add Environement Variables
+
+## **Instructions to install 7-zip**
+
+- Go to 7-zip home page at: https://www.7-zip.org/
+
+- You will see two rectangles with blue hyperlinks. Download the latest stable version of 7zip which matches your version of Windows. The text above the rectangles highlights which one is the latest stable version.
+
+ - To check version of windows:
+
+ - Open &quot;This PC&quot;
+
+ - Right-click on empty space on the screen and click Properties
+
+ - A window will pop up and one of lines should read &quot;System Type&quot;
+
+ - If it says 32-bit, download the 32-bit version of 7-zip. Otherwise, download the 64-bit version.
+
+ - Direct links to .exe files
+
+  - 32-Bit: https://www.7-zip.org/a/7z1900.exe
+
+  - 64-Bit: https://www.7-zip.org/a/7z1900-x64.exe
+
+ - After downloading the correct .exe file, double-click on it
+
+ - Save it in a directory on your machine and follow the install wizard.
+
+ - At the end, click finish and 7zip should be on your system.
+
+## **Instructions to verify JRE**
+
+- Open the command prompt. Follow the menu path: Start \&gt; Programs \&gt; Accessories \&gt; Command Prompt
+
+- Type: java -version and press Enter on your keyboard
+
+- Make sure the output looks something like this:
+
+ - java version &quot;11.0.2&quot; 2019-01-15
+
+ - Java(TM) SE Runtime Environment (build 11.0.2+9)
+
+ - Java HotSpot(TM) 64-Bit Server VM (build 11.0.2+9, mixed mode, sharing)
+
+- Your java version should be at least 11.0
+
+- If you don&#39;t have the correct Java version installed in your machine, please follow the instructions from this web page: https://www3.ntu.edu.sg/home/ehchua/programming/howto/JDK\_HowTo.html
+
+- They can be found at section 1. How to Install JDK on Windows.
+
+- Install Tomcat on Linux: [https://www.mulesoft.com/tcat/tomcat-linux](https://www.mulesoft.com/tcat/tomcat-linux) (Alternative).
+
+## **Instructions to run the web application using XAMMP as database management tool**
+
+- Install XAMPP with the following guide:[https://www.wikihow.com/Install-XAMPP-for-Windows](https://www.wikihow.com/Install-XAMPP-for-Windows).
+
+- Ensure XAMPP is running (the guide will show you how to run it).
+
+- Click the start buttons to the right of Apache and MySQL to start them (shown below).
+
+![](RackMultipart20210912-4-1ivmykj_html_c1d816012a1d5353.png)
+
+- Click on this link then click the either the icon or link that pops up:https://drive.google.com/file/d/1LywTSyA62YUF5oHejpvsi\_XcHYHU32kh/view?usp=sharing
+
+- Click the download button on the top right (shown below).
+
+![](RackMultipart20210912-4-1ivmykj_html_8fe4cb302928d3f0.png)
+
+- Click on download anyway (show below).
+
+- Go to the directory to which the file (orderbook\_release\_go.zip) was downloaded to – your &#39;Downloads&#39; folder is the default.
+
+- Right click the file and click cut.
+
+- Go to your documents.
+
+- Right-click in the folder and select &quot;New Folder&quot; – call it &quot;Orderbook\_Releases&quot;. Double click on it to enter it.
+
+- Right click in the folder and click paste.
+
+- Right click on the pasted zip file, and click extract all.
+
+- On the pop-up menu, ensure the box to the left of &#39;Show extracted files when complete&#39; is unchecked – if it is checked, click it to uncheck it.
+
+ - It is unchecked if there is no tick in it.
+
+- Click the &#39;Extract&#39; button near the bottom right of the menu that has popped up, leaving everything else at the default.
+
+- Delete the zip file once extraction is complete, by right clicking on it and clicking delete.
+
+ - Click on the search icon near the bottom left of your Windows taskbar.
+ 
+ - Type &#39;recycle bin&#39; and press enter.
+
+ - Find and right click &#39;orderbook\_release\_go.zip&#39;, then click delete in the pop-up menu.
+
+- Double click on the &#39;orderbook\_release\_go&#39; folder that has been extracted.
+
+- Go back to XAMMP.
+
+ a. Click on the &quot;Admin&quot; button to the right of MySQL.
+
+ b. A page should open on your default browser. Once it loads, click on the &quot;Import&quot; button (shown below)
+
+ c. Click the &quot;Choose File&quot; button.
+
+ d. On the pop-up window, go to your document -\&gt; Orderbook\_Releases -\&gt; orderbook\_release\_go -\&gt; SQL
+
+ e. Double click &quot;orderbook-schema.sql&quot;
+
+ f. Go to the bottom of the page (scroll down if necessary) and click on the &quot;Go&quot; button.
+
+ g. Wait for the execution to complete. Once it has completed, you should see this near the top of the page:
+
+ h. Now go back to your &quot;orderbook\_release\_go&quot; folder.
+
+- Repeat b to h for order-data.sql
+
+- Go to the config folder and open the file &#39;application.properties&#39; with a text editor
+
+- Inside the file, change the &#39;localhost:3306&#39; to the url and port for your database; adjust the username and password accordingly
+
+- Go back to the &#39;orderbook\_release\_go&#39; folder and go to Front\_End -\&gt; order-book then open &quot;.env&quot; with your preferred text editor and replace &quot;REACT\_APP\_SERVICE\_URL=[http://localhost:8080/api](http://localhost:8080/api)&quot; with &quot;REACT\_APP\_SERVICE\_URL=YOUR\_URL&quot;, substituting YOUR\_URL with your preferred url.
+
+- Go back to the &#39;orderbook\_release\_go&#39; folder and run linux\_run.sh and this should load both the backend and frontend. The script would download all required dependencies, which would take around 2-3 minutes. The frontend would be accessible from {YOUR\_URL}.
+
+- If you don&#39;t have Google Chrome, install it here with this guide:[https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0](https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&amp;hl=en&amp;oco=0)
+
+- Start Google Chrome
+
+- Type{YOUR\_URL} (or copy and paste it) into the chrome search bar, and press enter. This should lead you to the home page of the site.
+
+- You may now reference the Release Plan included as an attachment to the same email this Implementation Plan is included in, to find out about the features of this application and how to use them.
+
+# Release Notes (27.08.2020)
+
+### Order Book - v1.0
+
+**Overview**
+
+The purpose of this web application is to manage stock trading. The users of the system can create new buy/sell orders, update or cancel existing orders, commit trades, follow stock market trends using a ticker or observe changes in trade prices over time using a graph. Server data is kept in a MySQL database, which is dynamically updated as users interact with the web application.
+
+**Functionality of Order Book v1.0**
+
+- Create buy/sell orders
+- Update/cancel existing orders
+- Commit trades
+- Stock ticker
+- Graph with trades
+- MySQL database connectivity
+
+**Implementation Details**
+  - Backend Tools
+    - Java with Spring Boot used for backend server implementation
+    - JUnit used for testing
+    - MySQL database used for storing the data
+    - JPA used for managing the relationship with the database
+    - NetBeans was used as main IDE
+  - Frontend Tools
+    - React with JavaScript
+    - VSCode was used as main IDE
+  - Version Control
+    - GitHub desktop
+
+Further details regarding implementing and running the web application would be available in the Implementation Plan file.
+
+**Supporting Files**
+  - Implementation Plan: Specifies how to install the application and run it
+  - Rollback Plan: Specifies how to roll back to a previous stable release in case of delivery failure
+  - Change log: Has information regarding new additions to each release. Not available for Order Book v1.0 (current release) because it is the first release.
+  - Wireframes: Act as a map for the web page
+  - Entity Relationship Diagram: Visual representation of the structure of the MySQL database
+  - Class Diagram: Visual representation of the relationships between classes in the backend
+  - Flow Chart: Visual representation of the flow of operations of the web application

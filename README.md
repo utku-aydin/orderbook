@@ -23,7 +23,7 @@
 - SERVER\_USERNAME
 - SERVER\_PASSWORD
 
-[**https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/**](https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/) - To Add Environement Variables
+[**https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/**](https://www.architectryan.com/2018/08/31/how-to-change-environment-variables-on-windows-10/) - To Add Environment Variables
 
 ## **Instructions to install 7-zip**
 

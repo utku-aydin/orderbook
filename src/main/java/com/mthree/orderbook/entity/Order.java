@@ -171,10 +171,7 @@ public class Order implements Serializable {
         if (!Objects.equals(this.stock, other.stock)) {
             return false;
         }
-        if (this.status != other.status) {
-            return false;
-        }
-        return true;
+        return this.status == other.status;
     }
 
     @Override

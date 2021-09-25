@@ -145,10 +145,7 @@ public class Trade implements Serializable {
         if (!Objects.equals(this.trade_time, other.trade_time)) {
             return false;
         }
-        if (!Objects.equals(this.trade_price, other.trade_price)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.trade_price, other.trade_price);
     }
 
     @Override

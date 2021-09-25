@@ -59,9 +59,6 @@ public class Company {
         if (this.id != other.id) {
             return false;
         }
-        if (!Objects.equals(this.company_symbol, other.company_symbol)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.company_symbol, other.company_symbol);
     }
 }

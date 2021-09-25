@@ -72,10 +72,7 @@ public class User {
         if (!Objects.equals(this.user_symbol, other.user_symbol)) {
             return false;
         }
-        if (!Objects.equals(this.company, other.company)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.company, other.company);
     }
     
 }

@@ -74,10 +74,7 @@ public class Stock {
         if (!Objects.equals(this.tick_size, other.tick_size)) {
             return false;
         }
-        if (!Objects.equals(this.stock_symbol, other.stock_symbol)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.stock_symbol, other.stock_symbol);
     }
     
 }

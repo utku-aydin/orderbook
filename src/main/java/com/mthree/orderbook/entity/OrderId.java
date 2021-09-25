@@ -1,6 +1,7 @@
 package com.mthree.orderbook.entity;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Embeddable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -60,13 +61,10 @@ public class OrderId implements Serializable {
             return false;
         }
         final OrderId other = (OrderId) obj;
-        if (this.id != other.id) {
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (this.version != other.version) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.version, other.version);
     }
     
 }

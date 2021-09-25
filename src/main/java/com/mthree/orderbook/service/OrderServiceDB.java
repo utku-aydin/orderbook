@@ -145,6 +145,7 @@ public class OrderServiceDB implements OrderService {
         OrderId orderId = new OrderId(id, version);
         
         Order order = orderRepository.findById(orderId).orElse(null);
+        assert order != null;
         Order newOrder = copyOrder(order);
         newOrder.setStatus(StatusEnum.CANCELLED);
         newOrder = orderRepository.saveAndFlush(newOrder);
@@ -215,7 +216,6 @@ public class OrderServiceDB implements OrderService {
             Trade trade = new Trade();
             trade.setBuyorder(buy);
             trade.setSellorder(sell);
-
             trade.setTrade_price(sell.getPrice());
 
             if (buyRemaining > sellRemaining) {
@@ -236,9 +236,7 @@ public class OrderServiceDB implements OrderService {
                     sell.setStatus(StatusEnum.FULFILLED);
                 }
             }
-            
 
-            
             Order newSell = copyOrder(sell);
             Order newBuy = copyOrder(buy);
             trade.setTrade_time(LocalDateTime.now(ZoneId.of("GMT")));

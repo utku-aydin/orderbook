@@ -1,4 +1,4 @@
-# Orderbook
+# Order Book
  An order book for traders. A CRUD web application with a Java + MySQL back end, and a React front end. Allows order addition and modification, and tracks the history of each order. Automatic matching is performed, and a ticker feed is available alongside a simple trade history graph.  
  
 # Implementation Plan
